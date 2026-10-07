@@ -1,0 +1,1495 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+
+    color: #fff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background:
+        linear-gradient(140deg,
+            #14070d,
+            #220c18,
+            #190810,
+            #26101d);
+
+    background-size: 250% 250%;
+
+    animation:
+        backgroundFlow 18s ease infinite;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+@keyframes backgroundFlow {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+    height: 68px;
+
+    padding: 0 7%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background:
+        rgba(15, 5, 11, .88);
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, .05);
+
+    backdrop-filter:
+        blur(14px);
+}
+
+.logo {
+    color: #fff5f8;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+.logo span {
+    color: #df91ab;
+}
+
+.nav-menu {
+    display: flex;
+
+    gap: 25px;
+}
+
+.nav-menu a {
+    color:
+        rgba(255, 240, 245, .55);
+
+    text-decoration: none;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    transition:
+        color .25s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #e7a3b8;
+}
+
+
+/* INTRO */
+
+.princes-intro {
+    height: 88vh;
+
+    padding:
+        110px 20px 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.small-title {
+    margin-bottom: 14px;
+
+    color: #cbaa72;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+}
+
+.princes-intro h1 {
+    color: #fff7f9;
+
+    font-size:
+        clamp(46px, 7vw, 72px);
+
+    font-weight: 500;
+
+    font-style: italic;
+
+    text-shadow:
+        0 0 12px rgba(220, 140, 167, .16),
+        0 0 35px rgba(220, 140, 167, .10);
+}
+
+.princes-intro h1 span {
+    color: #e39ab2;
+
+    text-shadow:
+        0 0 12px rgba(227, 154, 178, .45);
+}
+
+.subtitle {
+    margin-top: 18px;
+
+    color:
+        rgba(255, 240, 245, .42);
+
+    font-size: 12px;
+
+    font-style: italic;
+}
+
+.scroll-arrow {
+    margin-top: 42px;
+
+    color:
+        rgba(255, 255, 255, .32);
+
+    font-size: 20px;
+
+    animation:
+        softArrow 1.7s ease-in-out infinite;
+}
+
+@keyframes softArrow {
+
+    50% {
+        transform:
+            translateY(7px);
+    }
+
+}
+
+
+/* STICKY SECTION */
+
+.princes-scroll-section {
+    position: relative;
+
+    height: 520vh;
+}
+
+.princes-sticky {
+    position: sticky;
+
+    top: 0;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        130px 20px 35px;
+}
+
+.princes-top-text {
+    position: absolute;
+
+    top: 104px;
+
+    left: 50%;
+
+    width:
+        min(390px, 82vw);
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    z-index: 50;
+}
+
+.princes-top-text span {
+    color:
+        rgba(255, 244, 248, .58);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 4.8px;
+}
+
+.princes-top-text p {
+    color: #d9b777;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* STICKY PHOTOS */
+
+.princes-stack {
+    position: relative;
+
+    width:
+        min(300px, 72vw);
+
+    aspect-ratio:
+        9 / 16;
+
+    margin-top: 18px;
+}
+
+.princes-photo-card {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    opacity: 0;
+
+    box-shadow:
+        0 34px 86px rgba(0, 0, 0, .47);
+}
+
+.princes-photo-card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transform:
+        scale(1.05);
+}
+
+.princes-photo-card:nth-child(2) img {
+    transform:
+        rotate(-90deg) scale(1.45);
+}
+
+
+/* PROGRESS */
+
+.princes-progress {
+    margin-top: 26px;
+
+    display: flex;
+
+    gap: 7px;
+}
+
+.progress-dot {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, .18);
+
+    transition:
+        .3s ease;
+}
+
+.progress-dot.active {
+    width: 24px;
+
+    background:
+        linear-gradient(90deg,
+            #c97893,
+            #e6a0b6);
+}
+
+.scroll-text {
+    margin-top: 11px;
+
+    color:
+        rgba(255, 255, 255, .20);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ==================================
+   GALLERY
+================================== */
+
+.princes-gallery-section {
+    position: relative;
+
+    padding:
+        130px 6% 150px;
+
+    background:
+        linear-gradient(180deg,
+            rgba(20, 7, 13, .15),
+            rgba(33, 11, 23, .70),
+            rgba(20, 7, 13, .20));
+}
+
+.gallery-heading {
+    margin:
+        0 auto 60px;
+
+    text-align: center;
+}
+
+.gallery-heading p {
+    color: #cbaa72;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+}
+
+.gallery-heading h2 {
+    margin-top: 15px;
+
+    color: #fff5f8;
+
+    font-size:
+        clamp(38px, 5vw, 60px);
+
+    font-weight: 500;
+
+    font-style: italic;
+
+    text-shadow:
+        0 0 25px rgba(217, 137, 164, .12);
+}
+
+.gallery-heading h2 span {
+    color: #df91ab;
+}
+
+.heading-line {
+    width: 60px;
+    height: 1px;
+
+    margin:
+        25px auto 0;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            #cbaa72,
+            transparent);
+}
+
+.princes-gallery {
+    width:
+        min(1180px, 100%);
+
+    margin:
+        0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.gallery-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.gallery-photo {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio:
+        4 / 5;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    background:
+        #2a111d;
+
+    box-shadow:
+        0 16px 42px rgba(0, 0, 0, .22);
+
+    transition:
+        transform .45s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .45s ease;
+}
+
+.gallery-photo::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border:
+        1px solid rgba(255, 255, 255, .07);
+
+    border-radius: inherit;
+
+    pointer-events: none;
+}
+
+.gallery-photo img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    transition:
+        transform .65s cubic-bezier(.22, 1, .36, 1),
+        filter .45s ease;
+}
+
+.gallery-photo:hover {
+    z-index: 5;
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 27px 62px rgba(0, 0, 0, .33);
+}
+
+.gallery-photo:hover img {
+    transform:
+        scale(1.06);
+
+    filter:
+        brightness(1.04);
+}
+
+
+/* SEDIKIT ROTASI EDITORIAL */
+
+.gallery-row:nth-child(odd) .gallery-photo:nth-child(1),
+
+.gallery-row:nth-child(even) .gallery-photo:nth-child(3) {
+    transform:
+        rotate(-.35deg);
+}
+
+.gallery-row:nth-child(odd) .gallery-photo:nth-child(4),
+
+.gallery-row:nth-child(even) .gallery-photo:nth-child(2) {
+    transform:
+        rotate(.35deg);
+}
+
+.gallery-row .gallery-photo:hover {
+    transform:
+        translateY(-7px) rotate(0deg);
+}
+
+
+/* ENDING */
+
+.after-princes {
+    min-height: 100vh;
+
+    padding:
+        100px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.after-heart {
+    color: #e094ad;
+
+    font-size: 30px;
+}
+
+.after-small {
+    margin-top: 20px;
+
+    color: #c9aa70;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+}
+
+.after-princes h2 {
+    margin-top: 18px;
+
+    color: #fff6f8;
+
+    font-size:
+        clamp(36px, 6vw, 54px);
+
+    font-weight: 500;
+
+    font-style: italic;
+}
+
+.after-description {
+    max-width: 390px;
+
+    margin-top: 18px;
+
+    color:
+        rgba(255, 240, 245, .48);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+.after-description::before {
+    content:
+        "still choosing you, in every frame.";
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color:
+        rgba(255, 240, 245, .72);
+
+    font-style: italic;
+}
+
+.gallery-button {
+    margin-top: 32px;
+
+    padding:
+        13px 23px;
+
+    border:
+        1px solid rgba(255, 255, 255, .14);
+
+    border-radius: 50px;
+
+    color:
+        rgba(255, 245, 248, .90);
+
+    text-decoration: none;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    background:
+        rgba(255, 255, 255, .03);
+}
+
+
+/* ==================================
+   LIGHTBOX
+================================== */
+
+.lightbox {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        35px 90px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    background:
+        rgba(8, 3, 6, .86);
+
+    backdrop-filter:
+        blur(18px);
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    transform:
+        scale(.94) translateY(15px);
+
+    opacity: 0;
+
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        opacity .35s ease;
+}
+
+.lightbox.open .lightbox-content {
+    transform:
+        scale(1) translateY(0);
+
+    opacity: 1;
+}
+
+.lightbox-image-wrap {
+    position: relative;
+
+    max-width:
+        min(82vw, 900px);
+
+    max-height:
+        78vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, .55);
+}
+
+.lightbox-image-wrap::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border:
+        1px solid rgba(255, 255, 255, .09);
+
+    border-radius: inherit;
+
+    pointer-events: none;
+}
+
+#lightboxImage {
+    display: block;
+
+    max-width: 100%;
+    max-height: 78vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    background: #160a10;
+}
+
+.lightbox-counter {
+    margin-top: 18px;
+
+    color:
+        rgba(255, 245, 248, .58);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+
+/* CLOSE */
+
+.lightbox-close {
+    position: absolute;
+
+    top: 26px;
+    right: 35px;
+
+    z-index: 10;
+
+    width: 44px;
+    height: 44px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    color: #fff;
+
+    background:
+        rgba(255, 255, 255, .07);
+
+    font-size: 30px;
+
+    font-weight: 200;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.lightbox-close:hover {
+    transform:
+        rotate(5deg) scale(1.05);
+
+    background:
+        rgba(255, 255, 255, .12);
+}
+
+
+/* LEFT RIGHT */
+
+.lightbox-nav {
+    position: absolute;
+
+    top: 50%;
+
+    width: 52px;
+    height: 52px;
+
+    transform:
+        translateY(-50%);
+
+    border:
+        1px solid rgba(255, 255, 255, .10);
+
+    border-radius: 50%;
+
+    color:
+        rgba(255, 255, 255, .90);
+
+    background:
+        rgba(255, 255, 255, .05);
+
+    font-size: 36px;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    backdrop-filter:
+        blur(8px);
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.lightbox-nav:hover {
+    background:
+        rgba(255, 255, 255, .10);
+}
+
+.lightbox-prev {
+    left: 28px;
+}
+
+.lightbox-next {
+    right: 28px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+    .princes-gallery-section {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .princes-gallery,
+    .gallery-row {
+        gap: 12px;
+    }
+
+    .lightbox {
+        padding:
+            30px 70px;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        height: auto;
+
+        padding:
+            14px 16px;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .nav-menu {
+        width: 100%;
+
+        gap: 5px;
+
+        justify-content:
+            space-between;
+    }
+
+    .nav-menu a {
+        font-size: 9px;
+    }
+
+    .princes-intro {
+        height: 78svh;
+    }
+
+    .princes-sticky {
+        padding-top: 145px;
+    }
+
+    .princes-top-text {
+        top: 118px;
+
+        width:
+            min(285px, 78vw);
+    }
+
+    .princes-stack {
+        width:
+            min(255px, 67vw);
+    }
+
+    .princes-gallery-section {
+        padding:
+            100px 16px 120px;
+    }
+
+    .gallery-row {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .princes-gallery {
+        gap: 10px;
+    }
+
+
+    /* LIGHTBOX MOBILE */
+
+    .lightbox {
+        padding:
+            75px 16px 70px;
+    }
+
+    .lightbox-image-wrap {
+        max-width: 92vw;
+
+        max-height: 72vh;
+    }
+
+    #lightboxImage {
+        max-height: 72vh;
+    }
+
+    .lightbox-close {
+        top: 18px;
+        right: 18px;
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 26px;
+    }
+
+    .lightbox-nav {
+        top: auto;
+
+        bottom: 17px;
+
+        width: 43px;
+        height: 43px;
+
+        transform: none;
+
+        font-size: 29px;
+    }
+
+    .lightbox-prev {
+        left:
+            calc(50% - 55px);
+    }
+
+    .lightbox-next {
+        right:
+            calc(50% - 55px);
+    }
+
+}
+
+/* ==================================
+   FIX FOTO MY PRINCES KE-2
+================================== */
+
+.princes-photo-card:nth-child(2) img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    transform:
+        rotate(90deg) scale(1.45) !important;
+
+    transform-origin: center center !important;
+}
+
+/* ==================================
+   FINAL FIX FOTO MY PRINCES KE-2
+   TEGAK LURUS
+================================== */
+
+.princes-photo-card:nth-child(2) img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    transform: scale(1.05) !important;
+
+    transform-origin: center center !important;
+}
+
+/* ==================================
+   FINAL FIX TOP LABEL
+================================== */
+
+.princes-top-text {
+    position: absolute !important;
+
+    top: 86px !important;
+    left: 50% !important;
+
+    width: min(410px, 84vw) !important;
+
+    transform: translateX(-50%) !important;
+
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+
+    z-index: 5000 !important;
+
+    padding: 0 4px;
+
+    pointer-events: none;
+}
+
+
+/* TEKS MY PRINCES */
+
+.princes-top-text span {
+    color: rgba(255, 247, 250, .95) !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 9px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 5px !important;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, .85),
+        0 0 14px rgba(223, 145, 171, .22) !important;
+}
+
+
+/* COUNTER 01 / 05 */
+
+.princes-top-text p {
+    color: #e0bd79 !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 10px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 2.5px !important;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, .85),
+        0 0 12px rgba(224, 189, 121, .22) !important;
+}
+
+
+/* TURUNKAN FOTO SEDIKIT */
+
+.princes-stack {
+    margin-top: 44px !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .princes-top-text {
+        top: 110px !important;
+
+        width: min(290px, 80vw) !important;
+    }
+
+    .princes-stack {
+        margin-top: 48px !important;
+    }
+
+}
+
+/* ==================================
+   HILANGKAN TEKS TOP
+================================== */
+
+.princes-top-text {
+    display: none !important;
+}
+
+
+/* ==================================
+   BUTTERFLY + LOVE FLOATING
+================================== */
+
+.romance-float-layer {
+    position: absolute;
+    inset: 90px 0 0 0;
+
+    z-index: 999;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.romance-item {
+    position: absolute;
+
+    opacity: 0;
+
+    transform:
+        translateY(24px) scale(.6) rotate(0deg);
+
+    will-change:
+        transform,
+        opacity;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(0 6px 14px rgba(0, 0, 0, .18));
+}
+
+.romance-item.butterfly {
+    text-shadow:
+        0 0 12px rgba(255, 190, 220, .28);
+}
+
+.romance-item.heart {
+    text-shadow:
+        0 0 10px rgba(255, 140, 180, .24);
+}
+
+.romance-float-layer.active .romance-item {
+    animation-name: romanceFloat;
+    animation-duration: var(--dur, 5.5s);
+    animation-delay: var(--delay, 0s);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes romanceFloat {
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(0, 26px, 0) scale(.55) rotate(-8deg);
+    }
+
+    12% {
+        opacity: .92;
+    }
+
+    40% {
+        transform:
+            translate3d(var(--drift-x, 16px), -45px, 0) scale(1) rotate(8deg);
+    }
+
+    70% {
+        opacity: .8;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate3d(calc(var(--drift-x, 16px) * 1.8), -120px, 0) scale(.85) rotate(-6deg);
+    }
+}
+
+
+/* sedikit turunkan foto biar dekorasi ada ruang */
+.princes-stack {
+    margin-top: 26px !important;
+}
+
+
+/* mobile */
+@media (max-width: 650px) {
+    .romance-float-layer {
+        inset: 115px 0 0 0;
+    }
+
+    .princes-stack {
+        margin-top: 32px !important;
+    }
+}
+
+/* ==================================
+   EXTRA GLOW BUTTERFLY + LOVE
+================================== */
+
+.romance-item {
+    filter:
+        drop-shadow(0 0 6px rgba(255, 190, 220, .35)) drop-shadow(0 0 14px rgba(255, 140, 190, .22));
+}
+
+.romance-item.butterfly {
+    text-shadow:
+        0 0 8px rgba(200, 160, 255, .45),
+        0 0 18px rgba(225, 175, 255, .28),
+        0 0 30px rgba(220, 150, 255, .12);
+
+    animation-name:
+        romanceFloat,
+        butterflyGlow;
+}
+
+.romance-item.heart {
+    text-shadow:
+        0 0 8px rgba(255, 150, 185, .50),
+        0 0 18px rgba(255, 110, 165, .28),
+        0 0 30px rgba(255, 100, 160, .12);
+
+    animation-name:
+        romanceFloat,
+        heartGlow;
+}
+
+
+/* glow kupu-kupu */
+
+@keyframes butterflyGlow {
+
+    0%,
+    100% {
+        filter:
+            drop-shadow(0 0 4px rgba(200, 165, 255, .25)) drop-shadow(0 0 10px rgba(220, 170, 255, .15));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 9px rgba(210, 175, 255, .55)) drop-shadow(0 0 20px rgba(230, 180, 255, .30));
+    }
+
+}
+
+
+/* glow love */
+
+@keyframes heartGlow {
+
+    0%,
+    100% {
+        filter:
+            drop-shadow(0 0 5px rgba(255, 130, 175, .30)) drop-shadow(0 0 12px rgba(255, 110, 160, .18));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 10px rgba(255, 150, 190, .60)) drop-shadow(0 0 22px rgba(255, 110, 165, .34));
+    }
+
+}
+
+/* ==================================
+   FINAL POLISH ROMANCE EFFECT
+================================== */
+
+/* glow di belakang tumpukan foto */
+.princes-stack::before {
+    width: 175% !important;
+    height: 145% !important;
+
+    background:
+        radial-gradient(circle,
+            rgba(255, 145, 190, .17) 0%,
+            rgba(220, 115, 165, .09) 28%,
+            rgba(180, 70, 130, .035) 52%,
+            transparent 75%) !important;
+
+    filter:
+        blur(30px) !important;
+
+    animation:
+        stackAura 4.5s ease-in-out infinite;
+}
+
+@keyframes stackAura {
+
+    0%,
+    100% {
+        opacity: .65;
+
+        transform:
+            translate(-50%, -50%) scale(.96);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%) scale(1.05);
+    }
+}
+
+
+/* kupu-kupu sedikit lebih menonjol */
+.romance-item.butterfly {
+    filter:
+        drop-shadow(0 0 7px rgba(215, 180, 255, .48)) drop-shadow(0 0 18px rgba(235, 170, 255, .25));
+}
+
+
+/* beberapa kupu-kupu dibuat lebih besar */
+
+.romance-item.butterfly:nth-child(1) {
+    font-size: 31px !important;
+}
+
+.romance-item.butterfly:nth-child(3) {
+    font-size: 27px !important;
+}
+
+.romance-item.butterfly:nth-child(5) {
+    font-size: 30px !important;
+}
+
+
+/* love sedikit lebih hidup */
+
+.romance-item.heart {
+    filter:
+        drop-shadow(0 0 6px rgba(255, 130, 175, .48)) drop-shadow(0 0 16px rgba(255, 100, 160, .24));
+}
+
+
+/* variasi ukuran love */
+
+.romance-item.heart:nth-child(7) {
+    font-size: 16px !important;
+}
+
+.romance-item.heart:nth-child(8) {
+    font-size: 11px !important;
+}
+
+.romance-item.heart:nth-child(9) {
+    font-size: 14px !important;
+}
+
+.romance-item.heart:nth-child(10) {
+    font-size: 10px !important;
+}
+
+.romance-item.heart:nth-child(11) {
+    font-size: 17px !important;
+}
+
+.romance-item.heart:nth-child(12) {
+    font-size: 12px !important;
+}
+
+.romance-item.heart:nth-child(13) {
+    font-size: 15px !important;
+}
+
+.romance-item.heart:nth-child(14) {
+    font-size: 11px !important;
+}
+
+.romance-item.heart:nth-child(15) {
+    font-size: 14px !important;
+}
+
+.romance-item.heart:nth-child(16) {
+    font-size: 12px !important;
+}
+
+
+/* galeri dinaikkan sedikit */
+
+.princes-gallery-section {
+    padding-top: 90px !important;
+}
+
+
+/* heading galeri sedikit lebih dekat */
+
+.gallery-heading {
+    margin-bottom: 48px !important;
+}
+
+
+/* mobile */
+
+@media (max-width: 650px) {
+
+    .princes-gallery-section {
+        padding-top: 75px !important;
+    }
+
+    .gallery-heading {
+        margin-bottom: 38px !important;
+    }
+
+}

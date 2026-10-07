@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elza ♥ Silmy</title>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            background: #0e0308;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+        }
+
+
+
+        /* =====================================================
+           WEBSITE
+        ===================================================== */
+
+        #websiteFrame {
+            position: fixed;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border: none;
+
+            opacity: 0;
+            visibility: hidden;
+
+            background: #0e0308;
+
+            transition:
+                opacity 1s ease,
+                visibility 1s ease;
+        }
+
+
+        body.unlocked #websiteFrame {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+
+        /* =====================================================
+           COMMON SCREEN
+        ===================================================== */
+
+        .gate-screen {
+            position: fixed;
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 50% 30%,
+                    rgba(142, 29, 69, 0.35),
+                    transparent 36%),
+                radial-gradient(circle at 10% 90%,
+                    rgba(91, 12, 41, 0.23),
+                    transparent 32%),
+                linear-gradient(145deg,
+                    #070204,
+                    #190811 48%,
+                    #090205);
+        }
+
+
+        .gate-screen::before {
+            content: "";
+
+            position: absolute;
+            inset: -30%;
+
+            background:
+                radial-gradient(circle,
+                    rgba(255, 184, 202, 0.08) 0 1px,
+                    transparent 1.5px);
+
+            background-size: 44px 44px;
+
+            animation:
+                backgroundMove 18s linear infinite;
+        }
+
+
+        @keyframes backgroundMove {
+
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(88px);
+            }
+
+        }
+
+
+
+        .gate-glow {
+            position: absolute;
+
+            width: 520px;
+            height: 520px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(169, 32, 78, 0.13);
+
+            filter: blur(95px);
+
+            animation:
+                gateGlow 4s ease-in-out infinite;
+        }
+
+
+        @keyframes gateGlow {
+
+            0%,
+            100% {
+                opacity: 0.45;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.12);
+            }
+
+        }
+
+
+
+        /* =====================================================
+           BARCODE SCREEN
+        ===================================================== */
+
+        #barcodeScreen {
+            z-index: 100000;
+
+            opacity: 1;
+            visibility: visible;
+
+            transition:
+                opacity 0.8s ease,
+                visibility 0.8s ease,
+                transform 0.8s ease;
+        }
+
+
+        body.show-password #barcodeScreen {
+            opacity: 0;
+            visibility: hidden;
+
+            transform: scale(1.05);
+
+            pointer-events: none;
+        }
+
+
+
+        .barcode-card {
+            position: relative;
+            z-index: 5;
+
+            width: min(430px, 100%);
+
+            padding:
+                44px 34px 36px;
+
+            text-align: center;
+
+            border:
+                1px solid rgba(255, 219, 199, 0.22);
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(145deg,
+                    rgba(61, 13, 31, 0.91),
+                    rgba(17, 4, 10, 0.97));
+
+            box-shadow:
+                0 34px 90px rgba(0, 0, 0, 0.62),
+
+                0 0 38px rgba(196, 48, 96, 0.09);
+
+            backdrop-filter: blur(18px);
+        }
+
+
+
+        .gate-small {
+            margin: 0 0 10px;
+
+            color: #d6aa9b;
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+
+
+        .gate-title {
+            margin: 0;
+
+            color: #fff2ec;
+
+            font-size:
+                clamp(31px,
+                    7vw,
+                    46px);
+
+            font-weight: 500;
+        }
+
+
+        .gate-title span {
+            display: inline-block;
+
+            color: #ef668f;
+
+            animation:
+                heartBeat 1.5s ease-in-out infinite;
+        }
+
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.13);
+            }
+
+        }
+
+
+
+        .gate-description {
+            margin:
+                14px auto 28px;
+
+            max-width: 300px;
+
+            color:
+                rgba(255, 239, 231, 0.65);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+
+        /* =====================================================
+           REAL BARCODE LOOK
+        ===================================================== */
+
+        .barcode-wrap {
+            position: relative;
+
+            width: 280px;
+
+            max-width: 100%;
+
+            margin:
+                0 auto 28px;
+        }
+
+
+
+        .barcode-box {
+            position: relative;
+
+            width: 100%;
+            height: 115px;
+
+            overflow: hidden;
+
+            border-radius: 13px;
+
+            border:
+                1px solid rgba(255, 223, 211, 0.18);
+
+            background:
+                rgba(255, 239, 233, 0.06);
+
+            box-shadow:
+                inset 0 0 25px rgba(255, 255, 255, 0.025),
+
+                0 12px 35px rgba(0, 0, 0, 0.22);
+        }
+
+
+
+        .barcode-lines {
+            position: absolute;
+
+            top: 16px;
+            left: 18px;
+            right: 18px;
+            bottom: 19px;
+
+            background:
+                repeating-linear-gradient(90deg,
+
+                    #ffe2db 0px,
+                    #ffe2db 2px,
+
+                    transparent 2px,
+                    transparent 5px,
+
+                    #ffe2db 5px,
+                    #ffe2db 9px,
+
+                    transparent 9px,
+                    transparent 12px,
+
+                    #ffe2db 12px,
+                    #ffe2db 13px,
+
+                    transparent 13px,
+                    transparent 18px,
+
+                    #ffe2db 18px,
+                    #ffe2db 24px,
+
+                    transparent 24px,
+                    transparent 27px,
+
+                    #ffe2db 27px,
+                    #ffe2db 29px,
+
+                    transparent 29px,
+                    transparent 34px);
+
+            opacity: 0.9;
+        }
+
+
+
+        .barcode-box::after {
+            content: "";
+
+            position: absolute;
+
+            left: 12px;
+            right: 12px;
+
+            height: 2px;
+
+            background: #ff7a9e;
+
+            box-shadow:
+                0 0 8px #ff789e,
+                0 0 18px rgba(255, 74, 126, 0.75);
+
+            animation:
+                barcodeScan 2.5s ease-in-out infinite;
+        }
+
+
+        @keyframes barcodeScan {
+
+            0% {
+                top: 12px;
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            85% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 101px;
+                opacity: 0;
+            }
+
+        }
+
+
+
+        .barcode-number {
+            margin:
+                7px 0 0;
+
+            color: #c79c90;
+
+            font-family: monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 5px;
+        }
+
+
+
+        .continue-button {
+            width: 100%;
+
+            padding:
+                14px 20px;
+
+            border:
+                1px solid rgba(255, 205, 180, 0.3);
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(135deg,
+                    #771c3d,
+                    #aa315b);
+
+            color: #fff7f2;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 27px rgba(90, 5, 36, 0.42);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 32px rgba(115, 9, 47, 0.5);
+        }
+
+
+        .continue-button:active {
+            transform: scale(0.98);
+        }
+
+
+
+        /* =====================================================
+           PASSWORD SCREEN
+        ===================================================== */
+
+        #passwordScreen {
+            z-index: 99999;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: scale(0.96);
+
+            transition:
+                opacity 0.8s ease,
+                visibility 0.8s ease,
+                transform 0.8s ease;
+        }
+
+
+        body.show-password #passwordScreen {
+            opacity: 1;
+            visibility: visible;
+
+            transform: scale(1);
+        }
+
+
+        body.unlocked #passwordScreen {
+            opacity: 0;
+            visibility: hidden;
+
+            transform: scale(1.05);
+
+            pointer-events: none;
+        }
+
+
+
+        .password-card {
+            position: relative;
+            z-index: 5;
+
+            width: min(430px, 100%);
+
+            padding:
+                43px 34px 34px;
+
+            text-align: center;
+
+            border:
+                1px solid rgba(255, 219, 199, 0.22);
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(145deg,
+                    rgba(61, 13, 31, 0.91),
+                    rgba(17, 4, 10, 0.97));
+
+            box-shadow:
+                0 34px 90px rgba(0, 0, 0, 0.62),
+
+                0 0 38px rgba(196, 48, 96, 0.09);
+
+            backdrop-filter: blur(18px);
+        }
+
+
+
+        .password-heart {
+            margin:
+                5px auto 24px;
+
+            color: #ff6f98;
+
+            font-size: 70px;
+
+            line-height: 1;
+
+            text-shadow:
+                0 0 12px rgba(255, 95, 143, 0.6),
+
+                0 0 28px rgba(255, 68, 124, 0.42);
+
+            animation:
+                passwordHeart 1.5s ease-in-out infinite;
+        }
+
+
+        @keyframes passwordHeart {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+        }
+
+
+
+        .password-label {
+            display: block;
+
+            margin-bottom: 9px;
+
+            color: #ead3c8;
+
+            font-size: 12px;
+
+            letter-spacing: 1.2px;
+        }
+
+
+
+        .password-box {
+            position: relative;
+
+            width: 100%;
+        }
+
+
+
+        #passwordInput {
+            width: 100%;
+
+            padding:
+                15px 50px 15px 17px;
+
+            border-radius: 14px;
+
+            border:
+                1px solid rgba(255, 208, 190, 0.23);
+
+            outline: none;
+
+            background:
+                rgba(7, 1, 4, 0.54);
+
+            color: #fff5ef;
+
+            text-align: center;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            letter-spacing: 3px;
+
+            transition:
+                border 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        #passwordInput:focus {
+            border-color:
+                rgba(233, 106, 143, 0.65);
+
+            box-shadow:
+                0 0 0 3px rgba(233, 106, 143, 0.08);
+        }
+
+
+
+        .show-password {
+            position: absolute;
+
+            top: 50%;
+            right: 14px;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #d0a092;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+
+
+        .unlock-button {
+            width: 100%;
+
+            margin-top: 14px;
+
+            padding:
+                14px 20px;
+
+            border:
+                1px solid rgba(255, 205, 180, 0.3);
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(135deg,
+                    #771c3d,
+                    #aa315b);
+
+            color: #fff7f2;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 27px rgba(90, 5, 36, 0.42);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .unlock-button:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 32px rgba(115, 9, 47, 0.5);
+        }
+
+
+        .unlock-button:active {
+            transform: scale(0.98);
+        }
+
+
+
+        .password-message {
+            min-height: 19px;
+
+            margin:
+                13px 0 0;
+
+            color: #ff91aa;
+
+            font-size: 12px;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+
+        .password-message.show {
+            opacity: 1;
+        }
+
+
+
+        .gate-footer {
+            margin-top: 19px;
+
+            color:
+                rgba(232, 195, 181, 0.43);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+        }
+
+
+
+        /* =====================================================
+           WRONG PASSWORD
+        ===================================================== */
+
+        .password-card.shake {
+            animation:
+                wrongPassword 0.42s ease;
+        }
+
+
+        @keyframes wrongPassword {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-8px);
+            }
+
+            40% {
+                transform: translateX(8px);
+            }
+
+            60% {
+                transform: translateX(-5px);
+            }
+
+            80% {
+                transform: translateX(5px);
+            }
+
+        }
+
+
+
+        /* =====================================================
+           SPEAKER
+        ===================================================== */
+
+        .speaker-control {
+            position: fixed;
+
+            right: 16px;
+            bottom: 16px;
+
+            z-index: 999999;
+
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 3px;
+
+            padding: 0;
+
+            border:
+                1px solid rgba(255, 214, 193, 0.24);
+
+            border-radius: 50%;
+
+            background:
+                rgba(38, 7, 19, 0.87);
+
+            color: #fff1eb;
+
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 8px 26px rgba(0, 0, 0, 0.38),
+
+                0 0 22px rgba(179, 40, 86, 0.1);
+
+            cursor: pointer;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.5s ease,
+                transform 0.25s ease;
+        }
+
+
+        body.unlocked .speaker-control {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        .speaker-control:hover {
+            transform: scale(1.08);
+        }
+
+
+
+        .speaker-icon {
+            font-size: 17px;
+        }
+
+
+
+        .sound-waves {
+            display: flex;
+            align-items: center;
+
+            gap: 2px;
+
+            height: 17px;
+        }
+
+
+        .sound-waves i {
+            display: block;
+
+            width: 2px;
+
+            border-radius: 5px;
+
+            background: #f0a8bb;
+
+            transform-origin: center;
+
+            animation:
+                soundWave 0.78s ease-in-out infinite;
+        }
+
+
+        .sound-waves i:nth-child(1) {
+            height: 5px;
+            animation-delay: 0s;
+        }
+
+
+        .sound-waves i:nth-child(2) {
+            height: 13px;
+            animation-delay: 0.13s;
+        }
+
+
+        .sound-waves i:nth-child(3) {
+            height: 8px;
+            animation-delay: 0.26s;
+        }
+
+
+        @keyframes soundWave {
+
+            0%,
+            100% {
+                transform: scaleY(0.42);
+                opacity: 0.42;
+            }
+
+            50% {
+                transform: scaleY(1.14);
+                opacity: 1;
+            }
+
+        }
+
+
+
+        .speaker-control.muted .sound-waves i {
+            animation: none;
+
+            transform:
+                scaleY(0.28);
+
+            opacity: 0.25;
+        }
+
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .barcode-card,
+            .password-card {
+                padding:
+                    34px 22px 28px;
+
+                border-radius: 23px;
+            }
+
+
+            .barcode-wrap {
+                width: 245px;
+            }
+
+
+            .speaker-control {
+                width: 42px;
+                height: 42px;
+
+                right: 12px;
+                bottom: 12px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <!-- =====================================================
+         STEP 1 : BARCODE
+    ===================================================== -->
+
+    <section class="gate-screen" id="barcodeScreen">
+
+        <div class="gate-glow"></div>
+
+
+        <div class="barcode-card">
+
+
+            <p class="gate-small">
+                PRIVATE ACCESS
+            </p>
+
+
+            <h1 class="gate-title">
+
+                Elza
+
+                <span>
+                    ♥
+                </span>
+
+                Silmy
+
+            </h1>
+
+
+            <p class="gate-description">
+
+                Setiap cerita memiliki
+                pintu masuknya sendiri.
+
+                <br>
+
+                Ini adalah pintu menuju
+                cerita kecil kita.
+
+            </p>
+
+
+
+            <div class="barcode-wrap">
+
+
+                <div class="barcode-box">
+
+                    <div class="barcode-lines"></div>
+
+                </div>
+
+
+                <p class="barcode-number">
+
+                    03032026
+
+                </p>
+
+
+            </div>
+
+
+
+            <button class="continue-button" id="continueToPassword" type="button">
+
+                SCAN TO CONTINUE ♥
+
+            </button>
+
+
+            <p class="gate-footer">
+
+                OUR LITTLE STORY
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STEP 2 : PASSWORD
+    ===================================================== -->
+
+    <section class="gate-screen" id="passwordScreen">
+
+        <div class="gate-glow"></div>
+
+
+        <div class="password-card" id="passwordCard">
+
+
+            <p class="gate-small">
+
+                ONE MORE STEP
+
+            </p>
+
+
+            <h1 class="gate-title">
+
+                Elza
+
+                <span>
+                    ♥
+                </span>
+
+                Silmy
+
+            </h1>
+
+
+            <p class="gate-description">
+
+                Masukkan tanggal
+                yang menjadi kunci
+                cerita ini.
+
+            </p>
+
+
+
+            <div class="password-heart">
+
+                ♥
+
+            </div>
+
+
+
+            <form id="passwordForm">
+
+
+                <label class="password-label" for="passwordInput">
+
+                    masukkan password
+
+                </label>
+
+
+                <div class="password-box">
+
+
+                    <input id="passwordInput" type="password" autocomplete="off" inputmode="numeric"
+                        placeholder="••••••••">
+
+
+                    <button class="show-password" id="showPassword" type="button" aria-label="Tampilkan password">
+
+                        ♡
+
+                    </button>
+
+
+                </div>
+
+
+
+                <button class="unlock-button" type="submit">
+
+                    OPEN OUR STORY ♥
+
+                </button>
+
+
+
+                <p class="password-message" id="passwordMessage">
+
+                    password belum tepat ♥
+
+                </p>
+
+
+            </form>
+
+
+            <p class="gate-footer">
+
+                ONLY FOR US
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WEBSITE
+    ===================================================== -->
+
+    <iframe id="websiteFrame" src="home.html" title="Elza dan Silmy">
+    </iframe>
+
+
+
+    <!-- =====================================================
+         MUSIC
+    ===================================================== -->
+
+    <audio id="backgroundMusic" src="musik/romantis.mp3" preload="auto" loop>
+    </audio>
+
+
+
+    <!-- =====================================================
+         SPEAKER
+    ===================================================== -->
+
+    <button class="speaker-control" id="speakerButton" type="button" aria-label="Mute atau unmute musik">
+
+
+        <span class="speaker-icon" id="speakerIcon">
+
+            🔊
+
+        </span>
+
+
+        <span class="sound-waves">
+
+            <i></i>
+            <i></i>
+            <i></i>
+
+        </span>
+
+
+    </button>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+
+        const continueToPassword =
+            document.getElementById(
+                "continueToPassword"
+            );
+
+
+        const passwordForm =
+            document.getElementById(
+                "passwordForm"
+            );
+
+
+        const passwordInput =
+            document.getElementById(
+                "passwordInput"
+            );
+
+
+        const passwordMessage =
+            document.getElementById(
+                "passwordMessage"
+            );
+
+
+        const passwordCard =
+            document.getElementById(
+                "passwordCard"
+            );
+
+
+        const showPassword =
+            document.getElementById(
+                "showPassword"
+            );
+
+
+        const music =
+            document.getElementById(
+                "backgroundMusic"
+            );
+
+
+        const speakerButton =
+            document.getElementById(
+                "speakerButton"
+            );
+
+
+        const speakerIcon =
+            document.getElementById(
+                "speakerIcon"
+            );
+
+
+        const websiteFrame =
+            document.getElementById(
+                "websiteFrame"
+            );
+
+
+
+        /* =====================================================
+           STEP 1 → PASSWORD
+        ===================================================== */
+
+        continueToPassword.addEventListener(
+            "click",
+            function () {
+
+
+                document
+                    .body
+                    .classList
+                    .add("show-password");
+
+
+                setTimeout(
+                    function () {
+
+                        passwordInput.focus();
+
+                    },
+                    600
+                );
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        const correctPassword =
+            "03032026";
+
+
+
+        passwordForm.addEventListener(
+            "submit",
+            async function (event) {
+
+
+                event.preventDefault();
+
+
+                const enteredPassword =
+                    passwordInput
+                        .value
+                        .trim();
+
+
+
+                if (
+                    enteredPassword ===
+                    correctPassword
+                ) {
+
+
+                    passwordMessage
+                        .classList
+                        .remove("show");
+
+
+                    music.volume =
+                        0.38;
+
+
+                    music.muted =
+                        false;
+
+
+
+                    /*
+                    Password submit is a user interaction,
+                    so browsers normally allow audio here.
+                    */
+
+                    try {
+
+                        await music.play();
+
+                    }
+                    catch (error) {
+
+                        console.log(
+                            "Audio belum bisa dimainkan.",
+                            error
+                        );
+
+                    }
+
+
+
+                    document
+                        .body
+                        .classList
+                        .add("unlocked");
+
+
+                }
+                else {
+
+
+                    passwordMessage.textContent =
+                        "password belum tepat ♥";
+
+
+                    passwordMessage
+                        .classList
+                        .add("show");
+
+
+                    passwordCard
+                        .classList
+                        .remove("shake");
+
+
+                    void passwordCard.offsetWidth;
+
+
+                    passwordCard
+                        .classList
+                        .add("shake");
+
+
+                    passwordInput.select();
+
+                }
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           SHOW PASSWORD
+        ===================================================== */
+
+        showPassword.addEventListener(
+            "click",
+            function () {
+
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+
+                    passwordInput.type =
+                        "text";
+
+
+                    showPassword.textContent =
+                        "♥";
+
+
+                }
+                else {
+
+
+                    passwordInput.type =
+                        "password";
+
+
+                    showPassword.textContent =
+                        "♡";
+
+
+                }
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           SPEAKER
+
+           IMPORTANT:
+           MUTE DOES NOT PAUSE AUDIO.
+        ===================================================== */
+
+        speakerButton.addEventListener(
+            "click",
+            function () {
+
+
+                music.muted =
+                    !music.muted;
+
+
+
+                if (music.muted) {
+
+
+                    speakerButton
+                        .classList
+                        .add("muted");
+
+
+                    speakerIcon.textContent =
+                        "🔇";
+
+
+                }
+                else {
+
+
+                    speakerButton
+                        .classList
+                        .remove("muted");
+
+
+                    speakerIcon.textContent =
+                        "🔊";
+
+
+                    if (music.paused) {
+
+
+                        music
+                            .play()
+                            .catch(
+                                () => { }
+                            );
+
+
+                    }
+
+
+                }
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           INTERNAL PAGE NAVIGATION
+
+           index.html remains alive,
+           therefore audio remains alive.
+        ===================================================== */
+
+        websiteFrame.addEventListener(
+            "load",
+            function () {
+
+
+                try {
+
+
+                    const frameDocument =
+                        websiteFrame.contentDocument;
+
+
+                    if (!frameDocument) {
+                        return;
+                    }
+
+
+
+                    const links =
+                        frameDocument
+                            .querySelectorAll(
+                                "a[href]"
+                            );
+
+
+                    links.forEach(
+                        function (link) {
+
+
+                            const href =
+                                link.getAttribute(
+                                    "href"
+                                );
+
+
+                            if (!href) {
+                                return;
+                            }
+
+
+                            if (
+                                href.startsWith("#") ||
+                                href.startsWith("http") ||
+                                href.startsWith("mailto:") ||
+                                href.startsWith("tel:")
+                            ) {
+
+                                return;
+
+                            }
+
+
+
+                            link.addEventListener(
+                                "click",
+                                function (event) {
+
+
+                                    if (
+                                        href.endsWith(
+                                            ".html"
+                                        )
+                                    ) {
+
+
+                                        event.preventDefault();
+
+
+
+                                        /*
+                                        Navbar Home links from
+                                        existing pages may still use
+                                        index.html.
+
+                                        Inside our wrapper,
+                                        Home = home.html.
+                                        */
+
+                                        if (
+                                            href ===
+                                            "index.html"
+                                        ) {
+
+
+                                            websiteFrame.src =
+                                                "home.html";
+
+
+                                        }
+                                        else {
+
+
+                                            websiteFrame.src =
+                                                href;
+
+
+                                        }
+
+
+                                    }
+
+
+                                }
+                            );
+
+
+                        }
+                    );
+
+
+
+                    /* HOME EXPLORE BUTTON */
+
+                    const continueButton =
+                        frameDocument
+                            .getElementById(
+                                "continueBtn"
+                            );
+
+
+                    if (continueButton) {
+
+
+                        continueButton
+                            .addEventListener(
+                                "click",
+                                function () {
+
+
+                                    setTimeout(
+                                        function () {
+
+
+                                            websiteFrame.src =
+                                                "gallery.html";
+
+
+                                        },
+                                        80
+                                    );
+
+
+                                }
+                            );
+
+
+                    }
+
+
+                }
+                catch (error) {
+
+
+                    console.log(
+                        "Navigation error:",
+                        error
+                    );
+
+
+                }
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           AUDIO ERROR
+        ===================================================== */
+
+        music.addEventListener(
+            "error",
+            function () {
+
+
+                console.log(
+                    "Pastikan file ada di musik/romantis.mp3"
+                );
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
