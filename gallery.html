@@ -10,14 +10,10 @@
     <link rel="stylesheet" href="gallery.css">
 
     <style>
-        /* =====================================================
-           MOUNTAIN DATE
-           SEMUA FOTO 1 - 11 DIKECILKAN SEDIKIT
-        ===================================================== */
-
+        /* MOUNTAIN DATE */
         .mountain-slider .slides img {
             object-fit: contain;
-            object-position: center center;
+            object-position: center;
             transform: scale(0.94);
             background: #0d0409;
         }
@@ -26,33 +22,23 @@
             transform: scale(0.94);
         }
 
-
-        /* =====================================================
-           FIRST TIME DATE HOME
-        ===================================================== */
-
+        /* FIRST TIME DATE HOME */
         .datehome-slider .slides img {
             object-fit: contain;
-            object-position: center center;
+            object-position: center;
             background: #0d0409;
         }
 
-        /* Foto 1 sampai 4 sama */
         .datehome-slider .slides img:nth-child(1),
         .datehome-slider .slides img:nth-child(2),
         .datehome-slider .slides img:nth-child(3),
-        .datehome-slider .slides img:nth-child(4) {
-            transform: scale(0.95);
-        }
-
-        /* Foto 5 lebih kecil */
-        .datehome-slider .slides img:nth-child(5) {
-            transform: scale(0.86);
-        }
-
-        /* Foto 6 normal */
+        .datehome-slider .slides img:nth-child(4),
         .datehome-slider .slides img:nth-child(6) {
             transform: scale(0.95);
+        }
+
+        .datehome-slider .slides img:nth-child(5) {
+            transform: scale(0.86);
         }
 
         .datehome-slider:hover .slides img:nth-child(1).active-image,
@@ -67,11 +53,12 @@
             transform: scale(0.86);
         }
 
-
-        /* =====================================================
-           FIRST TIME DINNER
-           FOTO 1 - 7 DIKECILKAN SEDIKIT
-        ===================================================== */
+        /* FIRST TIME DINNER */
+        .dinner-slider .slides img {
+            object-fit: contain;
+            object-position: center;
+            background: #0d0409;
+        }
 
         .dinner-slider .slides img:nth-child(1),
         .dinner-slider .slides img:nth-child(2),
@@ -80,10 +67,7 @@
         .dinner-slider .slides img:nth-child(5),
         .dinner-slider .slides img:nth-child(6),
         .dinner-slider .slides img:nth-child(7) {
-            object-fit: contain;
-            object-position: center center;
             transform: scale(0.94);
-            background: #0d0409;
         }
 
         .dinner-slider:hover .slides img:nth-child(1).active-image,
@@ -98,12 +82,11 @@
     </style>
 </head>
 
-
 <body>
 
-    <!-- =====================================================
+    <!-- =========================
          NAVBAR
-    ===================================================== -->
+    ========================= -->
 
     <nav class="navbar">
 
@@ -126,7 +109,7 @@
             </a>
 
             <a href="surat.html">
-                Surat Cinta
+                A Moment For You
             </a>
 
         </div>
@@ -134,13 +117,11 @@
     </nav>
 
 
-
     <main class="gallery-page">
 
-
-        <!-- =====================================================
-             HERO
-        ===================================================== -->
+        <!-- =========================
+             HERO GALERI
+        ========================= -->
 
         <section class="gallery-hero">
 
@@ -164,26 +145,17 @@
             <div class="hero-line"></div>
 
             <div class="scroll-hint">
-
-                <span>
-                    scroll to remember
-                </span>
-
-                <b>
-                    ↓
-                </b>
-
+                <span>scroll to remember</span>
+                <b>↓</b>
             </div>
 
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =========================
              MEMORY 01
              MOUNTAIN DATE
-             11 FOTO
-        ===================================================== -->
+        ========================= -->
 
         <section class="memory-section" data-memory="01">
 
@@ -192,7 +164,6 @@
                 <div class="memory-info">
 
                     <div class="memory-heading">
-
                         <span class="memory-number">
                             MEMORY 01
                         </span>
@@ -200,23 +171,13 @@
                         <span class="memory-symbol">
                             ✦
                         </span>
-
                     </div>
 
-                    <h2>
-                        Mountain Date
-                    </h2>
+                    <h2>Mountain Date</h2>
 
                     <div class="memory-meta">
-
-                        <span>
-                            ♡ our little adventure
-                        </span>
-
-                        <span>
-                            11 photos
-                        </span>
-
+                        <span>♡ our little adventure</span>
+                        <span>11 photos</span>
                     </div>
 
                     <p class="memory-story">
@@ -236,11 +197,9 @@
 
                 </div>
 
-
                 <div class="memory-slider mountain-slider">
 
                     <div class="slides">
-
                         <img src="foto/mountain1.jpg" alt="Mountain Date 1">
                         <img src="foto/mountain2.jpg" alt="Mountain Date 2">
                         <img src="foto/mountain3.jpg" alt="Mountain Date 3">
@@ -252,28 +211,22 @@
                         <img src="foto/mountain9.jpg" alt="Mountain Date 9">
                         <img src="foto/mountain10.jpg" alt="Mountain Date 10">
                         <img src="foto/mountain11.jpg" alt="Mountain Date 11">
-
                     </div>
 
-
-                    <button class="slider-button prev" type="button">
+                    <button class="slider-button prev" type="button" aria-label="Foto sebelumnya">
                         ‹
                     </button>
 
-
-                    <button class="slider-button next" type="button">
+                    <button class="slider-button next" type="button" aria-label="Foto berikutnya">
                         ›
                     </button>
 
-
                     <div class="slider-footer">
-
                         <div class="slider-dots"></div>
 
                         <span class="slider-counter">
                             01 / 11
                         </span>
-
                     </div>
 
                 </div>
@@ -283,11 +236,10 @@
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =========================
              MEMORY 02
              FIRST DATE
-        ===================================================== -->
+        ========================= -->
 
         <section class="memory-section reverse" data-memory="02">
 
@@ -296,31 +248,19 @@
                 <div class="memory-info">
 
                     <div class="memory-heading">
-
                         <span class="memory-number">
                             MEMORY 02
                         </span>
-
                         <span class="memory-symbol">
                             ♥
                         </span>
-
                     </div>
 
-                    <h2>
-                        First Date
-                    </h2>
+                    <h2>First Date</h2>
 
                     <div class="memory-meta">
-
-                        <span>
-                            ♡ where it started
-                        </span>
-
-                        <span>
-                            2 photos
-                        </span>
-
+                        <span>♡ where it started</span>
+                        <span>2 photos</span>
                     </div>
 
                     <p class="memory-story">
@@ -341,35 +281,26 @@
 
                 </div>
 
-
                 <div class="memory-slider">
 
                     <div class="slides">
-
                         <img src="foto/firstdate1.jpg" alt="First Date 1">
                         <img src="foto/firstdate2.jpg" alt="First Date 2">
-
                     </div>
 
-
-                    <button class="slider-button prev" type="button">
+                    <button class="slider-button prev" type="button" aria-label="Foto sebelumnya">
                         ‹
                     </button>
 
-
-                    <button class="slider-button next" type="button">
+                    <button class="slider-button next" type="button" aria-label="Foto berikutnya">
                         ›
                     </button>
 
-
                     <div class="slider-footer">
-
                         <div class="slider-dots"></div>
-
                         <span class="slider-counter">
                             01 / 02
                         </span>
-
                     </div>
 
                 </div>
@@ -379,11 +310,10 @@
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =========================
              MEMORY 03
              BIRTHDAY
-        ===================================================== -->
+        ========================= -->
 
         <section class="memory-section" data-memory="03">
 
@@ -392,31 +322,19 @@
                 <div class="memory-info">
 
                     <div class="memory-heading">
-
                         <span class="memory-number">
                             MEMORY 03
                         </span>
-
                         <span class="memory-symbol">
                             ✦
                         </span>
-
                     </div>
 
-                    <h2>
-                        Birthday
-                    </h2>
+                    <h2>Birthday</h2>
 
                     <div class="memory-meta">
-
-                        <span>
-                            ♡ another year with you
-                        </span>
-
-                        <span>
-                            2 photos
-                        </span>
-
+                        <span>♡ another year with you</span>
+                        <span>2 photos</span>
                     </div>
 
                     <p class="memory-story">
@@ -437,35 +355,26 @@
 
                 </div>
 
-
                 <div class="memory-slider">
 
                     <div class="slides">
-
                         <img src="foto/birthday1.jpg" alt="Birthday 1">
                         <img src="foto/birthday2.jpg" alt="Birthday 2">
-
                     </div>
 
-
-                    <button class="slider-button prev" type="button">
+                    <button class="slider-button prev" type="button" aria-label="Foto sebelumnya">
                         ‹
                     </button>
 
-
-                    <button class="slider-button next" type="button">
+                    <button class="slider-button next" type="button" aria-label="Foto berikutnya">
                         ›
                     </button>
 
-
                     <div class="slider-footer">
-
                         <div class="slider-dots"></div>
-
                         <span class="slider-counter">
                             01 / 02
                         </span>
-
                     </div>
 
                 </div>
@@ -475,12 +384,10 @@
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =========================
              MEMORY 04
              FIRST TIME DATE HOME
-             6 FOTO
-        ===================================================== -->
+        ========================= -->
 
         <section class="memory-section reverse" data-memory="04">
 
@@ -489,31 +396,19 @@
                 <div class="memory-info">
 
                     <div class="memory-heading">
-
                         <span class="memory-number">
                             MEMORY 04
                         </span>
-
                         <span class="memory-symbol">
                             ♥
                         </span>
-
                     </div>
 
-                    <h2>
-                        First Time Date Home
-                    </h2>
+                    <h2>First Time Date Home</h2>
 
                     <div class="memory-meta">
-
-                        <span>
-                            ♡ our cozy little moment
-                        </span>
-
-                        <span>
-                            6 photos
-                        </span>
-
+                        <span>♡ our cozy little moment</span>
+                        <span>6 photos</span>
                     </div>
 
                     <p class="memory-story">
@@ -537,39 +432,30 @@
 
                 </div>
 
-
                 <div class="memory-slider datehome-slider">
 
                     <div class="slides">
-
                         <img src="foto/datehome1.jpg" alt="First Time Date Home 1">
                         <img src="foto/datehome2.jpg" alt="First Time Date Home 2">
                         <img src="foto/datehome3.jpg" alt="First Time Date Home 3">
                         <img src="foto/datehome4.jpg" alt="First Time Date Home 4">
                         <img src="foto/datehome5.jpg" alt="First Time Date Home 5">
                         <img src="foto/datehome6.jpg" alt="First Time Date Home 6">
-
                     </div>
 
-
-                    <button class="slider-button prev" type="button">
+                    <button class="slider-button prev" type="button" aria-label="Foto sebelumnya">
                         ‹
                     </button>
 
-
-                    <button class="slider-button next" type="button">
+                    <button class="slider-button next" type="button" aria-label="Foto berikutnya">
                         ›
                     </button>
 
-
                     <div class="slider-footer">
-
                         <div class="slider-dots"></div>
-
                         <span class="slider-counter">
                             01 / 06
                         </span>
-
                     </div>
 
                 </div>
@@ -579,11 +465,10 @@
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =========================
              MEMORY 05
-             MOMENT KELULUSAN SEKOLAH
-        ===================================================== -->
+             KELULUSAN SEKOLAH
+        ========================= -->
 
         <section class="memory-section" data-memory="05">
 
@@ -592,31 +477,19 @@
                 <div class="memory-info">
 
                     <div class="memory-heading">
-
                         <span class="memory-number">
                             MEMORY 05
                         </span>
-
                         <span class="memory-symbol">
                             ✦
                         </span>
-
                     </div>
 
-                    <h2>
-                        Moment Kelulusan Sekolah
-                    </h2>
+                    <h2>Moment Kelulusan Sekolah</h2>
 
                     <div class="memory-meta">
-
-                        <span>
-                            ♡ a day to remember
-                        </span>
-
-                        <span>
-                            4 photos
-                        </span>
-
+                        <span>♡ a day to remember</span>
+                        <span>4 photos</span>
                     </div>
 
                     <p class="memory-story">
@@ -637,37 +510,28 @@
 
                 </div>
 
-
                 <div class="memory-slider">
 
                     <div class="slides">
-
                         <img src="foto/kelulusan1.jpg" alt="Kelulusan 1">
                         <img src="foto/kelulusan2.jpg" alt="Kelulusan 2">
                         <img src="foto/kelulusan3.jpg" alt="Kelulusan 3">
                         <img src="foto/kelulusan4.jpg" alt="Kelulusan 4">
-
                     </div>
 
-
-                    <button class="slider-button prev" type="button">
+                    <button class="slider-button prev" type="button" aria-label="Foto sebelumnya">
                         ‹
                     </button>
 
-
-                    <button class="slider-button next" type="button">
+                    <button class="slider-button next" type="button" aria-label="Foto berikutnya">
                         ›
                     </button>
 
-
                     <div class="slider-footer">
-
                         <div class="slider-dots"></div>
-
                         <span class="slider-counter">
                             01 / 04
                         </span>
-
                     </div>
 
                 </div>
@@ -677,12 +541,10 @@
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =========================
              MEMORY 06
              FIRST TIME DINNER
-             9 FOTO
-        ===================================================== -->
+        ========================= -->
 
         <section class="memory-section reverse" data-memory="06">
 
@@ -691,31 +553,19 @@
                 <div class="memory-info">
 
                     <div class="memory-heading">
-
                         <span class="memory-number">
                             MEMORY 06
                         </span>
-
                         <span class="memory-symbol">
                             ♥
                         </span>
-
                     </div>
 
-                    <h2>
-                        First Time Dinner
-                    </h2>
+                    <h2>First Time Dinner</h2>
 
                     <div class="memory-meta">
-
-                        <span>
-                            ♡ our first dinner together
-                        </span>
-
-                        <span>
-                            9 photos
-                        </span>
-
+                        <span>♡ our first dinner together</span>
+                        <span>9 photos</span>
                     </div>
 
                     <p class="memory-story">
@@ -738,11 +588,9 @@
 
                 </div>
 
-
                 <div class="memory-slider dinner-slider">
 
                     <div class="slides">
-
                         <img src="foto/dinner1.jpg" alt="First Time Dinner 1">
                         <img src="foto/dinner2.jpg" alt="First Time Dinner 2">
                         <img src="foto/dinner3.jpg" alt="First Time Dinner 3">
@@ -752,28 +600,21 @@
                         <img src="foto/dinner7.jpg" alt="First Time Dinner 7">
                         <img src="foto/dinner8.jpg" alt="First Time Dinner 8">
                         <img src="foto/dinner9.jpg" alt="First Time Dinner 9">
-
                     </div>
 
-
-                    <button class="slider-button prev" type="button">
+                    <button class="slider-button prev" type="button" aria-label="Foto sebelumnya">
                         ‹
                     </button>
 
-
-                    <button class="slider-button next" type="button">
+                    <button class="slider-button next" type="button" aria-label="Foto berikutnya">
                         ›
                     </button>
 
-
                     <div class="slider-footer">
-
                         <div class="slider-dots"></div>
-
                         <span class="slider-counter">
                             01 / 09
                         </span>
-
                     </div>
 
                 </div>
@@ -783,10 +624,9 @@
         </section>
 
 
-
-        <!-- =====================================================
-             ENDING
-        ===================================================== -->
+        <!-- =========================
+             PENUTUP GALERI
+        ========================= -->
 
         <section class="gallery-ending">
 
@@ -814,30 +654,26 @@
 
         </section>
 
-
     </main>
 
 
-
-    <!-- =====================================================
-         LIGHTBOX
-    ===================================================== -->
+    <!-- =========================
+         LIGHTBOX FOTO
+    ========================= -->
 
     <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
 
-        <button class="lightbox-close" id="lightboxClose" type="button">
+        <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Tutup foto">
             ×
         </button>
 
-
-        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button">
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Foto sebelumnya">
             ‹
         </button>
 
-
         <div class="lightbox-content">
 
-            <img id="lightboxImage" src="" alt="">
+            <img id="lightboxImage" src="" alt="Foto kenangan">
 
             <p id="lightboxCounter">
                 01 / 01
@@ -845,14 +681,14 @@
 
         </div>
 
-
-        <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Foto berikutnya">
             ›
         </button>
 
     </div>
 
 
+    <!-- JAVASCRIPT GALERI -->
     <script src="gallery.js"></script>
 
 </body>

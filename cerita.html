@@ -2,23 +2,17 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        My Princes - Elza ♥ Silmy
-    </title>
+    <title>My Princes - Elza ♥ Silmy</title>
 
     <link rel="stylesheet" href="myprinces.css">
-
 </head>
-
 
 <body>
 
-
+    <!-- NAVBAR -->
     <nav class="navbar">
 
         <div class="logo">
@@ -40,18 +34,16 @@
             </a>
 
             <a href="surat.html">
-                Surat Cinta
+                A Moment For You
             </a>
 
         </div>
 
     </nav>
 
-
-
     <main>
 
-
+        <!-- INTRO -->
         <section class="princes-intro">
 
             <p class="small-title">
@@ -59,13 +51,8 @@
             </p>
 
             <h1>
-
                 My Princes
-
-                <span>
-                    ♥
-                </span>
-
+                <span>♥</span>
             </h1>
 
             <p class="subtitle">
@@ -78,112 +65,77 @@
 
         </section>
 
-
-
+        <!-- ANIMASI FOTO -->
         <section class="princes-scroll-section" id="princesScrollSection">
 
             <div class="princes-sticky">
 
                 <div class="princes-top-text">
-
-                    <span>
-                        MY PRINCES
-                    </span>
+                    <span>MY PRINCES</span>
 
                     <p id="photoCounter">
                         01 / 05
                     </p>
-
                 </div>
-
 
                 <div class="princes-stack">
 
                     <div class="princes-photo-card">
-
                         <img src="foto/princes1.jpg" alt="My Princes 01">
-
                     </div>
 
-
                     <div class="princes-photo-card">
-
                         <img src="foto/princes2.jpg" alt="My Princes 02">
-
                     </div>
 
-
                     <div class="princes-photo-card">
-
                         <img src="foto/princes3.jpg" alt="My Princes 03">
-
                     </div>
 
-
                     <div class="princes-photo-card">
-
                         <img src="foto/princes4.jpg" alt="My Princes 04">
-
                     </div>
 
-
                     <div class="princes-photo-card">
-
                         <img src="foto/princes5.jpg" alt="My Princes 05">
-
                     </div>
 
                 </div>
 
-
                 <div class="princes-progress">
-
                     <span class="progress-dot active"></span>
                     <span class="progress-dot"></span>
                     <span class="progress-dot"></span>
                     <span class="progress-dot"></span>
                     <span class="progress-dot"></span>
-
                 </div>
-
 
                 <p class="scroll-text">
                     keep scrolling
                 </p>
 
             </div>
-
         </section>
 
-
-
+        <!-- MORE OF YOU -->
         <section class="princes-gallery-section">
 
             <div class="gallery-heading">
 
-                <p>
-                    LITTLE PIECES OF YOU
-                </p>
+                <p>LITTLE PIECES OF YOU</p>
 
                 <h2>
-
                     More of You
-
-                    <span>
-                        ♥
-                    </span>
-
+                    <span>♥</span>
                 </h2>
 
                 <div class="heading-line"></div>
 
             </div>
 
-
-
             <div class="princes-gallery">
 
-
+                <!-- BARIS 1 -->
                 <div class="gallery-row">
 
                     <div class="gallery-photo">
@@ -204,8 +156,7 @@
 
                 </div>
 
-
-
+                <!-- BARIS 2 -->
                 <div class="gallery-row">
 
                     <div class="gallery-photo">
@@ -226,8 +177,7 @@
 
                 </div>
 
-
-
+                <!-- BARIS 3 -->
                 <div class="gallery-row">
 
                     <div class="gallery-photo">
@@ -248,8 +198,7 @@
 
                 </div>
 
-
-
+                <!-- BARIS 4 -->
                 <div class="gallery-row">
 
                     <div class="gallery-photo">
@@ -270,8 +219,7 @@
 
                 </div>
 
-
-
+                <!-- BARIS 5 -->
                 <div class="gallery-row">
 
                     <div class="gallery-photo">
@@ -292,8 +240,7 @@
 
                 </div>
 
-
-
+                <!-- BARIS 6 -->
                 <div class="gallery-row">
 
                     <div class="gallery-photo">
@@ -315,16 +262,12 @@
                 </div>
 
             </div>
-
         </section>
 
-
-
+        <!-- PENUTUP -->
         <section class="after-princes">
 
-            <span class="after-heart">
-                ♥
-            </span>
+            <span class="after-heart">♥</span>
 
             <p class="after-small">
                 ALL THESE MOMENTS, STILL YOU
@@ -335,50 +278,38 @@
             </h2>
 
             <p class="after-description">
-
                 Dan masih ada banyak cerita
                 yang ingin aku simpan bersamamu.
-
             </p>
-
 
             <a href="gallery.html" class="gallery-button">
 
                 Lihat Kenangan Lainnya
 
-                <span>
-                    →
-                </span>
+                <span>→</span>
 
             </a>
 
         </section>
 
-
     </main>
 
-
-
+    <!-- LIGHTBOX GALERI -->
     <div class="lightbox" id="lightbox" aria-hidden="true">
 
         <button class="lightbox-close" id="lightboxClose" aria-label="Tutup">
             ×
         </button>
 
-
         <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Foto sebelumnya">
             ‹
         </button>
 
-
         <div class="lightbox-content">
 
             <div class="lightbox-image-wrap">
-
                 <img id="lightboxImage" src="" alt="">
-
             </div>
-
 
             <p class="lightbox-counter" id="lightboxCounter">
                 01 / 24
@@ -386,15 +317,13 @@
 
         </div>
 
-
         <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Foto berikutnya">
             ›
         </button>
 
     </div>
 
-
-
+    <!-- JAVASCRIPT -->
     <script src="myprinces.js"></script>
 
 </body>

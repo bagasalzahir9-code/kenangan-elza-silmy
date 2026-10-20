@@ -4,1368 +4,914 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A MOMENT FOR YOU | Elza ♥ Silmy</title>
 
-    <title>Surat Cinta - Elza ♥ Silmy</title>
+    <style>
+        /* =================================
+   1. DASAR WEBSITE
+================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="surat.css">
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #fff4f8;
+            background:
+                radial-gradient(circle at 50% 35%,
+                    rgba(176, 53, 103, .2),
+                    transparent 50%),
+                linear-gradient(145deg,
+                    #10050c 0%,
+                    #270c1c 55%,
+                    #11050c 100%);
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible {
+            outline: 2px solid #ffbdd6;
+            outline-offset: 3px;
+        }
+
+        /* =================================
+   2. NAVBAR
+================================= */
+        .navbar {
+            min-height: 68px;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            background: rgba(15, 5, 12, .92);
+            border-bottom: 1px solid rgba(255, 180, 210, .1);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 19px;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #f29abb;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .nav-menu a {
+            color: #d1a8b8;
+            text-decoration: none;
+            font: 11px Arial, sans-serif;
+            transition: color .25s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #ffacc9;
+        }
+
+        /* =================================
+   3. BACKGROUND BERSINAR
+================================= */
+        .ambient {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .aura {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(85px);
+            opacity: .2;
+            animation: floatAura 8s ease-in-out infinite;
+        }
+
+        .aura.one {
+            top: 10%;
+            left: -160px;
+            background: #ee689f;
+        }
+
+        .aura.two {
+            bottom: -80px;
+            right: -160px;
+            background: #bb3b7a;
+            animation-delay: -4s;
+        }
+
+        @keyframes floatAura {
+            50% {
+                transform: translateY(-35px) scale(1.15);
+            }
+        }
+
+        /* =================================
+   4. JUDUL
+================================= */
+        .hero {
+            padding: 55px 15px 25px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: #dca5b9;
+            font: bold 10px Arial, sans-serif;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 66px);
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-shadow: 0 0 28px rgba(255, 130, 178, .17);
+        }
+
+        .hero h1 span {
+            display: block;
+            color: #f4a5c1;
+            font-style: italic;
+        }
+
+        .description {
+            max-width: 500px;
+            margin: 18px auto 0;
+            color: #d5adbd;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .title-line {
+            width: 75px;
+            height: 1px;
+            margin: 24px auto 0;
+            background: linear-gradient(90deg,
+                    transparent,
+                    #f2a7c2,
+                    transparent);
+        }
+
+        /* =================================
+   5. VIDEO TEPAT 500PX MAKSIMAL
+================================= */
+        .moment-section {
+            padding: 25px 15px 70px;
+            text-align: center;
+        }
+
+        .video-area {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .video-frame {
+            position: relative;
+            isolation: isolate;
+            width: 100%;
+            padding: 7px;
+            border-radius: 17px;
+            background: #301020;
+            border: 1px solid rgba(255, 180, 210, .32);
+            box-shadow: 0 22px 65px rgba(0, 0, 0, .48);
+        }
+
+        /* CAHAYA MENGELILINGI VIDEO */
+        .video-frame::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            z-index: -1;
+            border-radius: 21px;
+            background: conic-gradient(from 0deg,
+                    #92345d,
+                    #ffc1d9,
+                    #ffe3c8,
+                    #a93c77,
+                    #ffc1d9,
+                    #92345d);
+            filter: blur(13px);
+            opacity: .5;
+            animation: videoGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes videoGlow {
+
+            0%,
+            100% {
+                opacity: .3;
+                filter: blur(11px);
+            }
+
+            50% {
+                opacity: .8;
+                filter: blur(22px);
+            }
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #090307;
+        }
+
+        #momentVideo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #090307;
+        }
+
+        /* =================================
+   6. BINTANG KECIL
+================================= */
+        .sparkle {
+            position: absolute;
+            z-index: 4;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #fff0f5;
+            pointer-events: none;
+            box-shadow:
+                0 0 8px #ffb5d1,
+                0 0 18px #f18db6;
+            animation: twinkle 3s infinite;
+        }
+
+        .s1 {
+            top: -12px;
+            left: 10%;
+        }
+
+        .s2 {
+            top: 25%;
+            right: -12px;
+            animation-delay: -.7s;
+        }
+
+        .s3 {
+            bottom: -12px;
+            left: 30%;
+            animation-delay: -1.5s;
+        }
+
+        .s4 {
+            bottom: 20%;
+            left: -12px;
+            animation-delay: -2s;
+        }
+
+        .s5 {
+            top: -12px;
+            right: 25%;
+            animation-delay: -1s;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: .2;
+                transform: scale(.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.7);
+            }
+        }
+
+        /* =================================
+   7. TAMPILAN SEBELUM VIDEO
+================================= */
+        .video-intro {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px;
+            background: radial-gradient(circle,
+                    #56203b,
+                    #0a0308);
+            transition: opacity .5s, visibility .5s;
+        }
+
+        .video-intro.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-heart {
+            color: #fca6c4;
+            font-size: 30px;
+            animation: heartbeat 2s infinite;
+        }
+
+        @keyframes heartbeat {
+            50% {
+                transform: scale(1.2);
+                text-shadow: 0 0 22px #ff8db9;
+            }
+        }
+
+        .video-intro h2 {
+            font-size: clamp(16px, 3vw, 25px);
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .video-intro p {
+            color: #ddb0c0;
+            font: 10px Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .open-moment {
+            margin-top: 4px;
+            padding: 11px 20px;
+            border: 1px solid #f2b3cb;
+            border-radius: 30px;
+            background: #9d426a;
+            color: #fff;
+            font-size: 11px;
+            transition: .3s;
+        }
+
+        .open-moment:hover {
+            background: #c05a83;
+            transform: translateY(-2px);
+        }
+
+        /* =================================
+   8. KONTROL VIDEO
+================================= */
+        .video-controls {
+            width: 100%;
+            margin: 19px auto 0;
+            padding: 13px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            border: 1px solid rgba(255, 180, 210, .15);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .035);
+        }
+
+        .control-btn {
+            min-height: 38px;
+            padding: 9px 11px;
+            border: 1px solid rgba(255, 183, 211, .2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .05);
+            color: #fff1f6;
+            font-size: 11px;
+        }
+
+        .control-btn:hover {
+            background: rgba(229, 105, 152, .24);
+        }
+
+        .progress {
+            width: 100%;
+            accent-color: #ed90b4;
+            cursor: pointer;
+        }
+
+        .time-display {
+            width: 100%;
+            color: #dbb1c2;
+            font: 11px Arial, sans-serif;
+        }
+
+        .video-status {
+            margin-top: 14px;
+            min-height: 22px;
+            color: #d9a6b8;
+            font: 12px Arial, sans-serif;
+        }
+
+        /* =================================
+   9. LIRIK LAGU
+================================= */
+        .lyrics-section {
+            max-width: 620px;
+            margin: 55px auto 20px;
+            padding: 42px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 180, 210, .16);
+            background:
+                radial-gradient(circle at top,
+                    rgba(190, 70, 117, .15),
+                    transparent 65%),
+                rgba(255, 255, 255, .025);
+        }
+
+        .lyrics-label {
+            color: #d8a5b9;
+            font: 10px Arial, sans-serif;
+            letter-spacing: 4px;
+        }
+
+        .lyrics-title {
+            margin: 18px 0;
+            color: #f4bad0;
+            font-size: clamp(26px, 4vw, 35px);
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .lyrics-divider {
+            width: 70px;
+            height: 1px;
+            margin: 20px auto;
+            background: #c77b99;
+        }
+
+        .lyrics-content {
+            color: #f0cddd;
+            font-size: clamp(14px, 2vw, 17px);
+            font-style: italic;
+            line-height: 2.3;
+            white-space: pre-line;
+            text-shadow: 0 0 18px rgba(255, 155, 195, .1);
+        }
+
+        .lyrics-heart {
+            margin-top: 22px;
+            color: #f5a1bf;
+            font-size: 23px;
+            animation: heartbeat 2.5s infinite;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .8s, transform .8s;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =================================
+   10. PENUTUP VIDEO
+================================= */
+        .ending {
+            max-width: 650px;
+            margin: 35px auto 0;
+            padding: 30px 15px;
+            display: none;
+        }
+
+        .ending.show {
+            display: block;
+            animation: endingAppear 1s ease both;
+        }
+
+        @keyframes endingAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ending h2 {
+            color: #f4b6ce;
+            font-size: clamp(25px, 4vw, 36px);
+            font-weight: normal;
+            font-style: italic;
+            margin-bottom: 18px;
+        }
+
+        .ending p {
+            color: #deb7c7;
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        footer {
+            padding: 26px 15px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            color: #a87c91;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* =================================
+   11. RESPONSIVE HP
+================================= */
+        @media (max-width: 650px) {
+            .navbar {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .nav-menu {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .hero {
+                padding-top: 42px;
+            }
+
+            .hero h1 {
+                letter-spacing: 1px;
+            }
+
+            .moment-section {
+                padding: 20px 14px 50px;
+            }
+
+            .video-frame {
+                padding: 5px;
+            }
+
+            .video-intro {
+                gap: 7px;
+            }
+
+            .intro-heart {
+                font-size: 23px;
+            }
+
+            .video-intro h2 {
+                font-size: 16px;
+            }
+
+            .open-moment {
+                padding: 9px 13px;
+                font-size: 10px;
+            }
+
+            .lyrics-section {
+                margin-top: 45px;
+                padding: 35px 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
 </head>
 
-<body class="surat-page">
+<body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+    <!-- BACKGROUND -->
+    <div class="ambient" aria-hidden="true">
+        <div class="aura one"></div>
+        <div class="aura two"></div>
+    </div>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
-
         <div class="logo">
             Elza <span>♥</span> Silmy
         </div>
 
         <div class="nav-menu">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="gallery.html">
-                Galeri
-            </a>
-
-            <a href="cerita.html">
-                My Princes
-            </a>
-
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Galeri</a>
+            <a href="cerita.html">My Princes</a>
             <a href="surat.html" class="active">
-                Surat Cinta
+                A Moment For You
             </a>
-
         </div>
-
     </nav>
 
+    <!-- JUDUL -->
+    <header class="hero">
+        <p class="eyebrow">
+            SOMETHING SPECIAL, JUST FOR YOU
+        </p>
 
-    <main class="love-page">
+        <h1>
+            A MOMENT
+            <span>FOR YOU.</span>
+        </h1>
 
-        <!-- =========================
-             INTRO
-        ========================== -->
+        <p class="description">
+            Some memories deserve more than words.
+            This one is made especially for you.
+        </p>
 
-        <section class="love-intro">
+        <div class="title-line"></div>
+    </header>
 
-            <p>
-                OUR LITTLE STORY
-            </p>
+    <!-- VIDEO -->
+    <main class="moment-section">
 
-            <h1>
-                Surat Cinta
-            </h1>
+        <div class="video-area">
+            <div class="video-frame">
 
-            <span>
-                Halaman demi halaman, tentang kita.
-            </span>
+                <!-- BINTANG -->
+                <span class="sparkle s1"></span>
+                <span class="sparkle s2"></span>
+                <span class="sparkle s3"></span>
+                <span class="sparkle s4"></span>
+                <span class="sparkle s5"></span>
 
-        </section>
+                <div class="video-container">
 
+                    <video id="momentVideo" preload="metadata" playsinline aria-label="Video kenangan Elza dan Silmy">
 
-        <!-- =========================
-             BOOK SCENE
-        ========================== -->
+                        <source src="video/moment.mp4" type="video/mp4">
 
-        <section class="book-scene" id="bookScene">
+                        Browser tidak mendukung video.
+                    </video>
 
-            <!-- LOVE DECORATION -->
+                    <!-- OVERLAY PEMBUKA -->
+                    <div class="video-intro" id="videoIntro">
 
-            <div class="side-love left-love">
-                <span>♥</span>
-                <span>♥</span>
-                <span>♥</span>
-                <span>♥</span>
-            </div>
-
-            <div class="side-love right-love">
-                <span>♥</span>
-                <span>♥</span>
-                <span>♥</span>
-                <span>♥</span>
-            </div>
-
-
-            <!-- AURA -->
-
-            <div class="romantic-aura"></div>
-
-
-            <!-- SPARKLE -->
-
-            <div class="sparkle-field">
-
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-
-            </div>
-
-
-            <!-- =========================
-                 BOOK
-            ========================== -->
-
-            <div class="storybook" id="storybook">
-
-                <!-- INNER BOOK -->
-
-                <div class="book-inside">
-
-
-                    <!-- LEFT PAGE -->
-
-                    <div class="book-page left-page">
-
-                        <div class="page-decoration">
-                            ♥
-                        </div>
-
-                        <p class="page-label" id="leftLabel">
-                            OUR MEMORY
-                        </p>
-
-
-                        <div class="memory-photo">
-
-                            <img id="storyPhoto" src="foto/kenangan1.jpg" alt="Kenangan Elza dan Silmy">
-
-                            <span id="photoCaption">
-                                Kenangan kita
-                            </span>
-
-                        </div>
-
-
-                        <p class="page-number" id="leftPageNumber">
-                            01
-                        </p>
-
-                    </div>
-
-
-                    <!-- RIGHT PAGE -->
-
-                    <div class="book-page right-page">
-
-                        <div class="page-decoration">
-                            ♥
-                        </div>
-
-                        <p class="page-label" id="rightLabel">
-                            A LETTER FOR YOU
-                        </p>
-
-
-                        <h2 id="letterTitle">
-                            Untuk Silmy
-                        </h2>
-
-
-                        <div class="letter-content" id="letterContent">
-                        </div>
-
-
-                        <p class="letter-sign">
-
-                            Dengan cinta,
-
-                            <br>
-
-                            <span>
-                                Elza ♥
-                            </span>
-
-                        </p>
-
-
-                        <p class="page-number" id="rightPageNumber">
-                            02
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     COVER
-                ========================== -->
-
-                <div class="book-cover" id="bookCover">
-
-                    <div class="cover-border">
-
-                        <p class="cover-small">
-                            ✦ OUR LITTLE STORY ✦
-                        </p>
-
-                        <div class="cover-heart">
-                            ♥
-                        </div>
+                        <div class="intro-heart">♥</div>
 
                         <h2>
-                            Cerita Kita
+                            Just A Little Something For You
                         </h2>
 
-                        <p class="cover-names">
+                        <p>MADE WITH LOVE</p>
 
-                            Elza
-
-                            <span>
-                                ♥
-                            </span>
-
-                            Silmy
-
-                        </p>
-
-                        <div class="cover-line"></div>
-
-                        <p class="cover-description">
-
-                            Sebuah cerita yang
-
-                            <br>
-
-                            ingin terus ditulis.
-
-                        </p>
+                        <button id="openMoment" class="open-moment" type="button">
+                            ♥ OPEN YOUR MOMENT
+                        </button>
 
                     </div>
-
-
-                    <!-- RIBBON -->
-
-                    <div class="love-ribbon" id="loveRibbon">
-
-                        <div class="ribbon-vertical"></div>
-
-                        <div class="ribbon-horizontal"></div>
-
-
-                        <div class="ribbon-bow">
-
-                            <div class="ribbon-loop ribbon-loop-left"></div>
-
-                            <div class="ribbon-loop ribbon-loop-right"></div>
-
-                            <div class="ribbon-knot"></div>
-
-                            <div class="ribbon-tail ribbon-tail-left"></div>
-
-                            <div class="ribbon-tail ribbon-tail-right"></div>
-
-                        </div>
-
-                    </div>
-
                 </div>
-
-
-                <!-- =========================
-                     MALE DOVE
-                ========================== -->
-
-                <div class="dove male-dove" id="maleDove">
-
-                    <div class="dove-wing wing-left"></div>
-
-                    <div class="dove-wing wing-right"></div>
-
-                    <div class="dove-body"></div>
-
-                    <div class="dove-neck"></div>
-
-                    <div class="dove-head"></div>
-
-                    <div class="dove-eye"></div>
-
-                    <div class="dove-beak"></div>
-
-                    <div class="dove-tail"></div>
-
-
-                    <div class="carried-heart" id="carriedHeart">
-                        ♥
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     FEMALE DOVE
-                ========================== -->
-
-                <div class="dove female-dove" id="femaleDove">
-
-                    <div class="dove-wing wing-left"></div>
-
-                    <div class="dove-wing wing-right"></div>
-
-                    <div class="dove-body"></div>
-
-                    <div class="dove-neck"></div>
-
-                    <div class="dove-head"></div>
-
-                    <div class="dove-eye"></div>
-
-                    <div class="dove-beak"></div>
-
-                    <div class="dove-tail"></div>
-
-
-                    <div class="received-heart" id="receivedHeart">
-                        ♥
-                    </div>
-
-                </div>
-
-
-                <!-- FLIGHT GLOW -->
-
-                <div class="flight-glow" id="flightGlow"></div>
-
-
-                <!-- FLIGHT TRAIL -->
-
-                <div class="flight-trail" id="flightTrail">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
-
-
-                <!-- FLYING HEARTS -->
-
-                <div class="flying-hearts" id="flyingHearts">
-
-                    <span>♥</span>
-                    <span>♥</span>
-                    <span>♥</span>
-                    <span>♥</span>
-                    <span>♥</span>
-
-                </div>
-
-
-                <!-- =========================
-                     FIREWORK FINALE
-                ========================== -->
-
-                <div class="firework-finale" id="fireworkFinale">
-
-                    <!-- BURST 1 -->
-
-                    <div class="firework-burst firework-left">
-
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
-                    </div>
-
-
-                    <!-- BURST 2 -->
-
-                    <div class="firework-burst firework-center">
-
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
-                    </div>
-
-
-                    <!-- BURST 3 -->
-
-                    <div class="firework-burst firework-right">
-
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
-                    </div>
-
-
-                    <!-- EXTRA SPARKLES -->
-
-                    <div class="firework-sparkles">
-
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     FINAL LOVE
-                ========================== -->
-
-                <div class="final-love" id="finalLove">
-
-                    <div class="heart-outline"></div>
-
-                    <div class="heart-glow"></div>
-
-                    <p>
-                        Elza
-                        <span>♥</span>
-                        Silmy
-                    </p>
-
-                </div>
-
             </div>
 
+            <!-- KONTROL -->
+            <div class="video-controls">
 
-            <!-- OPEN BUTTON -->
-
-            <button class="open-book-button" id="startStoryButton" type="button">
-                ❤️ Klik untuk Membuka Cerita Kita
-            </button>
-
-
-            <!-- CONTROLS -->
-
-            <div class="story-controls" id="storyControls">
-
-                <button id="prevStory" type="button">
-                    ◀ Previous
+                <button id="fullscreenButton" class="control-btn" type="button">
+                    ⛶ Fullscreen
                 </button>
 
-                <span id="storyIndicator">
-                    1 / 5
+                <input id="videoProgress" class="progress" type="range" min="0" max="100" step=".1" value="0"
+                    aria-label="Posisi video">
+
+                <span class="time-display" id="timeDisplay">
+                    00:00 / 00:00
                 </span>
 
-                <button id="nextStory" type="button">
-                    Next ▶
-                </button>
-
             </div>
 
-        </section>
-
-
-        <!-- =========================
-             ENDING
-        ========================== -->
-
-        <section class="story-ending" id="storyEnding">
-
-            <div class="ending-glow"></div>
-
-            <p>
-                ✦ THE END, BUT NOT OUR STORY ✦
+            <p id="videoStatus" class="video-status" role="status" aria-live="polite">
+                Press Open Your Moment to begin.
             </p>
+        </div>
 
-            <div class="ending-heart">
-                ♥
-            </div>
+        <!-- PESAN PENUTUP -->
+        <section class="ending" id="ending">
+
+            <div class="lyrics-heart">♥</div>
 
             <h2>
-
-                Masih ada banyak halaman
-
-                <br>
-
-                yang belum kita tulis.
-
+                Every Moment With You
+                Is My Favorite Memory.
             </h2>
 
-            <span>
-                Elza ♥ Silmy
-            </span>
+            <p>
+                Thank you for being part of my story.
+                I hope we create many more beautiful
+                memories together.
+            </p>
+
+            <p>With love, Bagas ♥</p>
+
+            <button id="replayButton" class="open-moment" style="margin-top:18px;" type="button">
+                ↺ Putar Lagi
+            </button>
 
         </section>
-
     </main>
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+    <footer>
+        Made with love ♥ Elza & Silmy
+    </footer>
 
     <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                const book =
-                    document.getElementById(
-                        "storybook"
-                    );
-
-                const bookScene =
-                    document.getElementById(
-                        "bookScene"
-                    );
-
-                const button =
-                    document.getElementById(
-                        "startStoryButton"
-                    );
-
-                const ribbon =
-                    document.getElementById(
-                        "loveRibbon"
-                    );
-
-                const male =
-                    document.getElementById(
-                        "maleDove"
-                    );
-
-                const female =
-                    document.getElementById(
-                        "femaleDove"
-                    );
-
-                const carriedHeart =
-                    document.getElementById(
-                        "carriedHeart"
-                    );
-
-                const receivedHeart =
-                    document.getElementById(
-                        "receivedHeart"
-                    );
-
-                const flightGlow =
-                    document.getElementById(
-                        "flightGlow"
-                    );
-
-                const flightTrail =
-                    document.getElementById(
-                        "flightTrail"
-                    );
-
-                const flyingHearts =
-                    document.getElementById(
-                        "flyingHearts"
-                    );
-
-                const fireworkFinale =
-                    document.getElementById(
-                        "fireworkFinale"
-                    );
-
-                const finalLove =
-                    document.getElementById(
-                        "finalLove"
-                    );
-
-                const controls =
-                    document.getElementById(
-                        "storyControls"
-                    );
-
-                const prevButton =
-                    document.getElementById(
-                        "prevStory"
-                    );
-
-                const nextButton =
-                    document.getElementById(
-                        "nextStory"
-                    );
-
-                const indicator =
-                    document.getElementById(
-                        "storyIndicator"
-                    );
-
-                const storyPhoto =
-                    document.getElementById(
-                        "storyPhoto"
-                    );
-
-                const photoCaption =
-                    document.getElementById(
-                        "photoCaption"
-                    );
-
-                const letterTitle =
-                    document.getElementById(
-                        "letterTitle"
-                    );
-
-                const letterContent =
-                    document.getElementById(
-                        "letterContent"
-                    );
-
-                const leftLabel =
-                    document.getElementById(
-                        "leftLabel"
-                    );
-
-                const rightLabel =
-                    document.getElementById(
-                        "rightLabel"
-                    );
-
-                const leftPageNumber =
-                    document.getElementById(
-                        "leftPageNumber"
-                    );
-
-                const rightPageNumber =
-                    document.getElementById(
-                        "rightPageNumber"
-                    );
-
-                const storyEnding =
-                    document.getElementById(
-                        "storyEnding"
-                    );
-
-
-                /* =========================
-                   STORY DATA
-                ========================== */
-
-                const pages = [
-
-                    {
-                        image:
-                            "foto/kenangan1.jpg",
-
-                        caption:
-                            "Bersamamu, semua terasa lebih indah.",
-
-                        leftLabel:
-                            "OUR MEMORY",
-
-                        rightLabel:
-                            "A LETTER FOR YOU",
-
-                        title:
-                            "Untuk Silmy",
-
-                        text: `
-
-                            <p class="letter-text">
-
-                                Ada banyak hal yang sulit
-                                dijelaskan dengan kata-kata.
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                Tetapi dari sekian banyak cerita
-                                yang pernah kita lalui,
-                                aku selalu ingin mengingat
-                                satu hal:
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                <strong>
-
-                                    kita pernah memilih
-                                    untuk berjalan bersama.
-
-                                </strong>
-
-                            </p>
-
-                        `
-                    },
-
-
-                    {
-                        image:
-                            "foto/kenangan2.jpg",
-
-                        caption:
-                            "Tempat favorit kita ♥",
-
-                        leftLabel:
-                            "OUR JOURNEY",
-
-                        rightLabel:
-                            "ALWAYS TOGETHER",
-
-                        title:
-                            "Selalu Bersama",
-
-                        text: `
-
-                            <p class="letter-text">
-
-                                Di setiap perjalanan,
-                                selalu ada cerita baru
-                                yang kita bawa pulang.
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                Tidak peduli seberapa jauh
-                                tempat yang kita datangi,
-
-                                yang terpenting adalah
-                                kita selalu memiliki
-                                cerita untuk dikenang bersama.
-
-                            </p>
-
-                        `
-                    },
-
-
-                    {
-                        image:
-                            "foto/kenangan3.jpg",
-
-                        caption:
-                            "Cerita kecil yang selalu kuingat.",
-
-                        leftLabel:
-                            "LITTLE MOMENTS",
-
-                        rightLabel:
-                            "MY FAVORITE PERSON",
-
-                        title:
-                            "Hal-Hal Kecil",
-
-                        text: `
-
-                            <p class="letter-text">
-
-                                Terkadang yang paling berarti
-                                bukan perjalanan besar,
-
-                                tetapi percakapan sederhana,
-                                tertawa tanpa alasan,
-
-                                dan waktu yang kita habiskan
-                                bersama.
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                <strong>
-
-                                    Hal-hal kecil bersamamu
-                                    selalu menjadi favoritku.
-
-                                </strong>
-
-                            </p>
-
-                        `
-                    },
-
-
-                    {
-                        image:
-                            "foto/kenangan4.jpg",
-
-                        caption:
-                            "Hal-hal sederhana yang berarti ♥",
-
-                        leftLabel:
-                            "THANK YOU",
-
-                        rightLabel:
-                            "FROM MY HEART",
-
-                        title:
-                            "Terima Kasih",
-
-                        text: `
-
-                            <p class="letter-text">
-
-                                Terima kasih sudah selalu ada,
-
-                                di setiap tawa,
-                                di setiap lelah,
-
-                                dan di setiap cerita.
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                Terima kasih karena
-                                sudah menjadi bagian
-                                dari perjalanan ini.
-
-                            </p>
-
-                        `
-                    },
-
-
-                    {
-                        image:
-                            "foto/kenangan5.jpg",
-
-                        caption:
-                            "Dan cerita ini masih terus berjalan.",
-
-                        leftLabel:
-                            "OUR FOREVER",
-
-                        rightLabel:
-                            "TO BE CONTINUED",
-
-                        title:
-                            "Untuk Selamanya",
-
-                        text: `
-
-                            <p class="letter-text">
-
-                                Ini bukan akhir
-                                dari cerita kita.
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                Melainkan awal
-                                dari banyak halaman indah
-
-                                yang akan kita tulis
-                                bersama.
-
-                            </p>
-
-                            <p class="letter-text">
-
-                                <strong>
-
-                                    Elza ♥ Silmy
-
-                                </strong>
-
-                            </p>
-
-                        `
-                    }
-
-                ];
-
-
-                let opened = false;
-
-                let currentPage = 0;
-
-
-                /* =========================
-                   UPDATE PAGE
-                ========================== */
-
-                function updatePage() {
-
-                    const data =
-                        pages[currentPage];
-
-
-                    storyPhoto.src =
-                        data.image;
-
-
-                    photoCaption.textContent =
-                        data.caption;
-
-
-                    leftLabel.textContent =
-                        data.leftLabel;
-
-
-                    rightLabel.textContent =
-                        data.rightLabel;
-
-
-                    letterTitle.textContent =
-                        data.title;
-
-
-                    letterContent.innerHTML =
-                        data.text;
-
-
-                    indicator.textContent =
-                        (currentPage + 1)
-                        +
-                        " / "
-                        +
-                        pages.length;
-
-
-                    leftPageNumber.textContent =
-                        String(
-                            currentPage * 2 + 1
-                        ).padStart(
-                            2,
-                            "0"
-                        );
-
-
-                    rightPageNumber.textContent =
-                        String(
-                            currentPage * 2 + 2
-                        ).padStart(
-                            2,
-                            "0"
-                        );
-
-
-                    prevButton.disabled =
-                        currentPage === 0;
-
-
-                    nextButton.textContent =
-                        currentPage ===
-                            pages.length - 1
-
-                            ? "Selesai ♥"
-
-                            : "Next ▶";
-
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // =================================
+            // ELEMEN
+            // =================================
+            const video = document.getElementById("momentVideo");
+            const intro = document.getElementById("videoIntro");
+            const openBtn = document.getElementById("openMoment");
+            const fullBtn = document.getElementById("fullscreenButton");
+            const progress = document.getElementById("videoProgress");
+            const time = document.getElementById("timeDisplay");
+            const status = document.getElementById("videoStatus");
+            const ending = document.getElementById("ending");
+            const container = document.querySelector(".video-container");
+
+            // =================================
+            // FORMAT WAKTU
+            // =================================
+            function formatTime(seconds) {
+                if (!Number.isFinite(seconds)) {
+                    return "00:00";
                 }
 
-
-                /* =========================
-                   START STORY
-                ========================== */
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        if (opened) {
-                            return;
-                        }
-
-
-                        opened = true;
-
-
-                        button.classList.add(
-                            "button-hidden"
-                        );
-
-
-                        bookScene.classList.add(
-                            "love-boost"
-                        );
-
-
-                        /* RIBBON */
-
-                        ribbon.classList.add(
-                            "ribbon-release"
-                        );
-
-
-                        /* BOOK OPEN */
-
-                        setTimeout(
-                            function () {
-
-                                book.classList.add(
-                                    "book-opening"
-                                );
-
-                            },
-                            850
-                        );
-
-
-                        /* MALE DOVE */
-
-                        setTimeout(
-                            function () {
-
-                                male.classList.add(
-                                    "dove-show"
-                                );
-
-                            },
-                            1750
-                        );
-
-
-                        /* FEMALE DOVE */
-
-                        setTimeout(
-                            function () {
-
-                                female.classList.add(
-                                    "dove-show"
-                                );
-
-                            },
-                            2150
-                        );
-
-
-                        /* HEART APPEARS */
-
-                        setTimeout(
-                            function () {
-
-                                carriedHeart.classList.add(
-                                    "heart-visible"
-                                );
-
-                            },
-                            2450
-                        );
-
-
-                        /* MALE APPROACH */
-
-                        setTimeout(
-                            function () {
-
-                                male.classList.add(
-                                    "male-fly-to-female"
-                                );
-
-                            },
-                            3000
-                        );
-
-
-                        /* HEART TRANSFER */
-
-                        setTimeout(
-                            function () {
-
-                                carriedHeart.classList.add(
-                                    "heart-transfer"
-                                );
-
-
-                                flightGlow.classList.add(
-                                    "glow-visible"
-                                );
-
-                            },
-                            4550
-                        );
-
-
-                        /* HEART RECEIVED */
-
-                        setTimeout(
-                            function () {
-
-                                receivedHeart.classList.add(
-                                    "heart-received"
-                                );
-
-                            },
-                            5150
-                        );
-
-
-                        /* FLY TOGETHER */
-
-                        setTimeout(
-                            function () {
-
-                                flightTrail.classList.add(
-                                    "trail-visible"
-                                );
-
-
-                                flyingHearts.classList.add(
-                                    "flying-hearts-visible"
-                                );
-
-
-                                male.classList.add(
-                                    "fly-together"
-                                );
-
-
-                                female.classList.add(
-                                    "fly-together-female"
-                                );
-
-                            },
-                            5750
-                        );
-
-
-                        /* GLOW REDUCED */
-
-                        setTimeout(
-                            function () {
-
-                                flightGlow.classList.remove(
-                                    "glow-visible"
-                                );
-
-
-                                bookScene.classList.remove(
-                                    "love-boost"
-                                );
-
-                            },
-                            10400
-                        );
-
-
-                        /* =========================
-                           FIREWORK
-                        ========================== */
-
-                        setTimeout(
-                            function () {
-
-                                fireworkFinale.classList.add(
-                                    "firework-show"
-                                );
-
-                            },
-                            10800
-                        );
-
-
-                        /* =========================
-                           LOVE + ELZA ♥ SILMY
-                        ========================== */
-
-                        setTimeout(
-                            function () {
-
-                                finalLove.classList.add(
-                                    "final-love-show"
-                                );
-
-                            },
-                            12100
-                        );
-
-
-                        /* FIREWORK HIDE */
-
-                        setTimeout(
-                            function () {
-
-                                fireworkFinale.classList.add(
-                                    "firework-hide"
-                                );
-
-                            },
-                            13800
-                        );
-
-
-                        /* FINAL LOVE HIDE */
-
-                        setTimeout(
-                            function () {
-
-                                finalLove.classList.add(
-                                    "final-love-hide"
-                                );
-
-                            },
-                            15000
-                        );
-
-
-                        /* CONTROLS */
-
-                        setTimeout(
-                            function () {
-
-                                controls.classList.add(
-                                    "controls-visible"
-                                );
-
-
-                                book.classList.add(
-                                    "story-ready"
-                                );
-
-
-                                updatePage();
-
-                            },
-                            16200
-                        );
-
-                    }
+                const minutes = Math.floor(seconds / 60);
+                const secondsLeft = Math.floor(seconds % 60);
+
+                return (
+                    String(minutes).padStart(2, "0") +
+                    ":" +
+                    String(secondsLeft).padStart(2, "0")
                 );
-
-
-                /* =========================
-                   PREVIOUS
-                ========================== */
-
-                prevButton.addEventListener(
-                    "click",
-                    function () {
-
-                        if (!opened) {
-                            return;
-                        }
-
-
-                        if (
-                            currentPage > 0
-                        ) {
-
-                            currentPage--;
-
-
-                            book.classList.add(
-                                "page-changing"
-                            );
-
-
-                            setTimeout(
-                                function () {
-
-                                    updatePage();
-
-
-                                    book.classList.remove(
-                                        "page-changing"
-                                    );
-
-                                },
-                                350
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                /* =========================
-                   NEXT
-                ========================== */
-
-                nextButton.addEventListener(
-                    "click",
-                    function () {
-
-                        if (!opened) {
-                            return;
-                        }
-
-
-                        if (
-                            currentPage <
-                            pages.length - 1
-                        ) {
-
-                            currentPage++;
-
-
-                            book.classList.add(
-                                "page-changing"
-                            );
-
-
-                            setTimeout(
-                                function () {
-
-                                    updatePage();
-
-
-                                    book.classList.remove(
-                                        "page-changing"
-                                    );
-
-                                },
-                                350
-                            );
-
-                        }
-
-                        else {
-
-                            controls.classList.remove(
-                                "controls-visible"
-                            );
-
-
-                            storyEnding.classList.add(
-                                "ending-visible"
-                            );
-
-
-                            storyEnding.scrollIntoView({
-                                behavior: "smooth",
-                                block: "center"
-                            });
-
-                        }
-
-                    }
-                );
-
-
-                updatePage();
-
             }
-        );
 
+            // =================================
+            // MEMUTAR VIDEO
+            // =================================
+            async function startVideo() {
+                try {
+                    ending.classList.remove("show");
+                    pauseParentMusic();
+
+                    await video.play();
+
+                    intro.classList.add("hidden");
+                    status.textContent = "Enjoy this little moment. ♥";
+
+                } catch (error) {
+                    status.textContent =
+                        "Video tidak dapat diputar. " +
+                        "Periksa file video/moment.mp4.";
+                }
+            }
+
+            openBtn.addEventListener("click", startVideo);
+
+            // Pause musik background di parent
+            function pauseParentMusic() {
+                try {
+                    var parentMusic = window.parent.document.getElementById("romanticMusic");
+                    if (parentMusic && !parentMusic.paused) {
+                        window._musicWasPaused = false;
+                        window._musicTime = parentMusic.currentTime;
+                        parentMusic.pause();
+                    }
+                } catch(e) {}
+            }
+
+            // Lanjutkan musik background dari posisi tadi
+            function resumeParentMusic() {
+                try {
+                    var parentMusic = window.parent.document.getElementById("romanticMusic");
+                    if (parentMusic && parentMusic.paused) {
+                        if (window._musicTime !== undefined) {
+                            parentMusic.currentTime = window._musicTime;
+                        }
+                        parentMusic.play().catch(function(){});
+                    }
+                } catch(e) {}
+            }
+
+            // =================================
+            // PROGRESS VIDEO
+            // =================================
+            function updateProgress() {
+                const duration = video.duration;
+
+                if (Number.isFinite(duration) && duration > 0) {
+                    progress.value =
+                        (video.currentTime / duration) * 100;
+                } else {
+                    progress.value = 0;
+                }
+
+                time.textContent =
+                    formatTime(video.currentTime) +
+                    " / " +
+                    formatTime(duration);
+            }
+
+            video.addEventListener("timeupdate", updateProgress);
+            video.addEventListener("loadedmetadata", updateProgress);
+            video.addEventListener("durationchange", updateProgress);
+
+            progress.addEventListener("input", function () {
+                if (
+                    Number.isFinite(video.duration) &&
+                    video.duration > 0
+                ) {
+                    video.currentTime =
+                        (Number(progress.value) / 100) *
+                        video.duration;
+                }
+            });
+
+            // =================================
+            // FULLSCREEN
+            // =================================
+            fullBtn.addEventListener("click", async function () {
+                try {
+                    if (document.fullscreenElement) {
+                        await document.exitFullscreen();
+
+                    } else if (container.requestFullscreen) {
+                        await container.requestFullscreen();
+
+                    } else if (video.webkitEnterFullscreen) {
+                        video.webkitEnterFullscreen();
+
+                    } else {
+                        status.textContent =
+                            "Fullscreen tidak didukung browser.";
+                    }
+
+                } catch (error) {
+                    status.textContent =
+                        "Fullscreen gagal dibuka.";
+                }
+            });
+
+            // =================================
+            // VIDEO SELESAI
+            // =================================
+            video.addEventListener("ended", function () {
+                ending.classList.add("show");
+                resumeParentMusic();
+                status.textContent = "Thank you for watching. ♥";
+                ending.scrollIntoView({ behavior: "smooth", block: "center" });
+            });
+
+            // =================================
+            // PENANGANAN ERROR
+            // =================================
+            video.addEventListener("error", function () {
+                status.textContent =
+                    "File video tidak ditemukan atau format tidak didukung. " +
+                    "Pastikan video/moment.mp4 benar.";
+            });
+
+            document.getElementById("replayButton").addEventListener("click", function () {
+                video.currentTime = 0;
+                ending.classList.remove("show");
+                startVideo();
+            });
+
+            updateProgress();
+        });
     </script>
 
 </body>

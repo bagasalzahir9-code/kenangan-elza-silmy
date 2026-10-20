@@ -1,959 +1,582 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
 
-        const section =
-            document.getElementById(
-                "princesScrollSection"
-            );
+document.addEventListener("DOMContentLoaded", function () {
 
-        const cards =
-            Array.from(
-                document.querySelectorAll(
-                    ".princes-photo-card"
-                )
-            );
+    // ==========================================
+    // 1. MENGAMBIL ELEMEN MY PRINCES
+    // ==========================================
 
-        const dots =
-            Array.from(
-                document.querySelectorAll(
-                    ".progress-dot"
-                )
-            );
+    const section = document.getElementById(
+        "princesScrollSection"
+    );
 
-        const counter =
-            document.getElementById(
-                "photoCounter"
-            );
+    const sticky = document.querySelector(
+        ".princes-sticky"
+    );
 
+    const cards = Array.from(
+        document.querySelectorAll(".princes-photo-card")
+    );
 
-        const galleryPhotos =
-            Array.from(
-                document.querySelectorAll(
-                    ".gallery-photo img"
-                )
-            );
+    const dots = Array.from(
+        document.querySelectorAll(".progress-dot")
+    );
 
+    const counter = document.getElementById(
+        "photoCounter"
+    );
 
-        const lightbox =
-            document.getElementById(
-                "lightbox"
-            );
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
 
-        const lightboxImage =
-            document.getElementById(
-                "lightboxImage"
-            );
-
-        const lightboxCounter =
-            document.getElementById(
-                "lightboxCounter"
-            );
-
-        const lightboxClose =
-            document.getElementById(
-                "lightboxClose"
-            );
-
-        const lightboxPrev =
-            document.getElementById(
-                "lightboxPrev"
-            );
-
-        const lightboxNext =
-            document.getElementById(
-                "lightboxNext"
-            );
+    function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+    }
 
 
-        let ticking = false;
+    // ==========================================
+    // 2. ANIMASI FOTO SAAT SCROLL
+    // ==========================================
 
-        let currentGalleryIndex = 0;
+    let ticking = false;
 
+    function updatePrinces() {
 
-        function clamp(
-            value,
-            min,
-            max
-        ) {
-
-            return Math.max(
-                min,
-                Math.min(
-                    max,
-                    value
-                )
-            );
-
+        if (!section || cards.length === 0) {
+            return;
         }
 
+        const rect = section.getBoundingClientRect();
 
-        function easeOutCubic(t) {
+        const scrollable = Math.max(
+            1,
+            section.offsetHeight - window.innerHeight
+        );
 
-            return 1 -
-                Math.pow(
-                    1 - t,
-                    3
-                );
+        const travelled = -rect.top;
 
-        }
+        const progress = clamp(
+            travelled / scrollable,
+            0,
+            1
+        );
 
+        const exact = progress * cards.length;
 
-        /* =========================
-           STICKY PHOTOS
-        ========================== */
+        const current = clamp(
+            Math.floor(exact),
+            0,
+            cards.length - 1
+        );
 
-        function updatePrinces() {
+        const local = clamp(
+            exact - current,
+            0,
+            1
+        );
 
-            if (
-                !section ||
-                cards.length === 0
-            ) {
+        const eased = 1 - Math.pow(1 - local, 3);
+
+        cards.forEach(function (card, index) {
+
+            const image = card.querySelector("img");
+
+            if (reduceMotion.matches) {
+
+                card.style.opacity =
+                    index === current ? "1" : "0";
+
+                card.style.transform = "none";
+                card.style.filter = "none";
+                card.style.zIndex = index === current ? 100 : 1;
+
                 return;
             }
 
+            // Foto yang sudah dilewati
+            if (index < current) {
 
-            const rect =
-                section.getBoundingClientRect();
+                const depth = current - index;
 
+                const side = index % 2 === 0 ? -1 : 1;
 
-            const scrollable =
-                section.offsetHeight -
-                window.innerHeight;
+                const x = side * depth * 11;
+                const y = depth * -14;
+                const scale = Math.max(0.7, 1 - depth * 0.04);
+                const rotate = side * (2.8 + depth * 0.4);
 
+                card.style.opacity = "1";
 
-            const travelled =
-                -rect.top;
+                card.style.transform =
+                    `translate(${x}px, ${y}px)
+                     scale(${scale})
+                     rotate(${rotate}deg)`;
 
+                card.style.filter =
+                    `brightness(${Math.max(0.5, 1 - depth * 0.075)})`;
 
-            let progress =
-                travelled /
-                scrollable;
-
-
-            progress =
-                clamp(
-                    progress,
-                    0,
-                    1
-                );
-
-
-            const steps =
-                cards.length - .18;
-
-
-            const exact =
-                progress * steps;
-
-
-            let current =
-                Math.floor(exact);
-
-
-            current =
-                clamp(
-                    current,
-                    0,
-                    cards.length - 1
-                );
-
-
-            const local =
-                clamp(
-                    exact - current,
-                    0,
-                    1
-                );
-
-
-            const eased =
-                easeOutCubic(local);
-
-
-            cards.forEach(
-                function (
-                    card,
-                    index
-                ) {
-
-                    const image =
-                        card.querySelector(
-                            "img"
-                        );
-
-
-                    /* BELAKANG */
-
-                    if (
-                        index < current
-                    ) {
-
-                        const depth =
-                            current - index;
-
-
-                        const side =
-                            index % 2 === 0
-                                ? -1
-                                : 1;
-
-
-                        const x =
-                            side *
-                            depth *
-                            11;
-
-
-                        const y =
-                            depth *
-                            -14;
-
-
-                        const scale =
-                            1 -
-                            depth *
-                            .04;
-
-
-                        const rotate =
-                            side *
-                            (
-                                2.8 +
-                                depth *
-                                .4
-                            );
-
-
-                        card.style.opacity =
-                            "1";
-
-
-                        card.style.transform =
-                            `
-                            translateX(${x}px)
-                            translateY(${y}px)
-                            scale(${scale})
-                            rotate(${rotate}deg)
-                            `;
-
-
-                        card.style.filter =
-                            `
-                            brightness(
-                                ${1 - depth * .075}
-                            )
-                            `;
-
-
-                        card.style.zIndex =
-                            index + 1;
-
-
-                        if (
-                            image &&
-                            index !== 1
-                        ) {
-
-                            image.style.transform =
-                                "scale(1.025)";
-
-                        }
-
-                    }
-
-
-                    /* AKTIF */
-
-                    else if (
-                        index === current
-                    ) {
-
-                        const side =
-                            index % 2 === 0
-                                ? -1
-                                : 1;
-
-
-                        card.style.opacity =
-                            "1";
-
-
-                        card.style.transform =
-                            `
-                            translateY(${-local * 5}px)
-                            scale(${1 - local * .014})
-                            rotate(${side * 1.8}deg)
-                            `;
-
-
-                        card.style.filter =
-                            "brightness(.99)";
-
-
-                        card.style.zIndex =
-                            50 + index;
-
-
-                        if (
-                            image &&
-                            index !== 1
-                        ) {
-
-                            image.style.transform =
-                                "scale(1.016)";
-
-                        }
-
-                    }
-
-
-                    /* BERIKUTNYA */
-
-                    else if (
-                        index ===
-                        current + 1
-                    ) {
-
-                        const side =
-                            index % 2 === 0
-                                ? -1
-                                : 1;
-
-
-                        const y =
-                            170 *
-                            (1 - eased);
-
-
-                        const scale =
-                            .70 +
-                            eased *
-                            .30;
-
-
-                        const rotate =
-                            (
-                                side * -8
-                            ) +
-                            (
-                                (
-                                    side * 1.8
-                                ) -
-                                (
-                                    side * -8
-                                )
-                            ) *
-                            eased;
-
-
-                        card.style.opacity =
-                            clamp(
-                                local * 1.75,
-                                0,
-                                1
-                            );
-
-
-                        card.style.transform =
-                            `
-                            translateY(${y}px)
-                            scale(${scale})
-                            rotate(${rotate}deg)
-                            `;
-
-
-                        card.style.filter =
-                            `
-                            blur(
-                                ${(1 - local) * 2}px
-                            )
-                            `;
-
-
-                        card.style.zIndex =
-                            100 + index;
-
-
-                        if (
-                            image &&
-                            index !== 1
-                        ) {
-
-                            image.style.transform =
-                                `
-                                scale(
-                                    ${1.07 - eased * .05}
-                                )
-                                `;
-
-                        }
-
-                    }
-
-
-                    /* BELUM */
-
-                    else {
-
-                        card.style.opacity =
-                            "0";
-
-
-                        card.style.transform =
-                            `
-                            translateY(170px)
-                            scale(.70)
-                            `;
-
-
-                        card.style.zIndex =
-                            index;
-
-                    }
-
-                }
-            );
-
-
-            if (counter) {
-
-                counter.textContent =
-                    String(
-                        current + 1
-                    )
-                        .padStart(
-                            2,
-                            "0"
-                        )
-                    +
-                    " / "
-                    +
-                    String(
-                        cards.length
-                    )
-                        .padStart(
-                            2,
-                            "0"
-                        );
-
+                card.style.zIndex = index + 1;
             }
 
+            // Foto yang sedang aktif
+            else if (index === current) {
 
-            dots.forEach(
-                function (
-                    dot,
-                    index
-                ) {
+                card.style.opacity = "1";
 
-                    dot.classList.toggle(
-                        "active",
-                        index === current
-                    );
+                card.style.transform = "none";
 
-                }
-            );
+                card.style.filter = "none";
 
+                card.style.zIndex = 100 + index;
+            }
+
+            // Foto selanjutnya yang mulai masuk
+            else if (index === current + 1) {
+
+                const side = index % 2 === 0 ? -1 : 1;
+
+                const y = 170 * (1 - eased);
+
+                const scale = 0.7 + eased * 0.3;
+
+                const rotate = side * -8 * (1 - eased);
+
+                card.style.opacity = String(
+                    clamp(local * 1.75, 0, 1)
+                );
+
+                card.style.transform =
+                    `translateY(${y}px)
+                     scale(${scale})
+                     rotate(${rotate}deg)`;
+
+                card.style.filter =
+                    `blur(${(1 - local) * 2}px)`;
+
+                card.style.zIndex = 100 + index;
+            }
+
+            // Foto yang belum muncul
+            else {
+
+                card.style.opacity = "0";
+
+                card.style.transform =
+                    "translateY(170px) scale(0.7)";
+
+                card.style.filter = "none";
+
+                card.style.zIndex = index;
+            }
+
+            // Mempertahankan orientasi foto kedua
+            if (image && index !== 1) {
+                image.style.transform = "scale(1.025)";
+            }
+        });
+
+
+        // ======================================
+        // 3. PENGHITUNG FOTO
+        // ======================================
+
+        if (counter) {
+
+            counter.textContent =
+                String(current + 1).padStart(2, "0") +
+                " / " +
+                String(cards.length).padStart(2, "0");
         }
 
+        // Titik indikator foto
+        dots.forEach(function (dot, index) {
 
-        /* =========================
-           LIGHTBOX
-        ========================== */
+            dot.classList.toggle(
+                "active",
+                index === current
+            );
+        });
 
-        function showGalleryPhoto(
-            index
-        ) {
-
-            if (
-                galleryPhotos.length === 0
-            ) {
-                return;
-            }
+    }
 
 
-            if (
-                index < 0
-            ) {
+    // ==========================================
+    // 4. DEKORASI KUPU-KUPU DAN HATI
+    // ==========================================
 
-                index =
-                    galleryPhotos.length - 1;
+    let romanceLayer = null;
 
-            }
+    if (sticky) {
+
+        romanceLayer = sticky.querySelector(
+            ".romance-float-layer"
+        );
+
+        if (!romanceLayer) {
+
+            romanceLayer = document.createElement("div");
+
+            romanceLayer.className = "romance-float-layer";
+
+            romanceLayer.setAttribute("aria-hidden", "true");
+
+            sticky.appendChild(romanceLayer);
+        }
+
+        const decorations = [
+            { text: "🦋", kind: "butterfly", x: 8, y: 66, size: 24 },
+            { text: "🦋", kind: "butterfly", x: 16, y: 30, size: 20 },
+            { text: "🦋", kind: "butterfly", x: 25, y: 75, size: 18 },
+            { text: "🦋", kind: "butterfly", x: 77, y: 27, size: 20 },
+            { text: "🦋", kind: "butterfly", x: 86, y: 62, size: 24 },
+            { text: "🦋", kind: "butterfly", x: 90, y: 42, size: 18 },
+
+            { text: "💗", kind: "heart", x: 12, y: 52, size: 14 },
+            { text: "💕", kind: "heart", x: 20, y: 40, size: 13 },
+            { text: "💖", kind: "heart", x: 30, y: 22, size: 12 },
+            { text: "💗", kind: "heart", x: 34, y: 70, size: 12 },
+            { text: "💕", kind: "heart", x: 67, y: 20, size: 13 },
+            { text: "💖", kind: "heart", x: 72, y: 48, size: 12 },
+            { text: "💗", kind: "heart", x: 80, y: 74, size: 14 },
+            { text: "💕", kind: "heart", x: 89, y: 36, size: 12 },
+            { text: "💖", kind: "heart", x: 44, y: 14, size: 12 },
+            { text: "💗", kind: "heart", x: 56, y: 78, size: 13 }
+        ];
+
+        romanceLayer.innerHTML = "";
+
+        decorations.forEach(function (item, index) {
+
+            const element = document.createElement("span");
+
+            element.className =
+                "romance-item " + item.kind;
+
+            element.textContent = item.text;
+
+            element.style.left = item.x + "%";
+            element.style.top = item.y + "%";
+            element.style.fontSize = item.size + "px";
+
+            element.style.setProperty(
+                "--dur",
+                (4.6 + (index % 5) * 0.35) + "s"
+            );
+
+            element.style.setProperty(
+                "--delay",
+                (index % 6) * 0.35 + "s"
+            );
+
+            element.style.setProperty(
+                "--drift-x",
+                (index % 2 === 0 ? 15 : -15) + "px"
+            );
+
+            element.style.setProperty(
+                "--extra-x",
+                (index % 3 - 1) * 7 + "px"
+            );
+
+            romanceLayer.appendChild(element);
+        });
+    }
 
 
-            if (
-                index >=
-                galleryPhotos.length
-            ) {
+    function updateRomance() {
 
-                index = 0;
+        if (!section || !romanceLayer) {
+            return;
+        }
 
-            }
+        const rect = section.getBoundingClientRect();
 
+        const visible =
+            rect.top < window.innerHeight * 0.9 &&
+            rect.bottom > window.innerHeight * 0.1;
+
+        romanceLayer.classList.toggle(
+            "active",
+            visible && !reduceMotion.matches
+        );
+    }
+
+
+    // ==========================================
+    // 5. OPTIMASI SCROLL
+    // ==========================================
+
+    function requestUpdate() {
+
+        if (ticking) return;
+
+        ticking = true;
+
+        requestAnimationFrame(function () {
+
+            updatePrinces();
+            updateRomance();
+
+            ticking = false;
+        });
+    }
+
+    window.addEventListener(
+        "scroll",
+        requestUpdate,
+        { passive: true }
+    );
+
+    window.addEventListener(
+        "resize",
+        requestUpdate
+    );
+
+    if (reduceMotion.addEventListener) {
+        reduceMotion.addEventListener(
+            "change",
+            requestUpdate
+        );
+    }
+
+    requestUpdate();
+
+
+    // ==========================================
+    // 6. GALERI FOTO MY PRINCES
+    // ==========================================
+
+    const galleryPhotos = Array.from(
+        document.querySelectorAll(".gallery-photo img")
+    );
+
+    const lightbox = document.getElementById("lightbox");
+
+    const lightboxImage = document.getElementById(
+        "lightboxImage"
+    );
+
+    const lightboxCounter = document.getElementById(
+        "lightboxCounter"
+    );
+
+    const lightboxClose = document.getElementById(
+        "lightboxClose"
+    );
+
+    const lightboxPrev = document.getElementById(
+        "lightboxPrev"
+    );
+
+    const lightboxNext = document.getElementById(
+        "lightboxNext"
+    );
+
+    let currentGalleryIndex = 0;
+    let previousFocus = null;
+
+    if (
+        lightbox &&
+        lightboxImage &&
+        galleryPhotos.length > 0
+    ) {
+
+        lightbox.setAttribute("role", "dialog");
+        lightbox.setAttribute("aria-modal", "true");
+        lightbox.setAttribute("aria-label", "Galeri foto");
+
+        function showGalleryPhoto(index) {
 
             currentGalleryIndex =
-                index;
+                (index + galleryPhotos.length) %
+                galleryPhotos.length;
 
+            const image = galleryPhotos[currentGalleryIndex];
 
-            const selected =
-                galleryPhotos[
-                currentGalleryIndex
-                ];
+            lightboxImage.src = image.currentSrc || image.src;
 
+            lightboxImage.alt = image.alt || "Foto kenangan";
 
-            lightboxImage.src =
-                selected.src;
+            if (lightboxCounter) {
 
-
-            lightboxImage.alt =
-                selected.alt;
-
-
-            lightboxCounter.textContent =
-                String(
-                    currentGalleryIndex + 1
-                )
-                    .padStart(
-                        2,
-                        "0"
-                    )
-                +
-                " / "
-                +
-                String(
-                    galleryPhotos.length
-                )
-                    .padStart(
-                        2,
-                        "0"
-                    );
-
+                lightboxCounter.textContent =
+                    String(currentGalleryIndex + 1).padStart(2, "0") +
+                    " / " +
+                    String(galleryPhotos.length).padStart(2, "0");
+            }
         }
 
+        function openLightbox(index) {
 
-        function openLightbox(
-            index
-        ) {
+            previousFocus = document.activeElement;
 
-            showGalleryPhoto(
-                index
-            );
+            showGalleryPhoto(index);
 
-
-            lightbox.classList.add(
-                "open"
-            );
-
+            lightbox.classList.add("open");
 
             lightbox.setAttribute(
                 "aria-hidden",
                 "false"
             );
 
+            document.body.classList.add(
+                "lightbox-open"
+            );
 
-            document.body
-                .classList
-                .add(
-                    "lightbox-open"
-                );
-
+            if (lightboxClose) {
+                lightboxClose.focus();
+            }
         }
-
 
         function closeLightbox() {
 
-            lightbox.classList.remove(
-                "open"
-            );
-
+            lightbox.classList.remove("open");
 
             lightbox.setAttribute(
                 "aria-hidden",
                 "true"
             );
 
+            document.body.classList.remove(
+                "lightbox-open"
+            );
 
-            document.body
-                .classList
-                .remove(
-                    "lightbox-open"
-                );
-
+            if (previousFocus && previousFocus.focus) {
+                previousFocus.focus();
+            }
         }
-
 
         function nextPhoto() {
-
-            showGalleryPhoto(
-                currentGalleryIndex + 1
-            );
-
+            showGalleryPhoto(currentGalleryIndex + 1);
         }
-
 
         function previousPhoto() {
+            showGalleryPhoto(currentGalleryIndex - 1);
+        }
 
-            showGalleryPhoto(
-                currentGalleryIndex - 1
+
+        // Klik foto
+        galleryPhotos.forEach(function (image, index) {
+
+            const photo = image.closest(".gallery-photo");
+
+            if (!photo) return;
+
+            photo.setAttribute("tabindex", "0");
+            photo.setAttribute("role", "button");
+            photo.setAttribute(
+                "aria-label",
+                "Perbesar foto " + (index + 1)
             );
 
-        }
+            photo.addEventListener("click", function () {
+                openLightbox(index);
+            });
 
-
-        galleryPhotos.forEach(
-            function (
-                image,
-                index
-            ) {
-
-                image.parentElement
-                    .addEventListener(
-                        "click",
-                        function () {
-
-                            openLightbox(
-                                index
-                            );
-
-                        }
-                    );
-
-            }
-        );
-
-
-        if (lightboxClose) {
-
-            lightboxClose
-                .addEventListener(
-                    "click",
-                    closeLightbox
-                );
-
-        }
-
-
-        if (lightboxNext) {
-
-            lightboxNext
-                .addEventListener(
-                    "click",
-                    nextPhoto
-                );
-
-        }
-
-
-        if (lightboxPrev) {
-
-            lightboxPrev
-                .addEventListener(
-                    "click",
-                    previousPhoto
-                );
-
-        }
-
-
-        if (lightbox) {
-
-            lightbox
-                .addEventListener(
-                    "click",
-                    function (
-                        event
-                    ) {
-
-                        if (
-                            event.target ===
-                            lightbox
-                        ) {
-
-                            closeLightbox();
-
-                        }
-
-                    }
-                );
-
-        }
-
-
-        document.addEventListener(
-            "keydown",
-            function (
-                event
-            ) {
+            photo.addEventListener("keydown", function (event) {
 
                 if (
-                    !lightbox ||
-                    !lightbox.classList
-                        .contains(
-                            "open"
-                        )
+                    event.key === "Enter" ||
+                    event.key === " "
                 ) {
+
+                    event.preventDefault();
+                    openLightbox(index);
+                }
+            });
+        });
+
+
+        // Tombol tutup
+        if (lightboxClose) {
+
+            lightboxClose.addEventListener(
+                "click",
+                closeLightbox
+            );
+        }
+
+        // Tombol foto berikutnya
+        if (lightboxNext) {
+
+            lightboxNext.addEventListener(
+                "click",
+                nextPhoto
+            );
+        }
+
+        // Tombol foto sebelumnya
+        if (lightboxPrev) {
+
+            lightboxPrev.addEventListener(
+                "click",
+                previousPhoto
+            );
+        }
+
+        // Klik area gelap untuk menutup
+        lightbox.addEventListener("click", function (event) {
+
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+
+        // Navigasi keyboard
+        document.addEventListener("keydown", function (event) {
+
+            if (!lightbox.classList.contains("open")) {
+                return;
+            }
+
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+
+            if (event.key === "ArrowRight") {
+                nextPhoto();
+            }
+
+            if (event.key === "ArrowLeft") {
+                previousPhoto();
+            }
+
+            if (event.key === "Tab") {
+
+                const buttons = [
+                    lightboxClose,
+                    lightboxPrev,
+                    lightboxNext
+                ].filter(function (button) {
+                    return button && !button.disabled;
+                });
+
+                if (buttons.length === 0) {
+                    event.preventDefault();
                     return;
                 }
 
+                const first = buttons[0];
+                const last = buttons[buttons.length - 1];
 
                 if (
-                    event.key ===
-                    "Escape"
+                    event.shiftKey &&
+                    document.activeElement === first
                 ) {
-
-                    closeLightbox();
-
+                    event.preventDefault();
+                    last.focus();
                 }
 
-
-                if (
-                    event.key ===
-                    "ArrowRight"
+                else if (
+                    !event.shiftKey &&
+                    document.activeElement === last
                 ) {
-
-                    nextPhoto();
-
+                    event.preventDefault();
+                    first.focus();
                 }
-
-
-                if (
-                    event.key ===
-                    "ArrowLeft"
-                ) {
-
-                    previousPhoto();
-
-                }
-
             }
-        );
-
-
-        /* =========================
-           SCROLL
-        ========================== */
-
-        function requestUpdate() {
-
-            if (!ticking) {
-
-                requestAnimationFrame(
-                    function () {
-
-                        updatePrinces();
-
-                        ticking =
-                            false;
-
-                    }
-                );
-
-
-                ticking =
-                    true;
-
-            }
-
-        }
-
-
-        window.addEventListener(
-            "scroll",
-            requestUpdate,
-            {
-                passive: true
-            }
-        );
-
-
-        window.addEventListener(
-            "resize",
-            requestUpdate
-        );
-
-
-        updatePrinces();
-
-    }
-);
-/* ==================================
-   BUTTERFLY + LOVE FLOATING DECOR
-================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const scrollSection =
-            document.getElementById(
-                "princesScrollSection"
-            );
-
-        const sticky =
-            document.querySelector(
-                ".princes-sticky"
-            );
-
-        if (!scrollSection || !sticky) {
-            return;
-        }
-
-        let layer =
-            sticky.querySelector(
-                ".romance-float-layer"
-            );
-
-        if (!layer) {
-            layer =
-                document.createElement("div");
-
-            layer.className =
-                "romance-float-layer";
-
-            sticky.appendChild(layer);
-        }
-
-        /* posisi dekorasi biar cantik di sekitar foto */
-        const config = [
-            { kind: "butterfly", text: "🦋", left: 8, top: 66, size: 24, dur: 5.5, delay: 0.0, drift: 22 },
-            { kind: "butterfly", text: "🦋", left: 16, top: 30, size: 20, dur: 6.0, delay: 0.8, drift: 18 },
-            { kind: "butterfly", text: "🦋", left: 25, top: 75, size: 18, dur: 5.4, delay: 1.2, drift: 20 },
-            { kind: "butterfly", text: "🦋", left: 77, top: 27, size: 20, dur: 5.8, delay: 0.4, drift: -18 },
-            { kind: "butterfly", text: "🦋", left: 86, top: 62, size: 24, dur: 6.2, delay: 1.0, drift: -22 },
-            { kind: "butterfly", text: "🦋", left: 90, top: 42, size: 18, dur: 5.0, delay: 1.6, drift: -16 },
-
-            { kind: "heart", text: "💗", left: 12, top: 52, size: 14, dur: 4.8, delay: 0.2, drift: 14 },
-            { kind: "heart", text: "💕", left: 20, top: 40, size: 13, dur: 5.0, delay: 1.1, drift: 12 },
-            { kind: "heart", text: "💖", left: 30, top: 22, size: 12, dur: 4.7, delay: 1.8, drift: 10 },
-            { kind: "heart", text: "💗", left: 34, top: 70, size: 12, dur: 5.1, delay: 2.2, drift: 12 },
-            { kind: "heart", text: "💕", left: 67, top: 20, size: 13, dur: 5.4, delay: 0.5, drift: -10 },
-            { kind: "heart", text: "💖", left: 72, top: 48, size: 12, dur: 4.9, delay: 1.4, drift: -12 },
-            { kind: "heart", text: "💗", left: 80, top: 74, size: 14, dur: 5.3, delay: 2.0, drift: -14 },
-            { kind: "heart", text: "💕", left: 89, top: 36, size: 12, dur: 4.6, delay: 2.4, drift: -12 },
-            { kind: "heart", text: "💖", left: 44, top: 14, size: 12, dur: 5.0, delay: 1.0, drift: 8 },
-            { kind: "heart", text: "💗", left: 56, top: 78, size: 13, dur: 5.2, delay: 1.9, drift: -8 }
-        ];
-
-        layer.innerHTML = "";
-
-        config.forEach(function (item) {
-            const el =
-                document.createElement("span");
-
-            el.className =
-                "romance-item " + item.kind;
-
-            el.textContent =
-                item.text;
-
-            el.style.left =
-                item.left + "%";
-
-            el.style.top =
-                item.top + "%";
-
-            el.style.fontSize =
-                item.size + "px";
-
-            el.style.setProperty(
-                "--dur",
-                item.dur + "s"
-            );
-
-            el.style.setProperty(
-                "--delay",
-                item.delay + "s"
-            );
-
-            el.style.setProperty(
-                "--drift-x",
-                item.drift + "px"
-            );
-
-            layer.appendChild(el);
         });
-
-        function updateRomanceState() {
-            const rect =
-                scrollSection.getBoundingClientRect();
-
-            const sectionHeight =
-                scrollSection.offsetHeight -
-                window.innerHeight;
-
-            const travelled =
-                -rect.top;
-
-            let progress =
-                travelled / sectionHeight;
-
-            if (!isFinite(progress)) {
-                progress = 0;
-            }
-
-            const inActiveRange =
-                progress > 0.03 &&
-                progress < 0.95;
-
-            layer.classList.toggle(
-                "active",
-                inActiveRange
-            );
-        }
-
-        window.addEventListener(
-            "scroll",
-            updateRomanceState,
-            { passive: true }
-        );
-
-        window.addEventListener(
-            "resize",
-            updateRomanceState
-        );
-
-        updateRomanceState();
     }
-);
-/* ==================================
-   RANDOM FLOAT POLISH
-================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const romanceItems =
-            document.querySelectorAll(
-                ".romance-item"
-            );
-
-        romanceItems.forEach(
-            function (
-                item,
-                index
-            ) {
-
-                const randomX =
-                    Math.floor(
-                        Math.random() * 20
-                    ) - 10;
-
-                const randomDelay =
-                    (
-                        Math.random() * 1.5
-                    ).toFixed(2);
-
-                item.style.setProperty(
-                    "--extra-x",
-                    randomX + "px"
-                );
-
-                item.style.animationDelay =
-                    randomDelay + "s";
-            }
-        );
-
-    }
-);
+});

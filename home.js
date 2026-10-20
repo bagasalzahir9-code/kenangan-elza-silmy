@@ -1,199 +1,153 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // =====================================
+    // ELEMEN UTAMA HOME
+    // =====================================
+
+    const book = document.getElementById("book");
+    const openBtn = document.getElementById("openBtn");
+    const ribbon = document.getElementById("ribbon");
+    const coverText = document.getElementById("coverText");
+    const bookLight = document.getElementById("bookLight");
+    const particles = document.getElementById("openingParticles");
+    const status = document.getElementById("storyStatus");
+    const continueBtn = document.getElementById("continueBtn");
+
+    let isOpening = false;
 
 
-        const openButton =
-            document.getElementById(
-                "openBtn"
-            );
+    // =====================================
+    // FOTO KENANGAN HOME
+    // =====================================
+
+    const memoryImage = document.getElementById("memorySlideImage");
+
+    const photoCandidates = [
+        "foto/home1.jpg",
+        "foto/home1.jpeg",
+        "foto/home1.png",
+        "foto/home1.webp",
+        "foto/kenangan1.jpg",
+        "foto/kenangan1.jpeg",
+        "foto/kenangan1.png",
+        "foto/kenangan1.webp",
+        "foto/intro.jpg",
+        "foto/mountain1.jpg",
+        "foto/datehome1.jpg"
+    ];
+
+    if (memoryImage) {
+
+        let photoIndex = 0;
+
+        function loadPhoto() {
+
+            if (photoIndex >= photoCandidates.length) {
+                memoryImage.removeAttribute("src");
+                memoryImage.alt = "Foto kenangan belum tersedia";
+                memoryImage.style.display = "none";
+                return;
+            }
+
+            const photo = photoCandidates[photoIndex];
+            photoIndex++;
+
+            memoryImage.src = photo;
+        }
+
+        memoryImage.addEventListener("error", loadPhoto);
+
+        memoryImage.addEventListener("load", function () {
+            memoryImage.style.display = "block";
+        });
+
+        loadPhoto();
+    }
 
 
-        const ribbon =
-            document.getElementById(
-                "ribbon"
-            );
+    // =====================================
+    // ANIMASI MEMBUKA BUKU
+    // =====================================
 
+    if (openBtn && book) {
 
-        const coverText =
-            document.getElementById(
-                "coverText"
-            );
+        openBtn.addEventListener("click", function () {
 
+            if (isOpening) return;
 
-        const book =
-            document.getElementById(
-                "book"
-            );
+            isOpening = true;
 
+            openBtn.classList.add("hidden");
 
-        const status =
-            document.getElementById(
-                "storyStatus"
-            );
+            if (status) {
+                status.textContent = "Membuka cerita kita...";
+                status.classList.add("visible");
+            }
 
+            // Lepaskan pita buku
+            if (ribbon) {
+                ribbon.classList.add("releasing");
+            }
 
-        const continueButton =
-            document.getElementById(
-                "continueBtn"
-            );
+            // Tampilkan tulisan cover
+            setTimeout(function () {
+                if (coverText) {
+                    coverText.classList.add("show");
+                }
+            }, 350);
 
+            // Tampilkan cahaya buku
+            setTimeout(function () {
+                if (bookLight) {
+                    bookLight.classList.add("show");
+                }
+            }, 650);
 
-        const bookLight =
-            document.getElementById(
-                "bookLight"
-            );
+            // Mulai buka buku
+            setTimeout(function () {
 
-
-        const openingParticles =
-            document.getElementById(
-                "openingParticles"
-            );
-
-
-        let started = false;
-
-
-
-        openButton.addEventListener(
-            "click",
-            function () {
-
-
-                if (started) {
-                    return;
+                if (status) {
+                    status.classList.remove("visible");
                 }
 
+                book.classList.add("opening");
 
-                started = true;
+                if (particles) {
+                    particles.classList.add("show");
+                }
 
+            }, 900);
 
-                openButton.classList.add(
-                    "hidden"
-                );
+            // Buku selesai terbuka
+            setTimeout(function () {
 
+                book.classList.remove("opening");
+                book.classList.add("opened");
 
-                status.textContent =
-                    "Membuka cerita kita...";
+            }, 2650);
 
-
-                status.classList.add(
-                    "visible"
-                );
-
-
-                ribbon.classList.add(
-                    "releasing"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        status.classList.remove(
-                            "visible"
-                        );
-
-                    },
-                    850
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        coverText.classList.add(
-                            "show"
-                        );
-
-                    },
-                    1000
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        status.textContent =
-                            "Elza ♥ Silmy";
-
-
-                        status.classList.add(
-                            "visible"
-                        );
-
-                    },
-                    2200
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        status.classList.remove(
-                            "visible"
-                        );
-
-
-                        book.classList.add(
-                            "opening"
-                        );
-
-
-                        bookLight.classList.add(
-                            "show"
-                        );
-
-
-                        openingParticles
-                            .classList
-                            .add(
-                                "show"
-                            );
-
-                    },
-                    3000
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        book.classList.add(
-                            "opened"
-                        );
-
-                    },
-                    4700
-                );
-
-            }
-        );
-
-
-
-        continueButton.addEventListener(
-            "click",
-            function () {
-
-
-                document.body.classList.add(
-                    "page-leaving"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        window.location.href =
-                            "gallery.html";
-
-                    },
-                    550
-                );
-
-            }
-        );
+        });
 
     }
-);
+
+
+    // =====================================
+    // TOMBOL EXPLORE OUR STORY
+    // =====================================
+
+    if (continueBtn) {
+
+        continueBtn.addEventListener("click", function () {
+
+            document.body.classList.add("page-leaving");
+
+            setTimeout(function () {
+                window.location.href = "gallery.html";
+            }, 550);
+
+        });
+
+    }
+
+});

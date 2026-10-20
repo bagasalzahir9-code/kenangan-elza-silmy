@@ -1,3 +1,7 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -8,9 +12,7 @@ html {
 
 body.surat-page {
     margin: 0;
-
     min-height: 100vh;
-
     overflow-x: hidden;
 
     font-family:
@@ -25,10 +27,10 @@ body.surat-page {
             rgba(173, 38, 91, .22),
             transparent 28%),
         radial-gradient(circle at 14% 58%,
-            rgba(255, 55, 130, .09),
+            rgba(255, 55, 130, .12),
             transparent 31%),
         radial-gradient(circle at 86% 58%,
-            rgba(255, 55, 130, .09),
+            rgba(255, 55, 130, .12),
             transparent 31%),
         linear-gradient(180deg,
             #160711 0%,
@@ -42,19 +44,17 @@ body.surat-page {
 ========================================================= */
 
 .navbar {
-    min-height: 68px;
+    min-height: 64px;
 
     padding:
-        0 7%;
+        0 6%;
 
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     position: relative;
-
     z-index: 500;
 
     background:
@@ -70,11 +70,12 @@ body.surat-page {
 .logo {
     color: #fff0f5;
 
-    font-size: 20px;
-
+    font-size: 18px;
     font-weight: 700;
 
     letter-spacing: 1px;
+
+    white-space: nowrap;
 }
 
 .logo span {
@@ -89,7 +90,7 @@ body.surat-page {
 
     align-items: center;
 
-    gap: 24px;
+    gap: 20px;
 }
 
 .nav-menu a {
@@ -100,11 +101,9 @@ body.surat-page {
 
     text-decoration: none;
 
-    font-family:
-        Arial,
-        sans-serif;
-
     font-size: 11px;
+
+    white-space: nowrap;
 }
 
 .nav-menu a:hover,
@@ -118,17 +117,32 @@ body.surat-page {
     position: absolute;
 
     left: 50%;
-
-    bottom: -10px;
+    bottom: -9px;
 
     width: 18px;
-
     height: 1px;
 
     transform:
         translateX(-50%);
 
     background: #ed6d9c;
+}
+
+#darkModeButton {
+    width: 32px;
+    height: 32px;
+
+    border:
+        1px solid rgba(255, 183, 208, .18);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, .04);
+
+    color: #fff;
+
+    cursor: pointer;
 }
 
 
@@ -138,10 +152,10 @@ body.surat-page {
 
 .love-page {
     min-height:
-        calc(100vh - 68px);
+        calc(100vh - 64px);
 
     padding:
-        18px 20px 90px;
+        18px 20px 85px;
 }
 
 .love-intro {
@@ -150,18 +164,18 @@ body.surat-page {
     z-index: 10;
 
     margin:
-        0 auto 12px;
+        0 auto 10px;
 
     text-align: center;
 }
 
 .love-intro>p {
     margin:
-        0 0 10px;
+        0 0 8px;
 
     color: #ec76a2;
 
-    font-size: 10px;
+    font-size: 9px;
 
     font-weight: 800;
 
@@ -174,9 +188,9 @@ body.surat-page {
     color: #fff5f7;
 
     font-size:
-        clamp(44px,
-            5vw,
-            66px);
+        clamp(40px,
+            4.5vw,
+            58px);
 
     font-weight: 500;
 
@@ -188,28 +202,29 @@ body.surat-page {
 .love-intro>span {
     display: block;
 
-    margin-top: 12px;
+    margin-top: 10px;
 
     color:
         rgba(255, 229, 238, .58);
 
-    font-size: 11px;
+    font-size: 10px;
 
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 }
 
 
 /* =========================================================
-   SCENE
+   BOOK SCENE
 ========================================================= */
 
 .book-scene {
     position: relative;
 
     width:
-        min(1180px, 96vw);
+        min(1080px,
+            96vw);
 
-    min-height: 700px;
+    min-height: 620px;
 
     margin: auto;
 
@@ -222,16 +237,19 @@ body.surat-page {
     isolation: isolate;
 }
 
+
+/* =========================================================
+   ROMANTIC AURA
+========================================================= */
+
 .romantic-aura {
     position: absolute;
 
     left: 50%;
+    top: 44%;
 
-    top: 47%;
-
-    width: 730px;
-
-    height: 520px;
+    width: 650px;
+    height: 470px;
 
     transform:
         translate(-50%, -50%);
@@ -244,12 +262,12 @@ body.surat-page {
 
     background:
         radial-gradient(circle,
-            rgba(255, 69, 142, .18),
-            rgba(230, 50, 116, .08) 40%,
+            rgba(255, 69, 142, .17),
+            rgba(230, 50, 116, .07) 40%,
             transparent 72%);
 
     filter:
-        blur(8px);
+        blur(7px);
 
     animation:
         auraPulse 5s ease-in-out infinite;
@@ -259,15 +277,13 @@ body.surat-page {
 
     0%,
     100% {
-
-        opacity: .55;
+        opacity: .5;
 
         transform:
             translate(-50%, -50%) scale(.96);
     }
 
     50% {
-
         opacity: .9;
 
         transform:
@@ -278,17 +294,16 @@ body.surat-page {
 
 
 /* =========================================================
-   SIDE LOVE
+   LOVE DECORATIONS
 ========================================================= */
 
 .side-love {
     position: absolute;
 
-    top: 100px;
+    top: 70px;
+    bottom: 110px;
 
-    bottom: 100px;
-
-    width: 14%;
+    width: 18%;
 
     z-index: 4;
 
@@ -296,132 +311,132 @@ body.surat-page {
 }
 
 .left-love {
-    left: 2%;
+    left: 1%;
 }
 
 .right-love {
-    right: 2%;
+    right: 1%;
 }
 
-.side-love span {
+.side-love span,
+.top-love span,
+.bottom-love span {
     position: absolute;
 
     color:
-        rgba(255, 91, 150, .54);
+        rgba(255, 72, 145, .72);
 
     text-shadow:
-        0 0 9px rgba(255, 70, 140, .65),
-        0 0 20px rgba(255, 70, 140, .22);
+        0 0 10px rgba(255, 61, 134, .92),
+        0 0 25px rgba(255, 61, 134, .55),
+        0 0 42px rgba(255, 61, 134, .25);
 
     animation:
         floatingLove 4.8s ease-in-out infinite;
 }
 
 .left-love span:nth-child(1) {
-    left: 12%;
-    top: 10%;
+    left: 8%;
+    top: 8%;
 
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .left-love span:nth-child(2) {
-    left: 55%;
-    top: 35%;
+    left: 56%;
+    top: 24%;
 
-    font-size: 10px;
+    font-size: 11px;
 
-    animation-delay: -1s;
+    animation-delay: -.8s;
 }
 
 .left-love span:nth-child(3) {
-    left: 8%;
-    top: 62%;
+    left: 5%;
+    top: 45%;
 
-    font-size: 22px;
+    font-size: 28px;
 
-    animation-delay: -2s;
+    animation-delay: -1.6s;
 }
 
 .left-love span:nth-child(4) {
-    left: 62%;
-    top: 82%;
+    left: 58%;
+    top: 60%;
 
-    font-size: 11px;
+    font-size: 13px;
 
-    animation-delay: -3s;
+    animation-delay: -2.4s;
 }
 
 .right-love span:nth-child(1) {
-    right: 12%;
-    top: 11%;
+    right: 8%;
+    top: 8%;
 
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .right-love span:nth-child(2) {
-    right: 55%;
-    top: 35%;
-
-    font-size: 10px;
-
-    animation-delay: -1.3s;
-}
-
-.right-love span:nth-child(3) {
-    right: 8%;
-    top: 62%;
-
-    font-size: 23px;
-
-    animation-delay: -2.3s;
-}
-
-.right-love span:nth-child(4) {
-    right: 62%;
-    top: 82%;
+    right: 56%;
+    top: 24%;
 
     font-size: 11px;
 
-    animation-delay: -3.3s;
+    animation-delay: -.8s;
+}
+
+.right-love span:nth-child(3) {
+    right: 5%;
+    top: 45%;
+
+    font-size: 28px;
+
+    animation-delay: -1.6s;
+}
+
+.right-love span:nth-child(4) {
+    right: 58%;
+    top: 60%;
+
+    font-size: 13px;
+
+    animation-delay: -2.4s;
 }
 
 @keyframes floatingLove {
 
     0%,
     100% {
-
-        opacity: .32;
-
         transform:
-            translateY(0) scale(.92);
+            translateY(0) scale(.9);
+
+        opacity: .45;
     }
 
     50% {
-
-        opacity: .85;
-
         transform:
-            translateY(-13px) scale(1.1);
+            translateY(-16px) scale(1.15);
+
+        opacity: 1;
     }
 
 }
 
-.book-scene.love-boost .side-love span {
-
-    color:
-        rgba(255, 95, 156, .92);
-
-    animation-duration:
-        1.8s;
+.book-scene.love-boost .side-love span,
+.book-scene.love-boost .top-love span,
+.book-scene.love-boost .bottom-love span {
+    filter:
+        brightness(1.5);
 
     text-shadow:
-        0 0 11px #ff3f8d,
-        0 0 28px rgba(255, 61, 140, .72);
+        0 0 14px #ff4c94,
+        0 0 35px #ff4c94,
+        0 0 60px rgba(255, 76, 148, .75);
 }
 
 
 /* =========================================================
-   SPARKLE
+   SPARKLES
 ========================================================= */
 
 .sparkle-field {
@@ -429,106 +444,86 @@ body.surat-page {
 
     inset: 0;
 
-    z-index: 3;
+    overflow: hidden;
 
     pointer-events: none;
+
+    z-index: 3;
 }
 
 .sparkle-field i {
     position: absolute;
 
-    width: 4px;
-
-    height: 4px;
+    width: 3px;
+    height: 3px;
 
     border-radius: 50%;
 
-    background: #ffe5ef;
+    background: white;
 
     box-shadow:
-        0 0 8px #fff,
-        0 0 16px #ff80b2;
+        0 0 8px rgba(255, 255, 255, .85);
 
     opacity: .25;
 
     animation:
-        sparkleTwinkle 3.4s ease-in-out infinite;
+        sparkleBlink 3s ease-in-out infinite;
 }
 
 .sparkle-field i:nth-child(1) {
-    left: 16%;
-    top: 24%;
-}
-
-.sparkle-field i:nth-child(2) {
-    left: 27%;
-    top: 14%;
-}
-
-.sparkle-field i:nth-child(3) {
-    left: 39%;
-    top: 17%;
-}
-
-.sparkle-field i:nth-child(4) {
-    right: 38%;
-    top: 15%;
-}
-
-.sparkle-field i:nth-child(5) {
-    right: 25%;
+    left: 8%;
     top: 20%;
 }
 
+.sparkle-field i:nth-child(2) {
+    left: 22%;
+    top: 13%;
+}
+
+.sparkle-field i:nth-child(3) {
+    right: 15%;
+    top: 21%;
+}
+
+.sparkle-field i:nth-child(4) {
+    right: 5%;
+    top: 47%;
+}
+
+.sparkle-field i:nth-child(5) {
+    left: 11%;
+    bottom: 24%;
+}
+
 .sparkle-field i:nth-child(6) {
-    right: 14%;
-    top: 40%;
+    left: 30%;
+    bottom: 10%;
 }
 
 .sparkle-field i:nth-child(7) {
-    right: 18%;
-    bottom: 25%;
-}
-
-.sparkle-field i:nth-child(8) {
-    right: 31%;
+    right: 28%;
     bottom: 13%;
 }
 
-.sparkle-field i:nth-child(9) {
-    left: 30%;
-    bottom: 15%;
+.sparkle-field i:nth-child(8) {
+    right: 8%;
+    bottom: 28%;
 }
 
-.sparkle-field i:nth-child(10) {
-    left: 14%;
-    bottom: 30%;
-}
-
-@keyframes sparkleTwinkle {
-
-    0%,
-    100% {
-
-        opacity: .2;
-
-        transform:
-            scale(.65);
-    }
+@keyframes sparkleBlink {
 
     50% {
-
-        opacity: .9;
+        opacity: 1;
 
         transform:
-            scale(1.35);
+            scale(1.8);
     }
 
 }
 
 
 /* =========================================================
-   STORY BOOK
+   STORYBOOK
 ========================================================= */
 
 .storybook {
@@ -537,15 +532,17 @@ body.surat-page {
     z-index: 20;
 
     width:
-        min(860px, 86vw);
+        min(770px,
+            80vw);
 
     height:
-        min(500px, 52vw);
+        min(448px,
+            46vw);
 
-    min-height: 390px;
+    min-height: 350px;
 
     margin:
-        28px auto 0;
+        22px auto 0;
 
     perspective: 2300px;
 
@@ -555,8 +552,13 @@ body.surat-page {
     overflow: visible;
 
     filter:
-        drop-shadow(0 30px 38px rgba(0, 0, 0, .42));
+        drop-shadow(0 26px 34px rgba(0, 0, 0, .38));
 }
+
+
+/* =========================================================
+   INSIDE BOOK
+========================================================= */
 
 .book-inside {
     position: absolute;
@@ -570,14 +572,16 @@ body.surat-page {
     overflow: hidden;
 
     border-radius:
-        11px 16px 16px 11px;
+        10px 14px 14px 10px;
 
     background: #eaded0;
 
     box-shadow:
         inset 0 0 0 2px rgba(108, 65, 52, .30),
-        inset 0 0 35px rgba(81, 35, 28, .16),
-        0 16px 38px rgba(0, 0, 0, .28);
+
+        inset 0 0 30px rgba(81, 35, 28, .14),
+
+        0 14px 32px rgba(0, 0, 0, .24);
 }
 
 .book-inside::before {
@@ -586,12 +590,10 @@ body.surat-page {
     position: absolute;
 
     left: 50%;
-
     top: 0;
-
     bottom: 0;
 
-    width: 10px;
+    width: 9px;
 
     transform:
         translateX(-50%);
@@ -600,9 +602,9 @@ body.surat-page {
 
     background:
         linear-gradient(90deg,
-            rgba(90, 45, 38, .28),
+            rgba(90, 45, 38, .27),
             rgba(255, 255, 255, .78),
-            rgba(90, 45, 38, .24));
+            rgba(90, 45, 38, .23));
 }
 
 
@@ -614,13 +616,12 @@ body.surat-page {
     position: relative;
 
     width: 50%;
-
     height: 100%;
 
     overflow: hidden;
 
     padding:
-        38px 42px 34px;
+        32px 34px 30px;
 
     color: #62484b;
 
@@ -641,39 +642,48 @@ body.surat-page {
 
 .left-page {
     box-shadow:
-        inset -16px 0 24px rgba(84, 40, 34, .08);
+        inset -14px 0 22px rgba(84, 40, 34, .08);
 }
 
 .right-page {
     box-shadow:
-        inset 16px 0 24px rgba(84, 40, 34, .08);
+        inset 14px 0 22px rgba(84, 40, 34, .08);
 }
 
-.book-page::before {
+.book-page::before,
+.book-page::after {
     content: "";
 
     position: absolute;
 
-    inset: 16px;
-
     pointer-events: none;
 
     border:
-        1px solid rgba(157, 95, 103, .16);
+        1px solid rgba(157, 95, 103, .15);
+}
+
+.book-page::before {
+    inset: 14px;
+}
+
+.book-page::after {
+    inset: 20px;
+
+    border-color:
+        rgba(157, 95, 103, .07);
 }
 
 .page-decoration {
     position: absolute;
 
-    top: 20px;
-
-    right: 28px;
+    top: 18px;
+    right: 24px;
 
     z-index: 3;
 
     color: #d97994;
 
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .page-label {
@@ -685,11 +695,11 @@ body.surat-page {
 
     color: #a36570;
 
-    font-size: 10px;
+    font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 
@@ -703,23 +713,25 @@ body.surat-page {
     z-index: 3;
 
     width:
-        min(82%, 300px);
+        min(78%,
+            265px);
 
     aspect-ratio:
         4 / 3;
 
     margin:
-        34px auto 12px;
+        28px auto 12px;
 
-    padding: 9px;
+    padding:
+        7px;
 
     background: #fff;
 
     box-shadow:
-        0 13px 25px rgba(72, 35, 31, .20);
+        0 11px 22px rgba(72, 35, 31, .18);
 
     transform:
-        rotate(-1.5deg);
+        rotate(-1.2deg);
 }
 
 .memory-photo::before {
@@ -728,12 +740,10 @@ body.surat-page {
     position: absolute;
 
     left: 50%;
+    top: -9px;
 
-    top: -11px;
-
-    width: 62px;
-
-    height: 19px;
+    width: 54px;
+    height: 16px;
 
     transform:
         translateX(-50%) rotate(-3deg);
@@ -746,7 +756,6 @@ body.surat-page {
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -756,16 +765,14 @@ body.surat-page {
     position: absolute;
 
     left: 0;
-
     right: 0;
-
-    bottom: -29px;
+    bottom: -24px;
 
     color: #a04661;
 
     text-align: center;
 
-    font-size: 14px;
+    font-size: 11px;
 
     font-style: italic;
 }
@@ -781,14 +788,14 @@ body.surat-page {
     z-index: 3;
 
     margin:
-        42px 0 18px;
+        34px 0 14px;
 
     color: #9d3158;
 
     font-size:
-        clamp(25px,
-            3vw,
-            34px);
+        clamp(23px,
+            2.6vw,
+            30px);
 
     font-weight: 500;
 
@@ -803,13 +810,13 @@ body.surat-page {
 
 .letter-text {
     margin:
-        0 0 14px;
+        0 0 11px;
 
     color: #6e5355;
 
-    font-size: 15px;
+    font-size: 13px;
 
-    line-height: 1.65;
+    line-height: 1.58;
 }
 
 .letter-text strong {
@@ -822,13 +829,13 @@ body.surat-page {
     z-index: 3;
 
     margin:
-        20px 0 0;
+        16px 0 0;
 
     color: #8f6068;
 
     text-align: right;
 
-    font-size: 14px;
+    font-size: 12px;
 
     font-style: italic;
 }
@@ -836,15 +843,14 @@ body.surat-page {
 .letter-sign span {
     color: #c84c78;
 
-    font-size: 19px;
+    font-size: 17px;
 }
 
 .page-number {
     position: absolute;
 
     left: 50%;
-
-    bottom: 16px;
+    bottom: 13px;
 
     z-index: 5;
 
@@ -853,9 +859,9 @@ body.surat-page {
 
     color: #a67b82;
 
-    font-size: 10px;
+    font-size: 9px;
 
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 
@@ -872,7 +878,7 @@ body.surat-page {
 
     overflow: hidden;
 
-    padding: 15px;
+    padding: 13px;
 
     border:
         2px solid rgba(231, 160, 178, .74);
@@ -891,8 +897,10 @@ body.surat-page {
 
     box-shadow:
         inset 8px 0 15px rgba(0, 0, 0, .20),
+
         inset 0 0 0 5px rgba(42, 7, 15, .34),
-        0 22px 35px rgba(0, 0, 0, .45);
+
+        0 20px 31px rgba(0, 0, 0, .40);
 
     transform:
         rotateY(0deg);
@@ -907,11 +915,18 @@ body.surat-page {
         hidden;
 
     transition:
-        transform 2.05s cubic-bezier(.62,
-            .03,
-            .20,
-            1);
+        transform 2.05s cubic-bezier(.62, .03, .20, 1);
 }
+
+.storybook.book-opening .book-cover {
+    transform:
+        rotateY(-168deg);
+}
+
+
+/* =========================================================
+   COVER CONTENT
+========================================================= */
 
 .cover-border {
     position: relative;
@@ -919,7 +934,6 @@ body.surat-page {
     z-index: 4;
 
     width: 100%;
-
     height: 100%;
 
     display: flex;
@@ -927,11 +941,10 @@ body.surat-page {
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     padding:
-        28px 45px 62px;
+        22px 34px 48px;
 
     border:
         1px solid rgba(255, 211, 222, .40);
@@ -941,39 +954,49 @@ body.surat-page {
 
 .cover-small {
     margin:
-        0 0 18px;
+        0 0 12px;
 
-    color: #f4ccd6;
+    color: #f0a9be;
 
-    font-size: 11px;
+    font-size: 8px;
 
-    font-weight: 800;
-
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 }
 
 .cover-heart {
-    color: #ff77a9;
+    color: #ff8bb3;
 
     font-size:
-        clamp(34px,
-            4vw,
-            54px);
+        clamp(28px,
+            3.2vw,
+            42px);
 
     text-shadow:
-        0 0 14px rgba(255, 83, 145, .65);
+        0 0 20px rgba(255, 97, 153, .42);
+
+    animation:
+        coverHeartBeat 1.8s ease-in-out infinite;
+}
+
+@keyframes coverHeartBeat {
+
+    50% {
+        transform:
+            scale(1.13);
+    }
+
 }
 
 .cover-border h2 {
     margin:
-        15px 0 10px;
+        14px 0;
 
-    color: #fff0f3;
+    color: #fff0f4;
 
     font-size:
-        clamp(42px,
-            6vw,
-            66px);
+        clamp(34px,
+            4.5vw,
+            50px);
 
     font-weight: 500;
 
@@ -981,47 +1004,38 @@ body.surat-page {
 }
 
 .cover-names {
-    margin: 0;
+    color: #ffc1d5;
 
-    color: #f5d9df;
+    font-size: 12px;
 
-    font-size: 16px;
-
-    font-style: italic;
-
-    letter-spacing: 3px;
-}
-
-.cover-names span {
-    margin:
-        0 9px;
-
-    color: #ff77a9;
+    letter-spacing: 2px;
 }
 
 .cover-line {
-    width: 80px;
-
+    width: 100px;
     height: 1px;
 
     margin:
-        18px 0;
+        14px 0;
 
     background:
-        rgba(255, 220, 229, .48);
+        linear-gradient(90deg,
+            transparent,
+            #df789c,
+            transparent);
 }
 
 .cover-description {
+    max-width: 390px;
+
     margin: 0;
 
     color:
-        rgba(255, 224, 231, .76);
+        rgba(255, 232, 239, .70);
 
-    font-size: 13px;
+    font-size: 9px;
 
-    font-style: italic;
-
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
 
@@ -1034,7 +1048,7 @@ body.surat-page {
 
     inset: 0;
 
-    z-index: 50;
+    z-index: 45;
 
     pointer-events: none;
 }
@@ -1042,90 +1056,58 @@ body.surat-page {
 .ribbon-vertical {
     position: absolute;
 
-    inset: 0;
-}
-
-.ribbon-vertical::before {
-    content: "";
-
-    position: absolute;
-
     left: 50%;
-
     top: 0;
 
-    width: 15px;
-
-    height: 10%;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        linear-gradient(90deg,
-            #b91d59,
-            #ed5b91 22%,
-            #ffc7d9 50%,
-            #ed5b91 78%,
-            #b91d59);
-}
-
-.ribbon-vertical::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 84%;
-
-    bottom: 0;
-
-    width: 15px;
+    width: 18px;
+    height: 100%;
 
     transform:
         translateX(-50%);
 
     background:
         linear-gradient(90deg,
-            #b91d59,
-            #ed5b91 22%,
-            #ffc7d9 50%,
-            #ed5b91 78%,
-            #b91d59);
+            #b9235a,
+            #ef72a1 24%,
+            #ffc2d5 50%,
+            #ef72a1 76%,
+            #b71e57);
+
+    box-shadow:
+        4px 0 10px rgba(0, 0, 0, .14),
+        -4px 0 10px rgba(0, 0, 0, .14);
 }
 
 .ribbon-horizontal {
     position: absolute;
 
     left: 0;
-
-    top: 84%;
+    top: 78%;
 
     width: 100%;
-
-    height: 16px;
+    height: 20px;
 
     transform:
         translateY(-50%);
 
     background:
         linear-gradient(180deg,
-            #ffbfd5,
-            #ee6498 42%,
-            #c52965);
+            #ffafc8,
+            #ef6598 45%,
+            #ba255a);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, .16);
 }
 
 .ribbon-bow {
     position: absolute;
 
     left: 50%;
+    top: 78%;
 
-    top: 84%;
-
-    width: 126px;
-
-    height: 90px;
+    width: 120px;
+    height: 100px;
 
     transform:
         translate(-50%, -50%);
@@ -1134,17 +1116,19 @@ body.surat-page {
 .ribbon-loop {
     position: absolute;
 
-    top: 13px;
+    top: 15px;
 
     width: 58px;
+    height: 40px;
 
-    height: 37px;
+    border-radius:
+        55% 50% 50% 55%;
 
     background:
         linear-gradient(145deg,
-            #ffacc7,
-            #e95086 60%,
-            #b51f58);
+            #ff9abc,
+            #e7447d 60%,
+            #ae194d);
 }
 
 .ribbon-loop-left {
@@ -1165,19 +1149,15 @@ body.surat-page {
     position: absolute;
 
     left: 50%;
+    top: 17px;
 
-    top: 15px;
-
-    width: 30px;
-
-    height: 33px;
+    width: 35px;
+    height: 41px;
 
     transform:
         translateX(-50%);
 
-    border-radius: 8px;
-
-    z-index: 5;
+    border-radius: 9px;
 
     background:
         linear-gradient(145deg,
@@ -1188,11 +1168,10 @@ body.surat-page {
 .ribbon-tail {
     position: absolute;
 
-    top: 43px;
+    top: 48px;
 
-    width: 29px;
-
-    height: 56px;
+    width: 30px;
+    height: 62px;
 
     background:
         linear-gradient(160deg,
@@ -1201,108 +1180,149 @@ body.surat-page {
 }
 
 .ribbon-tail-left {
-    left: 34px;
+    left: 32px;
 
     transform:
-        rotate(6deg);
+        rotate(7deg);
 }
 
 .ribbon-tail-right {
-    right: 34px;
+    right: 32px;
 
     transform:
-        rotate(-6deg);
-}
-
-.ribbon-release {
-    animation:
-        ribbonFade 1.1s ease forwards;
-}
-
-@keyframes ribbonFade {
-
-    0% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 1;
-
-        transform:
-            scale(.98);
-    }
-
-    100% {
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        transform:
-            translateY(25px) scale(.92);
-    }
-
-}
-
-.book-opening .book-cover {
-    transform:
-        rotateY(-168deg);
-
-    z-index: 25;
+        rotate(-7deg);
 }
 
 
 /* =========================================================
-   BUTTON
+   RIBBON RELEASE
+========================================================= */
+
+.love-ribbon.ribbon-release .ribbon-horizontal {
+    animation:
+        horizontalRelease .75s ease forwards;
+}
+
+.love-ribbon.ribbon-release .ribbon-vertical {
+    animation:
+        verticalRelease .75s ease forwards;
+}
+
+.love-ribbon.ribbon-release .ribbon-bow {
+    animation:
+        bowRelease .82s ease forwards;
+}
+
+.love-ribbon.ribbon-release {
+    animation:
+        ribbonFade .95s ease forwards;
+}
+
+@keyframes horizontalRelease {
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateY(-50%) translateX(120px) scaleX(.65);
+    }
+
+}
+
+@keyframes verticalRelease {
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateX(-50%) translateY(95px) scaleY(.75);
+    }
+
+}
+
+@keyframes bowRelease {
+
+    to {
+        opacity: 0;
+
+        transform:
+            translate(20%, 10%) rotate(20deg) scale(.80);
+    }
+
+}
+
+@keyframes ribbonFade {
+
+    0%,
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        visibility: hidden;
+    }
+
+}
+
+
+/* =========================================================
+   OPEN BUTTON
 ========================================================= */
 
 .open-book-button {
     position: relative;
 
-    z-index: 90;
+    z-index: 100;
 
-    margin-top: 22px;
+    margin-top: 18px;
+
+    min-width: 210px;
 
     padding:
-        14px 28px;
+        11px 22px;
 
     border:
-        1px solid rgba(255, 190, 215, .52);
+        1px solid rgba(255, 189, 213, .35);
 
-    border-radius: 50px;
+    border-radius: 40px;
 
     color: #fff;
 
     background:
         linear-gradient(135deg,
-            #e0447b,
-            #aa2257);
+            #cb3d6f,
+            #7e2346);
 
     font-family: inherit;
 
-    font-size: 13px;
+    font-size: 10px;
 
-    font-weight: 700;
+    letter-spacing: 1px;
 
     cursor: pointer;
 
     box-shadow:
-        0 12px 30px rgba(222, 54, 118, .28);
+        0 12px 25px rgba(114, 20, 57, .28);
 
     transition:
-        opacity .7s ease,
+        opacity .45s ease,
         transform .35s ease;
 }
 
 .open-book-button:hover {
     transform:
-        translateY(-3px);
+        translateY(-2px);
 }
 
 .open-book-button.button-hidden {
     opacity: 0;
 
     pointer-events: none;
+
+    transform:
+        translateY(8px);
 }
 
 
@@ -1313,319 +1333,267 @@ body.surat-page {
 .dove {
     position: absolute;
 
-    z-index: 220;
+    z-index: 80;
 
-    width: 116px;
-
-    height: 86px;
+    width: 90px;
+    height: 68px;
 
     opacity: 0;
 
-    visibility: visible;
-
     pointer-events: none;
 
-    filter:
-        drop-shadow(0 8px 12px rgba(0, 0, 0, .25)) drop-shadow(0 0 20px rgba(255, 255, 255, .48));
+    transition:
+        opacity .6s ease,
+        transform .8s ease;
+}
+
+.male-dove {
+    left: 31%;
+    top: 42%;
+
+    transform:
+        translate(-50%, -50%) scale(.75);
+}
+
+.female-dove {
+    left: 69%;
+    top: 42%;
+
+    transform:
+        translate(-50%, -50%) scaleX(-1) scale(.75);
+}
+
+.dove.dove-show {
+    opacity: 1;
 }
 
 .dove-body {
     position: absolute;
 
-    left: 36px;
+    left: 24px;
+    top: 25px;
 
-    top: 36px;
-
-    width: 55px;
-
-    height: 29px;
+    width: 45px;
+    height: 28px;
 
     border-radius:
-        58% 66% 50% 50%;
+        55% 60% 50% 50%;
 
     background:
         linear-gradient(145deg,
-            #fff,
-            #f4f3f5 48%,
-            #dad7db);
-}
+            #ffffff,
+            #e9e6ed);
 
-.dove-neck {
-    position: absolute;
-
-    left: 68px;
-
-    top: 28px;
-
-    width: 27px;
-
-    height: 27px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(145deg,
-            #fff,
-            #e7e4e8);
+    box-shadow:
+        0 0 18px rgba(255, 255, 255, .32);
 }
 
 .dove-head {
     position: absolute;
 
-    left: 80px;
-
+    left: 58px;
     top: 18px;
 
-    width: 28px;
-
-    height: 28px;
+    width: 21px;
+    height: 21px;
 
     border-radius: 50%;
 
-    background:
-        linear-gradient(145deg,
-            #fff,
-            #e7e4e8);
+    background: #fff;
 }
 
 .dove-eye {
     position: absolute;
 
-    left: 98px;
+    right: 5px;
+    top: 7px;
 
-    top: 28px;
-
-    width: 4px;
-
-    height: 4px;
-
-    z-index: 5;
+    width: 3px;
+    height: 3px;
 
     border-radius: 50%;
 
-    background: #32282c;
+    background: #422738;
 }
 
 .dove-beak {
     position: absolute;
 
-    left: 105px;
-
-    top: 29px;
+    right: -8px;
+    top: 8px;
 
     width: 0;
-
     height: 0;
 
     border-top:
-        6px solid transparent;
+        3px solid transparent;
 
     border-bottom:
-        6px solid transparent;
+        3px solid transparent;
 
     border-left:
-        14px solid #e9a25e;
+        9px solid #e3a36e;
 }
 
-.dove-tail {
+.dove-neck {
     position: absolute;
 
-    left: 19px;
+    left: 50px;
+    top: 28px;
 
-    top: 47px;
-
-    width: 34px;
-
+    width: 18px;
     height: 20px;
 
-    background:
-        linear-gradient(145deg,
-            #fff,
-            #d8d5d9);
+    border-radius: 50%;
 
-    clip-path:
-        polygon(100% 0,
-            0 15%,
-            30% 50%,
-            0 85%,
-            100% 100%);
+    background:
+        rgba(245, 245, 248, .9);
 }
 
 .dove-wing {
     position: absolute;
 
-    width: 70px;
+    left: 22px;
+    top: 12px;
 
-    height: 44px;
+    width: 35px;
+    height: 35px;
 
     border-radius:
-        92% 20% 88% 24%;
+        60% 15% 60% 25%;
 
     background:
         linear-gradient(145deg,
             #fff,
-            #e0dde1);
-}
-
-.wing-left {
-    left: 6px;
-
-    top: 7px;
+            #dcd8e3);
 
     transform-origin:
         right bottom;
 
     animation:
-        wingLeft .66s ease-in-out infinite;
+        wingBeat .55s ease-in-out infinite alternate;
 }
 
 .wing-right {
-    left: 38px;
-
-    top: 10px;
-
-    transform-origin:
-        left bottom;
-
-    animation:
-        wingRight .66s ease-in-out infinite;
-}
-
-@keyframes wingLeft {
-
-    0%,
-    100% {
-
-        transform:
-            rotate(-20deg);
-    }
-
-    50% {
-
-        transform:
-            rotate(-48deg) translateY(-5px);
-    }
-
-}
-
-@keyframes wingRight {
-
-    0%,
-    100% {
-
-        transform:
-            rotate(21deg);
-    }
-
-    50% {
-
-        transform:
-            rotate(47deg) translateY(-5px);
-    }
-
-}
-
-.male-dove {
-    left: 12%;
-
-    top: 46%;
+    left: 35px;
 
     transform:
-        translate(-50%, -50%) scale(1.06);
+        rotate(18deg);
 }
 
-.female-dove {
-    left: 88%;
+.dove-tail {
+    position: absolute;
 
-    top: 40%;
+    left: 8px;
+    top: 30px;
 
-    transform:
-        translate(-50%, -50%) scaleX(-1) scale(.82);
-}
-
-.female-dove .dove-body,
-
-.female-dove .dove-wing {
+    width: 27px;
+    height: 18px;
 
     background:
         linear-gradient(145deg,
-            #fff,
-            #f4eaf0);
+            #f8f8fb,
+            #d9d7df);
+
+    clip-path:
+        polygon(100% 30%,
+            0 0,
+            18% 50%,
+            0 100%,
+            100% 70%);
+}
+
+@keyframes wingBeat {
+
+    from {
+        transform:
+            rotate(-14deg);
+    }
+
+    to {
+        transform:
+            rotate(24deg);
+    }
+
 }
 
 
 /* =========================================================
-   DOVE APPEAR
+   DOVE MOVEMENT
 ========================================================= */
 
-.male-dove.dove-show {
+.male-dove.male-fly-to-female {
     animation:
-        maleAppear .85s cubic-bezier(.2,
-            .75,
-            .3,
-            1) forwards;
+        maleApproach 1.5s ease forwards;
 }
 
-.female-dove.dove-show {
-    animation:
-        femaleAppear .85s cubic-bezier(.2,
-            .75,
-            .3,
-            1) forwards;
-}
-
-@keyframes maleAppear {
-
-    from {
-
-        opacity: 0;
-
-        left: 8%;
-
-        top: 48%;
-
-        transform:
-            translate(-50%, -50%) scale(.72);
-    }
+@keyframes maleApproach {
 
     to {
-
-        opacity: 1;
-
-        left: 26%;
-
-        top: 46%;
-
-        transform:
-            translate(-50%, -50%) scale(1.06);
-    }
-
-}
-
-@keyframes femaleAppear {
-
-    from {
-
-        opacity: 0;
-
-        left: 94%;
-
-        top: 42%;
-
-        transform:
-            translate(-50%, -50%) scaleX(-1) scale(.65);
-    }
-
-    to {
-
-        opacity: 1;
-
-        left: 76%;
-
+        left: 46%;
         top: 40%;
+    }
 
-        transform:
-            translate(-50%, -50%) scaleX(-1) scale(.82);
+}
+
+.male-dove.fly-together {
+    animation:
+        flyAwayMale 5s ease-in-out forwards;
+}
+
+.female-dove.fly-together-female {
+    animation:
+        flyAwayFemale 5s ease-in-out forwards;
+}
+
+@keyframes flyAwayMale {
+
+    0% {
+        left: 46%;
+        top: 40%;
+    }
+
+    25% {
+        left: 39%;
+        top: 31%;
+    }
+
+    55% {
+        left: 55%;
+        top: 23%;
+    }
+
+    100% {
+        left: 115%;
+        top: 8%;
+
+        opacity: 0;
+    }
+
+}
+
+@keyframes flyAwayFemale {
+
+    0% {
+        left: 69%;
+        top: 42%;
+    }
+
+    25% {
+        left: 58%;
+        top: 32%;
+    }
+
+    55% {
+        left: 65%;
+        top: 23%;
+    }
+
+    100% {
+        left: 120%;
+        top: 9%;
+
+        opacity: 0;
     }
 
 }
@@ -1637,175 +1605,70 @@ body.surat-page {
 
 .carried-heart,
 .received-heart {
-
     position: absolute;
 
-    z-index: 240;
+    z-index: 95;
 
-    color: #ff3f89;
+    color: #ff5f9b;
 
-    font-size: 28px;
+    font-size: 19px;
 
     opacity: 0;
 
     text-shadow:
-        0 0 8px #ff3f8d,
-        0 0 18px rgba(255, 63, 141, .85),
-        0 0 34px rgba(255, 63, 141, .45);
+        0 0 10px #ff6da6,
+        0 0 22px rgba(255, 79, 145, .85);
 }
 
 .carried-heart {
-    left: 104px;
-
-    top: 48px;
+    left: 72px;
+    top: 17px;
 }
 
 .received-heart {
-    left: 101px;
-
-    top: 48px;
+    left: 14px;
+    top: 18px;
 }
 
 .carried-heart.heart-visible {
     opacity: 1;
-
-    animation:
-        heartPulse 1s ease-in-out infinite;
-}
-
-@keyframes heartPulse {
-
-    0%,
-    100% {
-
-        transform:
-            scale(1);
-    }
-
-    50% {
-
-        transform:
-            scale(1.3);
-    }
-
-}
-
-.male-dove.male-fly-to-female {
-    animation:
-        maleApproach 2s cubic-bezier(.45,
-            .05,
-            .25,
-            1) forwards;
-}
-
-@keyframes maleApproach {
-
-    0% {
-
-        opacity: 1;
-
-        left: 26%;
-
-        top: 46%;
-    }
-
-    30% {
-
-        left: 36%;
-
-        top: 34%;
-    }
-
-    60% {
-
-        left: 48%;
-
-        top: 29%;
-    }
-
-    80% {
-
-        left: 56%;
-
-        top: 34%;
-    }
-
-    100% {
-
-        opacity: 1;
-
-        left: 61%;
-
-        top: 40%;
-
-        transform:
-            translate(-50%, -50%) scale(.94);
-    }
-
 }
 
 .carried-heart.heart-transfer {
     animation:
-        transferHeart .9s ease-in-out forwards;
+        transferHeart .8s ease forwards;
 }
 
 @keyframes transferHeart {
 
     0% {
-
         opacity: 1;
 
         transform:
             translate(0, 0) scale(1);
     }
 
-    45% {
-
-        opacity: 1;
-
-        transform:
-            translate(36px, -16px) scale(1.45);
-    }
-
     100% {
-
         opacity: 0;
 
         transform:
-            translate(70px, 0) scale(.65);
+            translate(100px, -8px) scale(1.25);
     }
 
 }
 
 .received-heart.heart-received {
+    opacity: 1;
+
     animation:
-        receivedHeart 1s ease forwards;
+        receivedPulse 1.3s ease-in-out infinite;
 }
 
-@keyframes receivedHeart {
+@keyframes receivedPulse {
 
-    0% {
-
-        opacity: 0;
-
+    50% {
         transform:
-            scale(.2);
-    }
-
-    55% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.5);
-    }
-
-    100% {
-
-        opacity: 1;
-
-        transform:
-            scale(1);
+            scale(1.3);
     }
 
 }
@@ -1818,212 +1681,51 @@ body.surat-page {
 .flight-glow {
     position: absolute;
 
-    z-index: 150;
-
     left: 50%;
+    top: 41%;
 
-    top: 38%;
+    z-index: 70;
 
-    width: 400px;
-
-    height: 230px;
-
-    opacity: 0;
-
-    pointer-events: none;
+    width: 200px;
+    height: 100px;
 
     transform:
         translate(-50%, -50%);
 
     border-radius: 50%;
 
+    opacity: 0;
+
+    pointer-events: none;
+
     background:
-        radial-gradient(circle,
-            rgba(255, 106, 166, .32),
-            rgba(255, 93, 155, .12) 45%,
-            transparent 72%);
+        radial-gradient(ellipse,
+            rgba(255, 128, 174, .45),
+            transparent 70%);
 
     filter:
-        blur(8px);
-
-    transition:
-        opacity .7s ease;
+        blur(20px);
 }
 
 .flight-glow.glow-visible {
     opacity: 1;
-}
 
-
-/* =========================================================
-   FLY TOGETHER
-========================================================= */
-
-.male-dove.fly-together {
     animation:
-        maleFinalTogether 5s cubic-bezier(.35,
-            .04,
-            .17,
-            1) forwards;
+        flightGlowPulse 1.4s ease-in-out infinite;
 }
 
-.female-dove.fly-together-female {
-    animation:
-        femaleFinalTogether 5s cubic-bezier(.35,
-            .04,
-            .17,
-            1) forwards;
-}
-
-@keyframes maleFinalTogether {
-
-    0% {
-
-        left: 61%;
-
-        top: 40%;
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(.94);
-    }
-
-    15% {
-
-        left: 55%;
-
-        top: 34%;
-    }
-
-    30% {
-
-        left: 52%;
-
-        top: 29%;
-    }
+@keyframes flightGlowPulse {
 
     50% {
-
-        left: 61%;
-
-        top: 37%;
-    }
-
-    68% {
-
-        left: 72%;
-
-        top: 28%;
-    }
-
-    84% {
-
-        left: 88%;
-
-        top: 21%;
-
-        opacity: 1;
-    }
-
-    94% {
-
-        left: 103%;
-
-        top: 19%;
-
-        opacity: .8;
-    }
-
-    100% {
-
-        left: 109%;
-
-        top: 19%;
-
-        opacity: 0;
-
-        visibility: hidden;
-    }
-
-}
-
-@keyframes femaleFinalTogether {
-
-    0% {
-
-        left: 76%;
-
-        top: 40%;
-
-        opacity: 1;
-
         transform:
-            translate(-50%, -50%) scaleX(-1) scale(.82);
-    }
-
-    15% {
-
-        left: 65%;
-
-        top: 34%;
-    }
-
-    30% {
-
-        left: 58%;
-
-        top: 29%;
-    }
-
-    50% {
-
-        left: 66%;
-
-        top: 37%;
-    }
-
-    68% {
-
-        left: 77%;
-
-        top: 29%;
-    }
-
-    84% {
-
-        left: 91%;
-
-        top: 22%;
-
-        opacity: 1;
-    }
-
-    94% {
-
-        left: 106%;
-
-        top: 19%;
-
-        opacity: .8;
-    }
-
-    100% {
-
-        left: 112%;
-
-        top: 19%;
-
-        opacity: 0;
-
-        visibility: hidden;
+            translate(-50%, -50%) scale(1.25);
     }
 
 }
 
 
 /* =========================================================
-   TRAIL
+   FLIGHT TRAIL
 ========================================================= */
 
 .flight-trail {
@@ -2031,100 +1733,71 @@ body.surat-page {
 
     inset: 0;
 
-    z-index: 145;
+    z-index: 55;
 
     opacity: 0;
 
     pointer-events: none;
 }
 
+.flight-trail.trail-visible {
+    opacity: 1;
+}
+
 .flight-trail span {
     position: absolute;
 
-    width: 5px;
-
-    height: 5px;
-
-    border-radius: 50%;
-
-    background: #ff91ba;
-
-    box-shadow:
-        0 0 8px rgba(255, 120, 170, .8);
+    color:
+        rgba(255, 115, 166, .75);
 
     animation:
-        trailPulse 1.5s ease-in-out infinite;
+        trailHeart 3s ease forwards;
 }
 
 .flight-trail span:nth-child(1) {
-    left: 57%;
-    top: 38%;
+    left: 52%;
+    top: 42%;
 }
 
 .flight-trail span:nth-child(2) {
-    left: 65%;
-    top: 33%;
+    left: 58%;
+    top: 34%;
+
+    animation-delay: .3s;
 }
 
 .flight-trail span:nth-child(3) {
-    left: 74%;
+    left: 64%;
     top: 28%;
+
+    animation-delay: .6s;
 }
 
 .flight-trail span:nth-child(4) {
-    left: 83%;
-    top: 24%;
-}
-
-.flight-trail span:nth-child(5) {
-    left: 92%;
+    left: 70%;
     top: 21%;
+
+    animation-delay: .9s;
 }
 
-.flight-trail span:nth-child(6) {
-    left: 101%;
-    top: 19%;
-}
+@keyframes trailHeart {
 
-.flight-trail.trail-visible {
-    opacity: 1;
-
-    animation:
-        trailFade 5s ease forwards;
-}
-
-@keyframes trailPulse {
-
-    50% {
-
-        opacity: .4;
+    from {
+        opacity: 0;
 
         transform:
-            translateY(-9px) scale(1.3);
+            scale(.5);
     }
 
-}
-
-@keyframes trailFade {
-
-    0% {
-
-        opacity: 0;
-    }
-
-    15% {
-
+    30% {
         opacity: 1;
     }
 
-    82% {
-
-        opacity: .8;
-    }
-
-    100% {
-
+    to {
         opacity: 0;
+
+        transform:
+            translateY(-20px) scale(1.3);
     }
 
 }
@@ -2139,100 +1812,75 @@ body.surat-page {
 
     inset: 0;
 
-    z-index: 160;
+    z-index: 60;
 
     opacity: 0;
 
     pointer-events: none;
 }
 
+.flying-hearts.flying-hearts-visible {
+    opacity: 1;
+}
+
 .flying-hearts span {
     position: absolute;
 
-    color: #ff70a8;
+    color: #ff679f;
 
-    font-size: 12px;
+    opacity: 0;
 
     text-shadow:
-        0 0 9px rgba(255, 90, 160, .7);
+        0 0 12px rgba(255, 82, 145, .9);
 
     animation:
-        miniHeart 1.8s ease-in-out infinite;
+        flyingHeart 4.5s ease forwards;
 }
 
 .flying-hearts span:nth-child(1) {
-    left: 55%;
-    top: 36%;
+    left: 43%;
+    top: 45%;
 }
 
 .flying-hearts span:nth-child(2) {
-    left: 65%;
-    top: 31%;
+    left: 50%;
+    top: 36%;
+
+    animation-delay: .4s;
 }
 
 .flying-hearts span:nth-child(3) {
-    left: 76%;
-    top: 26%;
+    left: 58%;
+    top: 29%;
+
+    animation-delay: .8s;
 }
 
 .flying-hearts span:nth-child(4) {
-    left: 87%;
-    top: 21%;
+    left: 65%;
+    top: 20%;
+
+    animation-delay: 1.2s;
 }
 
-.flying-hearts span:nth-child(5) {
-    left: 100%;
-    top: 19%;
-}
-
-@keyframes miniHeart {
-
-    0%,
-    100% {
-
-        opacity: .3;
-
-        transform:
-            translateY(0) scale(.7);
-    }
-
-    50% {
-
-        opacity: 1;
-
-        transform:
-            translateY(-15px) scale(1.2);
-    }
-
-}
-
-.flying-hearts.flying-hearts-visible {
-    opacity: 1;
-
-    animation:
-        flyingHeartFade 5s ease forwards;
-}
-
-@keyframes flyingHeartFade {
+@keyframes flyingHeart {
 
     0% {
-
         opacity: 0;
+
+        transform:
+            scale(.5);
     }
 
-    15% {
-
+    20% {
         opacity: 1;
     }
 
-    82% {
-
-        opacity: .8;
-    }
-
     100% {
-
         opacity: 0;
+
+        transform:
+            translate(250px, -140px) rotate(25deg) scale(1.5);
     }
 
 }
@@ -2247,708 +1895,238 @@ body.surat-page {
 
     inset: 0;
 
-    z-index: 300;
+    z-index: 110;
 
     opacity: 0;
 
-    visibility: hidden;
-
     pointer-events: none;
 
-    overflow: visible;
+    transition:
+        opacity .8s ease;
 }
 
 .firework-finale.firework-show {
-    visibility: visible;
-
-    animation:
-        fireworkSceneIn .18s ease forwards;
+    opacity: 1;
 }
 
 .firework-finale.firework-hide {
-    animation:
-        fireworkSceneOut 1.1s ease forwards;
-}
-
-@keyframes fireworkSceneIn {
-
-    from {
-
-        opacity: 0;
-    }
-
-    to {
-
-        opacity: 1;
-    }
-
-}
-
-@keyframes fireworkSceneOut {
-
-    from {
-
-        opacity: 1;
-    }
-
-    to {
-
-        opacity: 0;
-
-        visibility: hidden;
-    }
-
-}
-
-
-/* =========================================================
-   LEDAKAN DI PINGGIR KANAN BUKU
-========================================================= */
-
-.firework-left {
-    left: 100%;
-
-    top: 22%;
-}
-
-.firework-center {
-    left: 106%;
-
-    top: 17%;
-}
-
-.firework-right {
-    left: 111%;
-
-    top: 24%;
+    opacity: 0;
 }
 
 .firework-burst {
     position: absolute;
 
-    width: 10px;
-
-    height: 10px;
-
-    transform:
-        translate(-50%, -50%);
-}
-
-.firework-burst::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 50%;
-
-    width: 19px;
-
-    height: 19px;
-
-    transform:
-        translate(-50%, -50%) scale(0);
+    width: 12px;
+    height: 12px;
 
     border-radius: 50%;
 
-    background: #fff9ef;
+    background: #ff8eb7;
 
     box-shadow:
-        0 0 12px #fff,
-        0 0 30px #fff,
-        0 0 55px #ff7dae,
-        0 0 90px rgba(255, 178, 104, .75);
+        0 0 22px rgba(255, 97, 159, .9);
 }
 
-.firework-show .firework-left::before {
-
-    animation:
-        explosionFlash 1.25s ease-out forwards;
+.firework-left {
+    left: 33%;
+    top: 30%;
 }
 
-.firework-show .firework-right::before {
-
-    animation:
-        explosionFlash 1.25s ease-out .10s forwards;
+.firework-center {
+    left: 50%;
+    top: 20%;
 }
 
-.firework-show .firework-center::before {
-
-    animation:
-        explosionFlash 1.35s ease-out .22s forwards;
+.firework-right {
+    left: 67%;
+    top: 30%;
 }
-
-@keyframes explosionFlash {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%) scale(.05);
-    }
-
-    16% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(3);
-    }
-
-    44% {
-
-        opacity: .95;
-
-        transform:
-            translate(-50%, -50%) scale(2);
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%) scale(.3);
-    }
-
-}
-
-
-/* =========================================================
-   FIREWORK PARTICLES
-========================================================= */
 
 .firework-burst span {
     position: absolute;
 
     left: 50%;
-
     top: 50%;
 
-    width: 8px;
-
-    height: 8px;
-
-    margin: -4px;
+    width: 5px;
+    height: 5px;
 
     border-radius: 50%;
 
-    opacity: 0;
-
-    background: #ff8bb8;
+    background: #ffd1e1;
 
     box-shadow:
-        0 0 8px #fff,
-        0 0 20px #ff65a1,
-        0 0 34px rgba(255, 184, 104, .8);
+        0 0 10px rgba(255, 108, 166, .9);
+
+    animation:
+        fireworkParticle 1.4s ease-out infinite;
 }
 
 .firework-burst span:nth-child(1) {
     --x: 0px;
-    --y: -105px;
-}
-
-.firework-burst span:nth-child(2) {
-    --x: 75px;
     --y: -75px;
 }
 
+.firework-burst span:nth-child(2) {
+    --x: 55px;
+    --y: -55px;
+}
+
 .firework-burst span:nth-child(3) {
-    --x: 105px;
+    --x: 75px;
     --y: 0px;
 }
 
 .firework-burst span:nth-child(4) {
-    --x: 75px;
-    --y: 75px;
+    --x: 55px;
+    --y: 55px;
 }
 
 .firework-burst span:nth-child(5) {
     --x: 0px;
-    --y: 105px;
-}
-
-.firework-burst span:nth-child(6) {
-    --x: -75px;
     --y: 75px;
 }
 
+.firework-burst span:nth-child(6) {
+    --x: -55px;
+    --y: 55px;
+}
+
 .firework-burst span:nth-child(7) {
-    --x: -105px;
+    --x: -75px;
     --y: 0px;
 }
 
 .firework-burst span:nth-child(8) {
-    --x: -75px;
-    --y: -75px;
+    --x: -55px;
+    --y: -55px;
 }
 
-.firework-show .firework-left span {
+@keyframes fireworkParticle {
 
-    animation:
-        explosionParticle 1.5s cubic-bezier(.13,
-            .72,
-            .15,
-            1) forwards;
-}
-
-.firework-show .firework-right span {
-
-    animation:
-        explosionParticle 1.5s cubic-bezier(.13,
-            .72,
-            .15,
-            1) .1s forwards;
-}
-
-.firework-show .firework-center span {
-
-    animation:
-        explosionParticle 1.55s cubic-bezier(.13,
-            .72,
-            .15,
-            1) .22s forwards;
-}
-
-@keyframes explosionParticle {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            translate(0, 0) scale(.1);
-    }
-
-    12% {
-
-        opacity: 1;
-    }
-
-    62% {
-
+    from {
         opacity: 1;
 
         transform:
-            translate(var(--x),
-                var(--y)) scale(1.15);
+            translate(-50%, -50%) scale(.8);
     }
 
-    100% {
-
+    to {
         opacity: 0;
 
         transform:
-            translate(var(--x),
-                var(--y)) scale(.15);
+            translate(calc(-50% + var(--x)),
+                calc(-50% + var(--y))) scale(.2);
     }
 
 }
 
 
 /* =========================================================
-   SPARKLES AFTER EXPLOSION
-========================================================= */
-
-.firework-sparkles {
-    position: absolute;
-
-    inset: 0;
-
-    overflow: visible;
-}
-
-.firework-sparkles i {
-    position: absolute;
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-
-    opacity: 0;
-
-    background: #fff8ef;
-
-    box-shadow:
-        0 0 8px #fff,
-        0 0 18px #ff75aa,
-        0 0 30px rgba(255, 112, 167, .7);
-}
-
-.firework-sparkles i:nth-child(1) {
-    left: 97%;
-    top: 21%;
-}
-
-.firework-sparkles i:nth-child(2) {
-    left: 100%;
-    top: 15%;
-}
-
-.firework-sparkles i:nth-child(3) {
-    left: 104%;
-    top: 14%;
-}
-
-.firework-sparkles i:nth-child(4) {
-    left: 108%;
-    top: 18%;
-}
-
-.firework-sparkles i:nth-child(5) {
-    left: 112%;
-    top: 16%;
-}
-
-.firework-sparkles i:nth-child(6) {
-    left: 115%;
-    top: 20%;
-}
-
-.firework-sparkles i:nth-child(7) {
-    left: 115%;
-    top: 28%;
-}
-
-.firework-sparkles i:nth-child(8) {
-    left: 112%;
-    top: 34%;
-}
-
-.firework-sparkles i:nth-child(9) {
-    left: 108%;
-    top: 37%;
-}
-
-.firework-sparkles i:nth-child(10) {
-    left: 103%;
-    top: 36%;
-}
-
-.firework-sparkles i:nth-child(11) {
-    left: 99%;
-    top: 31%;
-}
-
-.firework-sparkles i:nth-child(12) {
-    left: 96%;
-    top: 27%;
-}
-
-.firework-show .firework-sparkles i {
-
-    animation:
-        sparkleExplosion 1.8s ease-in-out .35s forwards;
-}
-
-.firework-sparkles i:nth-child(2n) {
-
-    animation-delay:
-        .43s !important;
-}
-
-.firework-sparkles i:nth-child(3n) {
-
-    animation-delay:
-        .50s !important;
-}
-
-@keyframes sparkleExplosion {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            scale(.1);
-    }
-
-    25% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.8);
-    }
-
-    65% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.1);
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            scale(.5);
-    }
-
-}
-
-
-/* =========================================================
-   FINAL LOVE + BAGAS ♥ SILMY
+   FINAL LOVE
 ========================================================= */
 
 .final-love {
     position: absolute;
 
-    /*
-       Dipindahkan keluar sedikit dari buku.
-       Jadi tidak menutupi tulisan surat.
-    */
+    left: 50%;
+    top: 35%;
 
-    left:
-        calc(100% + 105px);
+    z-index: 130;
 
-    top: 28%;
-
-    z-index: 320;
-
-    width: 260px;
-
-    height: 225px;
+    width: 300px;
+    height: 240px;
 
     transform:
-        translate(-50%, -50%) scale(.30);
+        translate(-50%, -50%) scale(.5);
 
     opacity: 0;
-
-    visibility: hidden;
 
     pointer-events: none;
 
     text-align: center;
+
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.final-love.final-love-show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%) scale(1);
+}
+
+.final-love.final-love-hide {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%) scale(1.08);
 }
 
 .heart-outline {
-    position: absolute;
+    position: relative;
 
-    left: 50%;
+    width: 210px;
+    height: 190px;
 
-    top: 43%;
-
-    width: 195px;
-
-    height: 180px;
-
-    transform:
-        translate(-50%, -50%);
+    margin: auto;
 }
 
 .heart-outline::before {
     content: "♡";
 
-    display: block;
+    position: absolute;
 
-    color: #ff8db6;
+    left: 50%;
+    top: 50%;
 
-    font-family:
-        Arial,
-        sans-serif;
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff79aa;
 
     font-size: 190px;
 
-    font-weight: 300;
-
-    line-height: 1;
-
     text-shadow:
-        0 0 7px #fff,
-        0 0 17px #ff83b1,
-        0 0 35px rgba(255, 74, 147, .92),
-        0 0 67px rgba(255, 70, 140, .50);
+        0 0 18px #ff6099,
+        0 0 45px rgba(255, 76, 142, .75);
 }
 
 .heart-glow {
     position: absolute;
 
     left: 50%;
+    top: 50%;
 
-    top: 43%;
-
-    width: 225px;
-
-    height: 190px;
+    width: 220px;
+    height: 200px;
 
     transform:
         translate(-50%, -50%);
-
-    z-index: -1;
 
     border-radius: 50%;
 
     background:
         radial-gradient(circle,
-            rgba(255, 91, 153, .35),
-            rgba(255, 85, 145, .13) 45%,
+            rgba(255, 81, 144, .30),
             transparent 72%);
 
     filter:
-        blur(14px);
-
-    animation:
-        heartGlowFinal 2s ease-in-out infinite;
-}
-
-@keyframes heartGlowFinal {
-
-    0%,
-    100% {
-
-        opacity: .6;
-
-        transform:
-            translate(-50%, -50%) scale(.92);
-    }
-
-    50% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1.08);
-    }
-
+        blur(18px);
 }
 
 .final-love p {
-    position: absolute;
+    margin-top: -20px;
 
-    left: 0;
+    color: #ffe3ed;
 
-    right: 0;
-
-    bottom: 2px;
-
-    margin: 0;
-
-    color: #fff2f6;
-
-    font-size: 18px;
+    font-size: 13px;
 
     font-style: italic;
 
-    font-weight: 600;
-
-    letter-spacing: 2px;
-
-    white-space: nowrap;
-
-    text-shadow:
-        0 0 12px rgba(255, 120, 168, .75),
-        0 0 28px rgba(255, 92, 151, .35);
-}
-
-.final-love p span {
-    margin:
-        0 6px;
-
-    color: #ff6eaa;
-}
-
-.final-love.final-love-show {
-    visibility: visible;
-
-    animation:
-        loveBornAtExplosion 1.5s cubic-bezier(.16,
-            .86,
-            .22,
-            1) forwards;
-}
-
-@keyframes loveBornAtExplosion {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%) scale(.10);
-
-        filter:
-            blur(18px);
-    }
-
-    25% {
-
-        opacity: .3;
-
-        transform:
-            translate(-50%, -50%) scale(.42);
-
-        filter:
-            blur(10px);
-    }
-
-    52% {
-
-        opacity: .8;
-
-        transform:
-            translate(-50%, -50%) scale(.80);
-
-        filter:
-            blur(4px);
-    }
-
-    76% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1.10);
-
-        filter:
-            blur(0);
-    }
-
-    100% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1);
-
-        filter:
-            blur(0);
-    }
-
-}
-
-.final-love.final-love-hide {
-    animation:
-        finalLoveDisappear 1.1s ease forwards;
-}
-
-@keyframes finalLoveDisappear {
-
-    0% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1);
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%) scale(1.06);
-
-        visibility: hidden;
-    }
-
+    letter-spacing: 1px;
 }
 
 
@@ -2961,15 +2139,14 @@ body.surat-page {
 
     z-index: 100;
 
-    margin-top: 24px;
+    margin-top: 18px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 15px;
+    gap: 12px;
 
     opacity: 0;
 
@@ -2993,10 +2170,10 @@ body.surat-page {
 }
 
 .story-controls button {
-    min-width: 125px;
+    min-width: 110px;
 
     padding:
-        11px 18px;
+        10px 15px;
 
     border:
         1px solid rgba(255, 189, 213, .31);
@@ -3012,13 +2189,9 @@ body.surat-page {
 
     font-family: inherit;
 
-    font-size: 11px;
+    font-size: 10px;
 
     cursor: pointer;
-
-    transition:
-        transform .25s ease,
-        opacity .25s ease;
 }
 
 .story-controls button:hover:not(:disabled) {
@@ -3040,11 +2213,10 @@ body.surat-page {
 
     text-align: center;
 
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .page-changing .book-page {
-
     opacity: .18;
 
     filter:
@@ -3059,33 +2231,45 @@ body.surat-page {
 .story-ending {
     position: relative;
 
-    min-height: 500px;
+    min-height: 420px;
 
     padding:
-        120px 25px 90px;
+        90px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
 
     text-align: center;
 
-    opacity: .3;
+    opacity: 0;
+
+    transform:
+        translateY(30px);
 
     transition:
-        opacity 1.4s ease;
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 .story-ending.ending-visible {
     opacity: 1;
+
+    transform:
+        translateY(0);
 }
 
 .ending-glow {
     position: absolute;
 
     left: 50%;
+    top: 50%;
 
-    top: 53%;
-
-    width: 520px;
-
-    height: 300px;
+    width: 380px;
+    height: 250px;
 
     transform:
         translate(-50%, -50%);
@@ -3094,43 +2278,51 @@ body.surat-page {
 
     background:
         radial-gradient(circle,
-            rgba(255, 107, 161, .20),
+            rgba(255, 70, 137, .18),
             transparent 70%);
+
+    filter:
+        blur(28px);
 }
 
 .story-ending>p {
     position: relative;
 
-    color: #db7499;
+    z-index: 2;
 
-    font-size: 10px;
+    color: #e486a5;
 
-    letter-spacing: 5px;
+    font-size: 9px;
+
+    letter-spacing: 4px;
 }
 
 .ending-heart {
     position: relative;
 
+    z-index: 2;
+
     margin:
-        28px 0;
+        22px 0;
 
     color: #ff6fa8;
 
-    font-size: 35px;
-
-    text-shadow:
-        0 0 17px rgba(255, 100, 160, .45);
+    font-size: 32px;
 }
 
 .story-ending h2 {
     position: relative;
 
+    z-index: 2;
+
+    margin: 0;
+
     color: #fff3f6;
 
     font-size:
-        clamp(37px,
-            5vw,
-            58px);
+        clamp(32px,
+            4.5vw,
+            50px);
 
     font-weight: 500;
 
@@ -3140,9 +2332,13 @@ body.surat-page {
 .story-ending>span {
     position: relative;
 
+    z-index: 2;
+
+    margin-top: 18px;
+
     color: #eaa6bd;
 
-    font-size: 17px;
+    font-size: 15px;
 
     font-style: italic;
 }
@@ -3152,31 +2348,101 @@ body.surat-page {
    TABLET
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 760px) {
 
-    .final-love {
-        left:
-            calc(100% + 35px);
-
-        width: 230px;
-
-        height: 200px;
+    .navbar {
+        padding:
+            0 18px;
     }
 
-    .heart-outline::before {
-        font-size: 165px;
+    .logo {
+        font-size: 15px;
     }
 
-    .firework-left {
-        left: 96%;
+    .nav-menu {
+        gap: 12px;
     }
 
-    .firework-center {
-        left: 100%;
+    .nav-menu a {
+        font-size: 9px;
     }
 
-    .firework-right {
-        left: 104%;
+    .love-page {
+        padding:
+            18px 10px 70px;
+    }
+
+    .book-scene {
+        min-height: 560px;
+    }
+
+    .storybook {
+        width: 88vw;
+        height: 388px;
+        min-height: 0;
+    }
+
+    .book-page {
+        padding:
+            23px 14px;
+    }
+
+    .memory-photo {
+        width:
+            min(78%,
+                220px);
+
+        margin-top: 24px;
+
+        padding: 7px;
+    }
+
+    .memory-photo span {
+        bottom: -22px;
+
+        font-size: 10px;
+    }
+
+    .right-page h2 {
+        margin:
+            28px 0 12px;
+
+        font-size: 24px;
+    }
+
+    .letter-text {
+        margin-bottom: 9px;
+
+        font-size: 11px;
+
+        line-height: 1.5;
+    }
+
+    .letter-sign {
+        font-size: 10px;
+    }
+
+    .cover-border {
+        padding:
+            18px 25px 42px;
+    }
+
+    .cover-border h2 {
+        font-size: 36px;
+    }
+
+    .cover-description {
+        font-size: 8px;
+    }
+
+    .dove {
+        transform:
+            translate(-50%, -50%) scale(.65);
+    }
+
+    .female-dove {
+        transform:
+            translate(-50%, -50%) scaleX(-1) scale(.65);
     }
 
 }
@@ -3188,559 +2454,465 @@ body.surat-page {
 
 @media (max-width: 520px) {
 
+    /* NAVBAR */
+
     .navbar {
+        min-height: 58px;
+
         padding:
-            10px 12px;
+            7px 8px;
 
-        flex-direction: column;
-
-        gap: 9px;
+        gap: 6px;
     }
 
     .logo {
-        font-size: 14px;
+        font-size: 11px;
     }
 
     .nav-menu {
-        width: 100%;
-
-        justify-content:
-            space-between;
-
         gap: 5px;
     }
 
     .nav-menu a {
-        font-size: 7.5px;
+        font-size: 6.8px;
     }
 
-    .love-page {
-        padding:
-            12px 8px 60px;
-    }
-
-    .love-intro h1 {
-        font-size: 39px;
-    }
-
-    .love-intro>p {
-        font-size: 7px;
-
-        letter-spacing: 3px;
-    }
-
-    .storybook {
-        width: 96vw;
-
-        height: 340px;
-
-        min-height: 0;
-    }
-
-    .book-page {
-        padding:
-            20px 13px;
-    }
-
-    .page-label {
-        font-size: 6px;
-
-        letter-spacing: 2px;
-    }
-
-    .memory-photo {
-        margin-top: 28px;
-
-        padding: 5px;
-    }
-
-    .memory-photo span {
-        bottom: -20px;
-
-        font-size: 8px;
-    }
-
-    .right-page h2 {
-        margin:
-            27px 0 10px;
-
-        font-size: 20px;
-    }
-
-    .letter-text {
-        margin-bottom: 7px;
-
-        font-size: 8px;
-
-        line-height: 1.5;
-    }
-
-    .letter-sign {
-        margin-top: 8px;
-
-        font-size: 8px;
-    }
-
-    .letter-sign span {
-        font-size: 11px;
-    }
-
-    .cover-border {
-        padding:
-            15px 18px 48px;
-    }
-
-    .cover-border h2 {
-        font-size: 33px;
-    }
-
-    .cover-description {
-        font-size: 7.5px;
-    }
-
-    .ribbon-horizontal,
-    .ribbon-bow {
-        top: 85%;
-    }
-
-    .ribbon-vertical::after {
-        top: 85%;
-    }
-
-    .ribbon-bow {
-        transform:
-            translate(-50%, -50%) scale(.58);
-    }
-
-    .open-book-button {
-        max-width: 90vw;
-
-        padding:
-            11px 16px;
+    #darkModeButton {
+        width: 27px;
+        height: 27px;
 
         font-size: 10px;
     }
 
-    .story-controls {
-        gap: 7px;
-    }
 
-    .story-controls button {
-        min-width: 88px;
+    /* PAGE */
+
+    .love-page {
+        min-height:
+            calc(100vh - 58px);
 
         padding:
-            8px 9px;
+            18px 5px 55px;
+    }
+
+    .love-intro {
+        margin-bottom: 8px;
+    }
+
+    .love-intro>p {
+        margin-bottom: 6px;
+
+        font-size: 6.5px;
+
+        letter-spacing: 3px;
+    }
+
+    .love-intro h1 {
+        font-size: 31px;
+    }
+
+    .love-intro>span {
+        margin-top: 7px;
+
+        font-size: 7px;
+
+        letter-spacing: .8px;
+    }
+
+
+    /* SCENE */
+
+    .book-scene {
+        width: 100%;
+
+        min-height: 470px;
+    }
+
+    .romantic-aura {
+        width: 95vw;
+        height: 360px;
+
+        top: 42%;
+    }
+
+
+    /* BOOK */
+
+    .storybook {
+        width: 92vw;
+        height: 306px;
+
+        min-height: 0;
+
+        margin-top: 15px;
+    }
+
+    .book-page {
+        padding:
+            13px 7px 15px;
+    }
+
+    .book-page::before {
+        inset: 8px;
+    }
+
+    .book-page::after {
+        inset: 12px;
+    }
+
+    .page-decoration {
+        top: 10px;
+        right: 11px;
+
+        font-size: 10px;
+    }
+
+    .page-label {
+        font-size: 5.8px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    /* FOTO */
+
+    .memory-photo {
+        width: 82%;
+
+        margin:
+            20px auto 7px;
+
+        padding: 5px;
+    }
+
+    .memory-photo::before {
+        top: -7px;
+
+        width: 40px;
+        height: 12px;
+    }
+
+    .memory-photo span {
+        bottom: -17px;
+
+        font-size: 7px;
+    }
+
+
+    /* TEXT */
+
+    .right-page h2 {
+        margin:
+            17px 0 7px;
+
+        font-size: 16px;
+    }
+
+    .letter-text {
+        margin-bottom: 5px;
+
+        font-size: 7px;
+
+        line-height: 1.38;
+    }
+
+    .letter-sign {
+        margin-top: 6px;
+
+        font-size: 7px;
+    }
+
+    .letter-sign span {
+        font-size: 10px;
+    }
+
+    .page-number {
+        bottom: 7px;
+
+        font-size: 6px;
+
+        letter-spacing: 1px;
+    }
+
+
+    /* COVER */
+
+    .book-cover {
+        padding: 8px;
+
+        border-width: 1px;
+    }
+
+    .cover-border {
+        padding:
+            10px 12px 32px;
+    }
+
+    .cover-small {
+        margin-bottom: 7px;
+
+        font-size: 5.5px;
+
+        letter-spacing: 2px;
+    }
+
+    .cover-heart {
+        font-size: 20px;
+    }
+
+    .cover-border h2 {
+        margin:
+            8px 0;
+
+        font-size: 26px;
+    }
+
+    .cover-names {
+        font-size: 8px;
+    }
+
+    .cover-line {
+        width: 60px;
+
+        margin:
+            8px 0;
+    }
+
+    .cover-description {
+        font-size: 6.5px;
+
+        line-height: 1.4;
+    }
+
+
+    /* RIBBON */
+
+    .ribbon-horizontal,
+    .ribbon-bow {
+        top: 82%;
+    }
+
+    .ribbon-bow {
+        transform:
+            translate(-50%, -50%) scale(.55);
+    }
+
+    .ribbon-vertical {
+        width: 12px;
+    }
+
+    .ribbon-horizontal {
+        height: 15px;
+    }
+
+
+    /* BUTTON */
+
+    .open-book-button {
+        min-width: 165px;
+
+        max-width: 82vw;
+
+        margin-top: 14px;
+
+        padding:
+            9px 13px;
 
         font-size: 8px;
     }
 
-    .story-controls span {
-        min-width: 42px;
 
-        font-size: 8px;
+    /* DOVES */
+
+    .dove {
+        width: 65px;
+        height: 50px;
+    }
+
+    .male-dove {
+        left: 30%;
+    }
+
+    .female-dove {
+        left: 70%;
     }
 
 
-    /*
-       Di HP final love sedikit masuk
-       supaya tidak keluar layar,
-       tapi tetap di sisi kanan buku.
-    */
+    /* FINAL LOVE */
 
     .final-love {
-        left: 96%;
+        top: 32%;
 
-        top: 24%;
-
-        width: 170px;
-
-        height: 155px;
+        width: 200px;
+        height: 175px;
     }
 
     .heart-outline {
-        width: 145px;
-
-        height: 135px;
+        width: 150px;
+        height: 140px;
     }
 
     .heart-outline::before {
-        font-size: 130px;
+        font-size: 135px;
     }
 
     .heart-glow {
-        width: 155px;
-
-        height: 145px;
+        width: 170px;
+        height: 150px;
     }
 
     .final-love p {
         font-size: 9px;
     }
 
-    .firework-left {
-        left: 91%;
 
-        top: 18%;
+    /* FIREWORK */
+
+    .firework-left {
+        left: 25%;
     }
 
     .firework-center {
-        left: 96%;
-
-        top: 15%;
+        left: 50%;
     }
 
     .firework-right {
-        left: 101%;
-
-        top: 21%;
+        left: 75%;
     }
 
-    .firework-burst span:nth-child(1) {
-        --x: 0px;
-        --y: -60px;
+
+    /* CONTROLS */
+
+    .story-controls {
+        width: 94vw;
+
+        margin:
+            13px auto 0;
+
+        gap: 5px;
     }
 
-    .firework-burst span:nth-child(2) {
-        --x: 42px;
-        --y: -42px;
+    .story-controls button {
+        min-width: 74px;
+
+        padding:
+            7px 8px;
+
+        font-size: 7px;
     }
 
-    .firework-burst span:nth-child(3) {
-        --x: 60px;
-        --y: 0px;
+    .story-controls span {
+        min-width: 55px;
+
+        font-size: 7px;
     }
 
-    .firework-burst span:nth-child(4) {
-        --x: 42px;
-        --y: 42px;
+
+    /* ENDING */
+
+    .story-ending {
+        min-height: 330px;
+
+        padding:
+            55px 13px;
     }
 
-    .firework-burst span:nth-child(5) {
-        --x: 0px;
-        --y: 60px;
+    .story-ending>p {
+        font-size: 6px;
+
+        letter-spacing: 2px;
     }
 
-    .firework-burst span:nth-child(6) {
-        --x: -42px;
-        --y: 42px;
+    .ending-heart {
+        margin:
+            15px 0;
+
+        font-size: 25px;
     }
 
-    .firework-burst span:nth-child(7) {
-        --x: -60px;
-        --y: 0px;
+    .story-ending h2 {
+        font-size: 28px;
+
+        line-height: 1.08;
     }
 
-    .firework-burst span:nth-child(8) {
-        --x: -42px;
-        --y: -42px;
-    }
+    .story-ending>span {
+        margin-top: 13px;
 
-}
-
-/* =========================================================
-   CINEMATIC ENDING POLISH
-========================================================= */
-
-.story-ending {
-    overflow: hidden;
-}
-
-
-/* aura ending lebih hidup */
-
-.story-ending .ending-glow {
-    width: 680px !important;
-    height: 400px !important;
-
-    background:
-        radial-gradient(circle,
-            rgba(255, 117, 170, .22) 0%,
-            rgba(210, 70, 130, .10) 38%,
-            transparent 72%) !important;
-
-    filter:
-        blur(18px);
-
-    animation:
-        endingAuraPulse 4.5s ease-in-out infinite;
-}
-
-@keyframes endingAuraPulse {
-
-    0%,
-    100% {
-        opacity: .60;
-
-        transform:
-            translate(-50%, -50%) scale(.94);
-    }
-
-    50% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1.06);
-    }
-
-}
-
-
-/* heart utama lebih cantik */
-
-.story-ending .ending-heart {
-    animation:
-        endingHeartBeat 2.2s ease-in-out infinite;
-
-    text-shadow:
-        0 0 8px #ff9abd,
-        0 0 22px rgba(255, 93, 155, .55),
-        0 0 48px rgba(255, 72, 145, .25);
-}
-
-@keyframes endingHeartBeat {
-
-    0%,
-    100% {
-        transform:
-            scale(1);
-    }
-
-    45% {
-        transform:
-            scale(1.14);
-    }
-
-    55% {
-        transform:
-            scale(1.07);
-    }
-
-}
-
-
-/* judul ending muncul cinematic */
-
-.story-ending h2 {
-    opacity: 0;
-
-    transform:
-        translateY(24px);
-
-    transition:
-        opacity 1.3s ease .25s,
-        transform 1.3s ease .25s;
-
-    text-shadow:
-        0 0 25px rgba(255, 160, 195, .10);
-}
-
-.story-ending.ending-visible h2 {
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-/* tulisan kecil atas */
-
-.story-ending>p {
-    opacity: 0;
-
-    transform:
-        translateY(12px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
-}
-
-.story-ending.ending-visible>p {
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-/* nama Bagas ♥ Silmy */
-
-.story-ending>span {
-    display: inline-block;
-
-    opacity: 0;
-
-    transform:
-        translateY(16px);
-
-    letter-spacing: 3px;
-
-    text-shadow:
-        0 0 14px rgba(255, 123, 169, .35);
-
-    transition:
-        opacity 1.3s ease .8s,
-        transform 1.3s ease .8s;
-}
-
-.story-ending.ending-visible>span {
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-/* =====================================
-   LOVE KECIL MUNCUL DI ENDING
-===================================== */
-
-.story-ending::before,
-.story-ending::after {
-    position: absolute;
-
-    z-index: 2;
-
-    color:
-        rgba(255, 115, 165, .45);
-
-    pointer-events: none;
-
-    opacity: 0;
-
-    text-shadow:
-        0 0 12px rgba(255, 95, 155, .35);
-}
-
-.story-ending::before {
-    content:
-        "♥   ·   ♥     ·      ♥";
-
-    left: 8%;
-
-    bottom: 16%;
-
-    font-size: 15px;
-
-    transform:
-        translateY(25px);
-
-    animation:
-        endingLoveLeft 6s ease-in-out infinite;
-}
-
-.story-ending::after {
-    content:
-        "♥      ·    ♥   ·   ♥";
-
-    right: 8%;
-
-    top: 20%;
-
-    font-size: 13px;
-
-    transform:
-        translateY(20px);
-
-    animation:
-        endingLoveRight 6.5s ease-in-out infinite;
-}
-
-.story-ending.ending-visible::before,
-.story-ending.ending-visible::after {
-    opacity: 1;
-}
-
-
-@keyframes endingLoveLeft {
-
-    0%,
-    100% {
-        transform:
-            translateY(18px);
-
-        opacity: .25;
-    }
-
-    50% {
-        transform:
-            translateY(-22px);
-
-        opacity: .75;
-    }
-
-}
-
-
-@keyframes endingLoveRight {
-
-    0%,
-    100% {
-        transform:
-            translateY(15px);
-
-        opacity: .22;
-    }
-
-    50% {
-        transform:
-            translateY(-28px);
-
-        opacity: .68;
-    }
-
-}
-
-
-/* =====================================
-   GOLD LINE DI BAWAH JUDUL
-===================================== */
-
-.story-ending h2::after {
-    content: "";
-
-    display: block;
-
-    width: 0;
-
-    height: 1px;
-
-    margin:
-        28px auto 0;
-
-    background:
-        linear-gradient(90deg,
-            transparent,
-            #cda56e,
-            transparent);
-
-    transition:
-        width 1.4s ease 1s;
-}
-
-.story-ending.ending-visible h2::after {
-    width: 90px;
-}
-
-
-/* =====================================
-   MOBILE
-===================================== */
-
-@media (max-width: 520px) {
-
-    .story-ending .ending-glow {
-        width: 420px !important;
-        height: 280px !important;
-    }
-
-    .story-ending::before,
-    .story-ending::after {
         font-size: 10px;
     }
 
-    .story-ending h2::after {
-        margin-top: 20px;
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .navbar {
+        padding:
+            7px 5px;
+    }
+
+    .logo {
+        font-size: 10px;
+    }
+
+    .nav-menu {
+        gap: 3px;
+    }
+
+    .nav-menu a {
+        font-size: 6px;
+    }
+
+    #darkModeButton {
+        width: 24px;
+        height: 24px;
+    }
+
+    .storybook {
+        width: 94vw;
+        height: 285px;
+    }
+
+    .book-page {
+        padding:
+            11px 5px 13px;
+    }
+
+    .memory-photo {
+        width: 80%;
+
+        margin-top: 18px;
+    }
+
+    .right-page h2 {
+        margin-top: 15px;
+
+        font-size: 14px;
+    }
+
+    .letter-text {
+        font-size: 6.2px;
+
+        line-height: 1.34;
+    }
+
+    .cover-border h2 {
+        font-size: 23px;
+    }
+
+    .cover-description {
+        font-size: 5.8px;
+    }
+
+    .story-controls button {
+        min-width: 67px;
+
+        font-size: 6.4px;
     }
 
 }

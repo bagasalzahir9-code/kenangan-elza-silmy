@@ -1,16 +1,18 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     min-height: 100%;
 }
-
 
 body.home-page {
     position: relative;
@@ -19,12 +21,12 @@ body.home-page {
 
     overflow-x: hidden;
 
+    color: #fff;
+
     font-family:
         Georgia,
         "Times New Roman",
         serif;
-
-    color: #fff;
 
     background:
         radial-gradient(circle at 50% 43%,
@@ -43,29 +45,32 @@ body.home-page {
 }
 
 
-/* =========================================
-   BACKGROUND
-========================================= */
+/* =========================================================
+   BACKGROUND TEXTURE
+========================================================= */
 
 body.home-page::before {
     content: "";
 
     position: fixed;
-
     inset: 0;
 
     pointer-events: none;
 
-    opacity: .2;
+    opacity: .18;
 
     background-image:
-        radial-gradient(rgba(255, 255, 255, .12) .6px,
+        radial-gradient(rgba(255, 255, 255, .13) .6px,
             transparent .6px);
 
     background-size:
         11px 11px;
 }
 
+
+/* =========================================================
+   BACKGROUND AURA
+========================================================= */
 
 .background-aura {
     position: fixed;
@@ -74,12 +79,10 @@ body.home-page::before {
 
     pointer-events: none;
 
-    filter:
-        blur(30px);
+    filter: blur(32px);
 
     opacity: .45;
 }
-
 
 .aura-one {
     left: -120px;
@@ -92,9 +95,8 @@ body.home-page::before {
         rgba(206, 54, 115, .18);
 
     animation:
-        auraFloatOne 8s ease-in-out infinite;
+        auraOne 8s ease-in-out infinite;
 }
-
 
 .aura-two {
     right: -130px;
@@ -107,46 +109,40 @@ body.home-page::before {
         rgba(152, 37, 86, .18);
 
     animation:
-        auraFloatTwo 9s ease-in-out infinite;
+        auraTwo 9s ease-in-out infinite;
 }
 
-
-@keyframes auraFloatOne {
+@keyframes auraOne {
 
     50% {
         transform:
-            translate(35px,
-                30px) scale(1.08);
+            translate(35px, 30px) scale(1.08);
+    }
+
+}
+
+@keyframes auraTwo {
+
+    50% {
+        transform:
+            translate(-35px, -25px) scale(1.08);
     }
 
 }
 
 
-@keyframes auraFloatTwo {
-
-    50% {
-        transform:
-            translate(-35px,
-                -25px) scale(1.08);
-    }
-
-}
-
-
-/* =========================================
+/* =========================================================
    FLOATING HEARTS
-========================================= */
+========================================================= */
 
 .floating-hearts {
     position: fixed;
-
     inset: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
-}
 
+    pointer-events: none;
+}
 
 .floating-hearts span {
     position: absolute;
@@ -161,64 +157,46 @@ body.home-page::before {
         floatingHeart 6s ease-in-out infinite;
 }
 
-
 .floating-hearts span:nth-child(1) {
     left: 7%;
     top: 18%;
-
     font-size: 13px;
 }
-
 
 .floating-hearts span:nth-child(2) {
     left: 15%;
     top: 70%;
-
     font-size: 20px;
-
     animation-delay: -2s;
 }
-
 
 .floating-hearts span:nth-child(3) {
     left: 29%;
     top: 8%;
-
     font-size: 8px;
-
     animation-delay: -3s;
 }
-
 
 .floating-hearts span:nth-child(4) {
     right: 8%;
     top: 22%;
-
     font-size: 18px;
-
     animation-delay: -1s;
 }
-
 
 .floating-hearts span:nth-child(5) {
     right: 16%;
     top: 72%;
-
     font-size: 10px;
-
     animation-delay: -4s;
 }
-
 
 .floating-hearts span:nth-child(6) {
     right: 28%;
     top: 12%;
-
     font-size: 8px;
-
     animation-delay: -2.5s;
 }
-
 
 @keyframes floatingHeart {
 
@@ -240,18 +218,16 @@ body.home-page::before {
 }
 
 
-/* =========================================
+/* =========================================================
    STARS
-========================================= */
+========================================================= */
 
 .background-stars {
     position: fixed;
-
     inset: 0;
 
     pointer-events: none;
 }
-
 
 .background-stars i {
     position: absolute;
@@ -272,68 +248,45 @@ body.home-page::before {
         starBlink 3s ease-in-out infinite;
 }
 
-
 .background-stars i:nth-child(1) {
     left: 9%;
     top: 31%;
 }
 
-
 .background-stars i:nth-child(2) {
     left: 22%;
     top: 16%;
-
-    animation-delay: -.8s;
 }
-
 
 .background-stars i:nth-child(3) {
     left: 31%;
     bottom: 14%;
-
-    animation-delay: -1.4s;
 }
-
 
 .background-stars i:nth-child(4) {
     right: 32%;
     top: 14%;
-
-    animation-delay: -.4s;
 }
-
 
 .background-stars i:nth-child(5) {
     right: 18%;
     top: 35%;
-
-    animation-delay: -2s;
 }
-
 
 .background-stars i:nth-child(6) {
     right: 9%;
     bottom: 21%;
-
-    animation-delay: -1s;
 }
-
 
 .background-stars i:nth-child(7) {
     left: 10%;
     bottom: 18%;
-
-    animation-delay: -2.3s;
 }
-
 
 .background-stars i:nth-child(8) {
     right: 36%;
     bottom: 9%;
-
-    animation-delay: -.5s;
 }
-
 
 @keyframes starBlink {
 
@@ -347,9 +300,9 @@ body.home-page::before {
 }
 
 
-/* =========================================
-   MAIN
-========================================= */
+/* =========================================================
+   HOME
+========================================================= */
 
 .home-container {
     position: relative;
@@ -368,25 +321,19 @@ body.home-page::before {
     flex-direction: column;
 
     justify-content: center;
-
     align-items: center;
 }
 
 
-/* =========================================
-   OPENING HEADER
-========================================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .opening-header {
     margin-bottom: 20px;
 
     text-align: center;
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
 }
-
 
 .opening-header p {
     margin-bottom: 8px;
@@ -404,7 +351,6 @@ body.home-page::before {
     letter-spacing: 5px;
 }
 
-
 .opening-header span {
     color:
         rgba(255, 228, 237, .43);
@@ -417,9 +363,9 @@ body.home-page::before {
 }
 
 
-/* =========================================
-   SCENE
-========================================= */
+/* =========================================================
+   BOOK SCENE
+========================================================= */
 
 .book-scene {
     position: relative;
@@ -432,9 +378,9 @@ body.home-page::before {
 }
 
 
-/* =========================================
+/* =========================================================
    BOOK
-========================================= */
+========================================================= */
 
 .book {
     position: relative;
@@ -442,16 +388,50 @@ body.home-page::before {
     width: 720px;
     height: 460px;
 
-    perspective: 2400px;
+    perspective: 2600px;
 
-    transform-style:
-        preserve-3d;
+    transform-style: preserve-3d;
+
+    transition:
+        transform .7s ease;
 }
 
 
-/* =========================================
-   INSIDE
-========================================= */
+/* =========================================================
+   BOOK OPENING LIFT
+========================================================= */
+
+.book.opening {
+    animation:
+        bookLift 1.7s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes bookLift {
+
+    0% {
+        transform:
+            translateY(0) scale(1);
+    }
+
+    45% {
+        transform:
+            translateY(-8px) scale(1.018);
+    }
+
+    100% {
+        transform:
+            translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   BOOK INSIDE
+
+   FIX UTAMA:
+   sebelum klik = benar-benar tidak terlihat
+========================================================= */
 
 .book-inside {
     position: absolute;
@@ -459,34 +439,67 @@ body.home-page::before {
     left: 50%;
     top: 0;
 
-    width: 310px;
+    z-index: 5;
+
+    width: 680px;
     height: 460px;
 
     display: flex;
 
     overflow: hidden;
 
-    transform:
-        translateX(-50%) scale(.985);
+    border-radius: 15px;
+
+    background:
+        transparent;
 
     opacity: 0;
 
-    border-radius: 15px;
+    visibility: hidden;
 
-    background: #f4e9de;
+    transform:
+        translateX(-50%) scale(.98);
+
+    box-shadow:
+        none;
+
+    pointer-events: none;
+
+    transition:
+        opacity .55s ease .35s,
+        transform .85s cubic-bezier(.22, 1, .36, 1) .30s,
+        visibility 0s linear .35s;
+}
+
+
+/*
+   BARU MUNCUL SAAT BUKU DIBUKA
+*/
+
+.book.opening .book-inside,
+.book.opened .book-inside {
+    visibility: visible;
+
+    opacity: 1;
+
+    transform:
+        translateX(-50%) scale(1);
+
+    pointer-events: auto;
+
+    background:
+        #f4e9de;
 
     box-shadow:
         0 32px 70px rgba(0, 0, 0, .32),
+
         inset 0 0 30px rgba(82, 42, 38, .10);
-
-    transition:
-        width 1.4s cubic-bezier(.22, 1, .36, 1),
-        opacity .38s ease,
-        transform 1.4s cubic-bezier(.22, 1, .36, 1);
-
-    z-index: 5;
 }
 
+
+/* =========================================================
+   SPINE
+========================================================= */
 
 .book-inside::after {
     content: "";
@@ -498,7 +511,7 @@ body.home-page::before {
 
     z-index: 15;
 
-    width: 10px;
+    width: 12px;
     height: 100%;
 
     transform:
@@ -508,21 +521,26 @@ body.home-page::before {
 
     background:
         linear-gradient(90deg,
-            rgba(88, 46, 42, .20),
-            rgba(255, 255, 255, .92),
-            rgba(88, 46, 42, .20));
+            rgba(88, 46, 42, .22),
+            rgba(255, 255, 255, .90),
+            rgba(88, 46, 42, .22));
 
     box-shadow:
-        0 0 12px rgba(80, 40, 35, .15);
+        0 0 14px rgba(80, 40, 35, .18);
 
     transition:
-        opacity .45s ease .5s;
+        opacity .6s ease .8s;
+}
+
+.book.opening .book-inside::after,
+.book.opened .book-inside::after {
+    opacity: 1;
 }
 
 
-/* =========================================
-   PAGE
-========================================= */
+/* =========================================================
+   PAGES
+========================================================= */
 
 .book-page {
     position: relative;
@@ -546,7 +564,7 @@ body.home-page::before {
     opacity: 0;
 
     transform:
-        scale(.985);
+        translateY(12px) scale(.99);
 
     background:
         radial-gradient(circle at 30% 15%,
@@ -557,10 +575,17 @@ body.home-page::before {
             #f4e7de);
 
     transition:
-        opacity .6s ease .25s,
-        transform .75s ease .2s;
+        opacity .65s ease .58s,
+        transform .75s cubic-bezier(.22, 1, .36, 1) .58s;
 }
 
+.book.opening .book-page,
+.book.opened .book-page {
+    opacity: 1;
+
+    transform:
+        translateY(0) scale(1);
+}
 
 .left-page {
     border-radius:
@@ -569,7 +594,6 @@ body.home-page::before {
     box-shadow:
         inset -15px 0 25px rgba(90, 49, 45, .07);
 }
-
 
 .right-page {
     justify-content: center;
@@ -581,7 +605,6 @@ body.home-page::before {
         inset 15px 0 25px rgba(90, 49, 45, .07);
 }
 
-
 .page-frame {
     position: absolute;
 
@@ -592,7 +615,6 @@ body.home-page::before {
 
     pointer-events: none;
 }
-
 
 .page-small {
     position: relative;
@@ -614,7 +636,6 @@ body.home-page::before {
     letter-spacing: 4px;
 }
 
-
 .page-number {
     position: absolute;
 
@@ -632,9 +653,9 @@ body.home-page::before {
 }
 
 
-/* =========================================
-   SCRAPBOOK
-========================================= */
+/* =========================================================
+   SCRAPBOOK PHOTO
+========================================================= */
 
 .scrapbook-card {
     position: relative;
@@ -644,7 +665,8 @@ body.home-page::before {
     padding:
         15px 15px 17px;
 
-    background: #fffaf6;
+    background:
+        #fffaf6;
 
     border:
         1px solid rgba(172, 118, 126, .09);
@@ -654,27 +676,17 @@ body.home-page::before {
 
     transform:
         rotate(-1.4deg);
-
-    transition:
-        transform .5s ease;
 }
-
-
-.book.opened .scrapbook-card:hover {
-    transform:
-        rotate(.7deg) scale(1.018);
-}
-
 
 .tape {
     position: absolute;
 
     top: -9px;
 
+    z-index: 5;
+
     width: 43px;
     height: 15px;
-
-    z-index: 5;
 
     opacity: .85;
 
@@ -684,14 +696,12 @@ body.home-page::before {
             rgba(215, 152, 166, .74));
 }
 
-
 .tape-left {
     left: 23px;
 
     transform:
         rotate(-8deg);
 }
-
 
 .tape-right {
     right: 23px;
@@ -700,96 +710,103 @@ body.home-page::before {
         rotate(8deg);
 }
 
-
 .photo-wrap {
     width: 100%;
     height: 195px;
 
     overflow: hidden;
 
-    background: #ebd6dd;
+    background:
+        #ebd6dd;
 }
 
-
 .photo-wrap img {
+    display: block;
+
     width: 100%;
     height: 100%;
 
-    display: block;
-
     object-fit: cover;
-
-    transition:
-        transform .8s cubic-bezier(.22, 1, .36, 1);
 }
-
-
-.book.opened .scrapbook-card:hover .photo-wrap img {
-    transform:
-        scale(1.035);
-}
-
 
 .photo-caption {
     margin-top: 12px;
 
-    color: #6e4e54;
+    color:
+        #6e4e54;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-style: italic;
+    font-style:
+        italic;
 
-    line-height: 1.55;
+    line-height:
+        1.55;
 }
-
 
 .left-note {
-    max-width: 225px;
+    max-width:
+        225px;
 
-    margin-top: 17px;
+    margin-top:
+        17px;
 
-    color: #8b6b70;
+    color:
+        #8b6b70;
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    line-height: 1.65;
+    line-height:
+        1.65;
 }
 
 
-/* =========================================
+/* =========================================================
    RIGHT PAGE
-========================================= */
+========================================================= */
 
 .right-heart {
-    margin-bottom: 9px;
+    margin-bottom:
+        9px;
 
-    color: #c8557b;
+    color:
+        #c8557b;
 
-    font-size: 16px;
+    font-size:
+        16px;
 
     text-shadow:
         0 0 9px rgba(200, 85, 123, .20);
 }
 
-
 .story-title {
-    margin-bottom: 14px;
+    margin-bottom:
+        14px;
 
-    color: #923858;
+    color:
+        #923858;
 
-    font-size: 36px;
+    font-size:
+        36px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    font-style: italic;
+    font-style:
+        italic;
 }
 
-
 .story-divider {
-    width: 76px;
-    height: 1px;
+    width:
+        76px;
 
-    margin-bottom: 18px;
+    height:
+        1px;
+
+    margin-bottom:
+        18px;
 
     background:
         linear-gradient(90deg,
@@ -798,35 +815,42 @@ body.home-page::before {
             transparent);
 }
 
-
 .story-paragraph {
-    max-width: 245px;
+    max-width:
+        245px;
 
-    margin-bottom: 13px;
+    margin-bottom:
+        13px;
 
-    color: #73585d;
+    color:
+        #73585d;
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    line-height: 1.65;
+    line-height:
+        1.65;
 }
-
 
 .last-paragraph {
-    margin-bottom: 18px;
+    margin-bottom:
+        18px;
 }
 
 
-/* =========================================
-   CONTINUE BUTTON
-========================================= */
+/* =========================================================
+   EXPLORE BUTTON
+========================================================= */
 
 .continue-button {
-    position: relative;
+    position:
+        relative;
 
-    z-index: 20;
+    z-index:
+        20;
 
-    margin-top: 2px;
+    margin-top:
+        2px;
 
     padding:
         10px 21px;
@@ -834,9 +858,11 @@ body.home-page::before {
     border:
         1px solid rgba(146, 53, 83, .22);
 
-    border-radius: 30px;
+    border-radius:
+        30px;
 
-    color: #fff;
+    color:
+        #fff;
 
     background:
         linear-gradient(135deg,
@@ -847,69 +873,64 @@ body.home-page::before {
         Georgia,
         serif;
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translateY(8px);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     box-shadow:
         0 8px 18px rgba(150, 50, 80, .14);
 
     transition:
         opacity .6s ease,
-        transform .6s ease,
-        box-shadow .3s ease;
+        transform .6s ease;
 }
-
-
-.continue-button span {
-    margin-left: 5px;
-}
-
-
-.continue-button:hover {
-    box-shadow:
-        0 12px 24px rgba(150, 50, 80, .24);
-
-    transform:
-        translateY(-2px);
-}
-
 
 .book.opened .continue-button {
-    opacity: 1;
+    opacity:
+        1;
 
     transform:
         translateY(0);
 
-    pointer-events: auto;
+    pointer-events:
+        auto;
 }
 
 
-/* =========================================
-   COVER
-========================================= */
+/* =========================================================
+   BOOK COVER
+========================================================= */
 
 .book-cover {
     position: absolute;
 
-    z-index: 20;
-
     top: 0;
     left: 50%;
 
-    width: 350px;
-    height: 460px;
+    z-index: 20;
 
-    margin-left: -175px;
+    width:
+        350px;
 
-    overflow: hidden;
+    height:
+        460px;
+
+    margin-left:
+        -175px;
+
+    overflow:
+        hidden;
 
     border:
         1px solid rgba(236, 195, 112, .94);
@@ -928,7 +949,9 @@ body.home-page::before {
 
     box-shadow:
         inset 9px 0 18px rgba(0, 0, 0, .26),
+
         inset 0 0 55px rgba(255, 110, 157, .08),
+
         0 30px 65px rgba(0, 0, 0, .42);
 
     transform-origin:
@@ -944,10 +967,29 @@ body.home-page::before {
         hidden;
 
     transition:
-        transform 1.65s cubic-bezier(.55, .03, .20, 1),
+        transform 1.65s cubic-bezier(.20, .82, .20, 1),
+
         box-shadow 1.2s ease;
 }
 
+
+/* =========================================================
+   OPEN COVER
+========================================================= */
+
+.book.opening .book-cover,
+.book.opened .book-cover {
+    transform:
+        rotateY(-168deg);
+
+    box-shadow:
+        -22px 18px 42px rgba(0, 0, 0, .22);
+}
+
+
+/* =========================================================
+   COVER SPINE
+========================================================= */
 
 .book-cover::before {
     content: "";
@@ -958,9 +1000,10 @@ body.home-page::before {
     top: 4%;
     bottom: 4%;
 
-    width: 11px;
-
     z-index: 4;
+
+    width:
+        11px;
 
     border-radius:
         6px 0 0 6px;
@@ -976,18 +1019,20 @@ body.home-page::before {
 }
 
 
-/* =========================================
+/* =========================================================
    COVER TEXTURE
-========================================= */
+========================================================= */
 
 .cover-texture {
     position: absolute;
 
     inset: 0;
 
-    opacity: .15;
+    opacity:
+        .15;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     background-image:
         radial-gradient(rgba(255, 255, 255, .25) .6px,
@@ -998,16 +1043,18 @@ body.home-page::before {
 }
 
 
-/* =========================================
+/* =========================================================
    GOLD FRAME
-========================================= */
+========================================================= */
 
 .gold-frame {
     position: absolute;
 
-    inset: 13px;
+    inset:
+        13px;
 
-    z-index: 4;
+    z-index:
+        4;
 
     border:
         1px solid rgba(236, 194, 103, .88);
@@ -1015,105 +1062,124 @@ body.home-page::before {
     border-radius:
         8px 16px 16px 8px;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
-
 
 .gold-frame-inner {
     position: absolute;
 
-    inset: 8px;
+    inset:
+        8px;
 
     border:
         1px solid rgba(255, 229, 170, .15);
 
-    border-radius: 6px;
+    border-radius:
+        6px;
 }
 
 
-/* =========================================
+/* =========================================================
    CORNERS
-========================================= */
+========================================================= */
 
 .corner {
     position: absolute;
 
-    z-index: 6;
+    z-index:
+        6;
 
     color:
         rgba(237, 194, 108, .65);
 
-    font-size: 9px;
+    font-size:
+        9px;
 }
-
 
 .corner-top-left {
-    left: 29px;
-    top: 28px;
-}
+    left:
+        29px;
 
+    top:
+        28px;
+}
 
 .corner-top-right {
-    right: 27px;
-    top: 28px;
-}
+    right:
+        27px;
 
+    top:
+        28px;
+}
 
 .corner-bottom-left {
-    left: 29px;
-    bottom: 28px;
-}
+    left:
+        29px;
 
+    bottom:
+        28px;
+}
 
 .corner-bottom-right {
-    right: 27px;
-    bottom: 28px;
+    right:
+        27px;
+
+    bottom:
+        28px;
 }
 
 
-/* =========================================
+/* =========================================================
    COVER TEXT
-========================================= */
+========================================================= */
 
 .cover-text {
     position: absolute;
 
     inset: 0;
 
-    z-index: 7;
+    z-index:
+        7;
 
     padding:
         40px 28px;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    text-align: center;
+    text-align:
+        center;
 
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translateY(8px) scale(.985);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
-
 
 .cover-text.show {
     animation:
         coverTextAppear .8s cubic-bezier(.22, 1, .36, 1) forwards;
 }
 
-
 @keyframes coverTextAppear {
 
     to {
-        opacity: 1;
+        opacity:
+            1;
 
         transform:
             translateY(0) scale(1);
@@ -1121,69 +1187,88 @@ body.home-page::before {
 
 }
 
-
 .cover-small {
-    margin-bottom: 14px;
+    margin-bottom:
+        14px;
 
-    color: #e8c784;
+    color:
+        #e8c784;
 
     font-family:
         Arial,
         sans-serif;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    letter-spacing: 4px;
+    letter-spacing:
+        4px;
 }
-
-
-/* COVER HEART */
 
 .cover-heart-wrap {
-    position: relative;
+    position:
+        relative;
 
-    width: 58px;
-    height: 48px;
+    width:
+        58px;
 
-    margin-bottom: 9px;
+    height:
+        48px;
 
-    display: flex;
+    margin-bottom:
+        9px;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: center;
+    align-items:
+        center;
+
+    justify-content:
+        center;
 }
 
-
 .cover-heart {
-    position: relative;
+    position:
+        relative;
 
-    z-index: 2;
+    z-index:
+        2;
 
-    color: #efbd73;
+    color:
+        #efbd73;
 
-    font-size: 24px;
+    font-size:
+        24px;
 
     animation:
         coverHeartbeat 2s ease-in-out infinite;
 }
 
-
 .cover-heart-glow {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 50%;
+    left:
+        50%;
 
-    width: 60px;
-    height: 60px;
+    top:
+        50%;
+
+    width:
+        60px;
+
+    height:
+        60px;
 
     transform:
         translate(-50%, -50%);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         radial-gradient(circle,
@@ -1194,7 +1279,6 @@ body.home-page::before {
         blur(6px);
 }
 
-
 @keyframes coverHeartbeat {
 
     50% {
@@ -1204,59 +1288,66 @@ body.home-page::before {
 
 }
 
-
 .cover-text h1 {
-    width: 100%;
+    width:
+        100%;
 
-    color: #ffe2a9;
+    color:
+        #ffe2a9;
 
-    font-size: 31px;
+    font-size:
+        31px;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    line-height: 1.15;
+    line-height:
+        1.15;
 
-    white-space: nowrap;
-
-    text-shadow:
-        0 3px 12px rgba(0, 0, 0, .22);
+    white-space:
+        nowrap;
 }
-
 
 .cover-text h1 span {
     margin:
         0 3px;
 
-    color: #eebb72;
+    color:
+        #eebb72;
 }
 
-
 .cover-ornament {
-    width: 120px;
+    width:
+        120px;
 
     margin:
         19px 0 15px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 8px;
+    gap:
+        8px;
 }
 
-
 .cover-ornament span {
-    width: 42px;
-    height: 1px;
+    width:
+        42px;
+
+    height:
+        1px;
 
     background:
         linear-gradient(90deg,
             transparent,
             #d6aa66);
 }
-
 
 .cover-ornament span:last-child {
     background:
@@ -1265,70 +1356,84 @@ body.home-page::before {
             transparent);
 }
 
-
 .cover-ornament b {
-    color: #dfb46d;
+    color:
+        #dfb46d;
 
-    font-size: 8px;
+    font-size:
+        8px;
 }
-
 
 .cover-text h2 {
-    color: #ffe0a5;
+    color:
+        #ffe0a5;
 
-    font-size: 29px;
+    font-size:
+        29px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    font-style: italic;
+    font-style:
+        italic;
 }
 
-
 .cover-description {
-    margin-top: 12px;
+    margin-top:
+        12px;
 
     color:
         rgba(255, 235, 219, .82);
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    line-height: 1.7;
+    line-height:
+        1.7;
 }
 
-
 .cover-year {
-    margin-top: 15px;
+    margin-top:
+        15px;
 
     color:
         rgba(234, 184, 107, .75);
 
-    font-size: 10px;
+    font-size:
+        10px;
 }
 
 
-/* =========================================
+/* =========================================================
    RIBBON
-========================================= */
+========================================================= */
 
 .ribbon {
     position: absolute;
 
     inset: 0;
 
-    z-index: 15;
+    z-index:
+        30;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
-
 
 .ribbon-vertical {
     position: absolute;
 
-    left: 50%;
-    top: 0;
+    left:
+        50%;
 
-    width: 19px;
-    height: 100%;
+    top:
+        0;
+
+    width:
+        19px;
+
+    height:
+        100%;
 
     transform:
         translateX(-50%);
@@ -1343,626 +1448,560 @@ body.home-page::before {
 
     box-shadow:
         4px 0 10px rgba(0, 0, 0, .14),
-        -4px 0 10px rgba(0, 0, 0, .09);
-}
 
+        -4px 0 10px rgba(0, 0, 0, .14);
+}
 
 .ribbon-horizontal {
     position: absolute;
 
     left: 0;
-    top: 50%;
 
-    width: 100%;
-    height: 21px;
+    top:
+        55%;
+
+    width:
+        100%;
+
+    height:
+        22px;
 
     transform:
         translateY(-50%);
 
     background:
         linear-gradient(180deg,
-            #ffc0d5,
-            #ef6799 45%,
-            #c82c66);
+            #ffafc8,
+            #ef6598 45%,
+            #ba255a);
 
     box-shadow:
-        0 5px 12px rgba(0, 0, 0, .20);
+        0 5px 12px rgba(0, 0, 0, .16);
 }
 
 
+/* =========================================================
+   BOW
+========================================================= */
+
 .ribbon-bow {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 50%;
+    left:
+        50%;
 
-    width: 170px;
-    height: 120px;
+    top:
+        55%;
+
+    width:
+        126px;
+
+    height:
+        105px;
 
     transform:
         translate(-50%, -50%);
-}
 
+    z-index:
+        4;
+}
 
 .bow-left,
 .bow-right {
-    position: absolute;
+    position:
+        absolute;
 
-    top: 17px;
+    top:
+        16px;
 
-    width: 80px;
-    height: 50px;
+    width:
+        60px;
+
+    height:
+        42px;
+
+    border-radius:
+        55% 50% 50% 55%;
 
     background:
         linear-gradient(145deg,
-            #ffa4c1,
-            #e4477e 62%,
-            #b71e57);
-
-    box-shadow:
-        0 8px 16px rgba(0, 0, 0, .20);
+            #ff9abc,
+            #e7447d 60%,
+            #ae194d);
 }
 
-
 .bow-left {
-    left: 5px;
-
-    border-radius:
-        90% 16% 80% 25%;
+    left: 0;
 
     transform:
         rotate(-13deg);
 }
 
-
 .bow-right {
-    right: 5px;
-
-    border-radius:
-        16% 90% 25% 80%;
+    right: 0;
 
     transform:
         rotate(13deg);
 }
 
-
 .bow-knot {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 20px;
+    left:
+        50%;
 
-    z-index: 5;
+    top:
+        18px;
 
-    width: 38px;
-    height: 42px;
+    z-index:
+        5;
+
+    width:
+        37px;
+
+    height:
+        43px;
 
     transform:
         translateX(-50%);
 
-    border-radius: 8px;
+    border-radius:
+        9px;
 
     background:
         linear-gradient(145deg,
-            #e94c82,
-            #a9184c);
+            #ef5a8e,
+            #a91a4d);
 }
 
-
 .bow-tail {
-    position: absolute;
+    position:
+        absolute;
 
-    top: 55px;
+    top:
+        50px;
 
-    width: 42px;
-    height: 89px;
+    width:
+        34px;
+
+    height:
+        70px;
 
     background:
         linear-gradient(160deg,
-            #fa72a2,
-            #c92763);
+            #ff7dac,
+            #c52864);
 }
-
 
 .bow-tail-left {
-    left: 49px;
+    left:
+        33px;
 
     transform:
-        rotate(6deg);
-
-    clip-path:
-        polygon(0 0,
-            100% 0,
-            80% 100%,
-            50% 78%,
-            20% 100%);
+        rotate(7deg);
 }
-
 
 .bow-tail-right {
-    right: 49px;
+    right:
+        33px;
 
     transform:
-        rotate(-6deg);
-
-    clip-path:
-        polygon(0 0,
-            100% 0,
-            80% 100%,
-            50% 78%,
-            20% 100%);
+        rotate(-7deg);
 }
 
 
-/* =========================================
+/* =========================================================
    RIBBON RELEASE
-========================================= */
-
-.ribbon.releasing {
-    animation:
-        ribbonFade .9s ease forwards;
-}
-
+========================================================= */
 
 .ribbon.releasing .ribbon-horizontal {
     animation:
-        horizontalRelease .75s cubic-bezier(.45, 0, .2, 1) forwards;
+        ribbonHorizontalRelease .9s ease forwards;
 }
-
 
 .ribbon.releasing .ribbon-vertical {
     animation:
-        verticalRelease .75s cubic-bezier(.45, 0, .2, 1) forwards;
+        ribbonVerticalRelease .9s ease forwards;
 }
-
 
 .ribbon.releasing .ribbon-bow {
     animation:
-        bowRelease .85s cubic-bezier(.3, 0, .2, 1) forwards;
+        ribbonBowRelease 1s ease forwards;
 }
 
+.ribbon.releasing {
+    animation:
+        ribbonFade 1.1s ease forwards;
+}
 
-@keyframes horizontalRelease {
+@keyframes ribbonHorizontalRelease {
 
     to {
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            translateY(-50%) translateX(130px) scaleX(.55);
+            translateY(-50%) translateX(150px);
     }
 
 }
 
-
-@keyframes verticalRelease {
+@keyframes ribbonVerticalRelease {
 
     to {
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            translateX(-50%) translateY(110px) scaleY(.70);
+            translateX(-50%) translateY(70px);
     }
 
 }
 
-
-@keyframes bowRelease {
+@keyframes ribbonBowRelease {
 
     to {
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            translate(35%, 18%) rotate(20deg) scale(.78);
+            translate(-15%, -15%) rotate(22deg) scale(.78);
     }
 
 }
-
 
 @keyframes ribbonFade {
 
     0%,
-    70% {
-        opacity: 1;
+    72% {
+        opacity:
+            1;
     }
 
     100% {
-        opacity: 0;
+        opacity:
+            0;
 
-        visibility: hidden;
+        visibility:
+            hidden;
     }
 
 }
 
 
-/* =========================================
-   OPEN BOOK
-========================================= */
-
-.book.opening .book-inside {
-    width: 670px;
-
-    opacity: 1;
-
-    transform:
-        translateX(-50%) scale(1);
-}
-
-
-.book.opening .book-inside::after {
-    opacity: 1;
-}
-
-
-.book.opening .book-page {
-    opacity: 1;
-
-    transform:
-        scale(1);
-}
-
-
-.book.opening .book-cover {
-    transform:
-        rotateY(-166deg);
-
-    box-shadow:
-        -18px 18px 30px rgba(0, 0, 0, .16);
-}
-
-
-/* =========================================
-   BOOK LIGHT
-========================================= */
+/* =========================================================
+   LIGHT
+========================================================= */
 
 .book-light {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 48%;
+    left:
+        50%;
 
-    z-index: 2;
+    top:
+        50%;
 
-    width: 500px;
-    height: 320px;
+    z-index:
+        18;
+
+    width:
+        170px;
+
+    height:
+        390px;
 
     transform:
-        translate(-50%, -50%) scale(.5);
+        translate(-50%, -50%) scale(.3);
 
-    border-radius: 50%;
+    opacity:
+        0;
 
-    opacity: 0;
-
-    pointer-events: none;
+    pointer-events:
+        none;
 
     background:
-        radial-gradient(circle,
-            rgba(255, 211, 226, .22),
-            rgba(232, 100, 149, .08) 43%,
+        radial-gradient(ellipse,
+            rgba(255, 236, 205, .92),
+            rgba(255, 159, 190, .36) 35%,
             transparent 72%);
 
     filter:
-        blur(16px);
+        blur(18px);
 }
-
 
 .book-light.show {
     animation:
-        bookGlow 2.3s ease forwards;
+        openingGlow 2.2s ease forwards;
 }
 
-
-@keyframes bookGlow {
+@keyframes openingGlow {
 
     0% {
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            translate(-50%, -50%) scale(.5);
+            translate(-50%, -50%) scale(.25);
     }
 
-    40% {
-        opacity: 1;
+    38% {
+        opacity:
+            1;
 
         transform:
-            translate(-50%, -50%) scale(1.08);
+            translate(-50%, -50%) scale(1.3);
     }
 
     100% {
-        opacity: .25;
+        opacity:
+            .10;
 
         transform:
-            translate(-50%, -50%) scale(1);
+            translate(-50%, -50%) scale(.9);
     }
 
 }
 
 
-/* =========================================
-   OPENING PARTICLES
-========================================= */
+/* =========================================================
+   PARTICLES
+========================================================= */
 
 .opening-particles {
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        -60px;
 
-    z-index: 45;
+    z-index:
+        40;
 
-    pointer-events: none;
+    pointer-events:
+        none;
+
+    opacity:
+        0;
 }
 
+.opening-particles.show {
+    opacity:
+        1;
+}
 
 .opening-particles span {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 50%;
-    top: 48%;
-
-    color: #ee8faf;
-
-    opacity: 0;
+    color:
+        #ffd0df;
 
     text-shadow:
-        0 0 10px rgba(238, 143, 175, .55);
-}
+        0 0 10px rgba(255, 122, 166, .9);
 
+    opacity:
+        0;
+}
 
 .opening-particles.show span {
     animation:
-        particleFly 2.3s ease-out forwards;
+        openingParticle 1.8s ease forwards;
 }
-
 
 .opening-particles span:nth-child(1) {
-    --x: -180px;
-    --y: -120px;
-
-    font-size: 12px;
+    left: 37%;
+    top: 45%;
 }
-
 
 .opening-particles span:nth-child(2) {
-    --x: -115px;
-    --y: -180px;
-
-    animation-delay: .08s;
+    left: 45%;
+    top: 20%;
+    animation-delay: .12s;
 }
-
 
 .opening-particles span:nth-child(3) {
-    --x: 165px;
-    --y: -115px;
-
-    font-size: 14px;
-
-    animation-delay: .14s;
+    left: 54%;
+    top: 38%;
+    animation-delay: .18s;
 }
-
 
 .opening-particles span:nth-child(4) {
-    --x: 115px;
-    --y: -180px;
-
-    animation-delay: .2s;
-}
-
-
-.opening-particles span:nth-child(5) {
-    --x: -190px;
-    --y: 80px;
-
-    font-size: 9px;
-
+    left: 61%;
+    top: 25%;
     animation-delay: .28s;
 }
 
-
-.opening-particles span:nth-child(6) {
-    --x: 190px;
-    --y: 70px;
-
+.opening-particles span:nth-child(5) {
+    left: 43%;
+    top: 70%;
     animation-delay: .34s;
 }
 
+.opening-particles span:nth-child(6) {
+    left: 58%;
+    top: 65%;
+    animation-delay: .42s;
+}
 
-@keyframes particleFly {
+@keyframes openingParticle {
 
     0% {
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            translate(-50%, -50%) scale(.3);
+            translateY(10px) scale(.5);
     }
 
-    30% {
-        opacity: .85;
+    35% {
+        opacity:
+            1;
     }
 
     100% {
-        opacity: 0;
+        opacity:
+            0;
 
         transform:
-            translate(calc(-50% + var(--x)),
-                calc(-50% + var(--y))) scale(1.2);
+            translateY(-80px) translateX(22px) scale(1.3);
     }
 
 }
 
 
-/* =========================================
+/* =========================================================
    OPEN BUTTON
-========================================= */
+========================================================= */
 
 .open-button {
-    position: relative;
+    position:
+        relative;
 
-    z-index: 60;
+    z-index:
+        50;
 
-    min-width: 225px;
-
-    margin-top: 27px;
+    margin-top:
+        28px;
 
     padding:
-        13px 27px;
+        13px 26px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
-
-    gap: 9px;
+    gap:
+        8px;
 
     border:
-        1px solid rgba(255, 192, 215, .35);
+        1px solid rgba(255, 190, 215, .42);
 
-    border-radius: 50px;
+    border-radius:
+        50px;
 
-    color: #fff;
+    color:
+        #fff;
 
     background:
         linear-gradient(135deg,
-            #e65e91,
-            #aa285d);
+            #d74275,
+            #93264e);
 
-    font-family:
-        Georgia,
-        serif;
+    font-size:
+        11px;
 
-    font-size: 13px;
-
-    font-weight: 600;
-
-    cursor: pointer;
+    cursor:
+        pointer;
 
     box-shadow:
-        0 13px 28px rgba(212, 48, 108, .24);
+        0 11px 28px rgba(168, 36, 86, .30);
 
     transition:
-        opacity .5s ease,
-        transform .3s ease,
-        box-shadow .3s ease;
+        opacity .55s ease,
+        transform .35s ease;
 }
-
-
-.open-button::before {
-    content: "";
-
-    position: absolute;
-
-    inset: -1px;
-
-    z-index: -1;
-
-    border-radius: inherit;
-
-    opacity: 0;
-
-    box-shadow:
-        0 0 28px rgba(239, 92, 147, .35);
-
-    transition:
-        opacity .3s ease;
-}
-
 
 .open-button:hover {
     transform:
         translateY(-3px);
-
-    box-shadow:
-        0 17px 34px rgba(212, 48, 108, .32);
 }
-
-
-.open-button:hover::before {
-    opacity: 1;
-}
-
-
-.button-heart {
-    animation:
-        buttonHeart 1.8s ease-in-out infinite;
-}
-
-
-@keyframes buttonHeart {
-
-    50% {
-        transform:
-            scale(1.25);
-    }
-
-}
-
 
 .open-button.hidden {
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translateY(8px);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 
-/* =========================================
+/* =========================================================
    STATUS
-========================================= */
+========================================================= */
 
 .story-status {
-    height: 18px;
+    height:
+        18px;
 
-    margin-top: 10px;
+    margin-top:
+        10px;
 
     color:
         rgba(255, 226, 235, .55);
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
-    opacity: 0;
+    opacity:
+        0;
 
     transition:
         opacity .35s ease;
 }
 
-
 .story-status.visible {
-    opacity: 1;
+    opacity:
+        1;
 }
 
-
 .opening-note {
-    margin-top: 5px;
+    margin-top:
+        5px;
 
     color:
         rgba(255, 230, 238, .25);
 
-    font-family:
-        Arial,
-        sans-serif;
+    font-size:
+        7px;
 
-    font-size: 7px;
+    letter-spacing:
+        2px;
 
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    transition:
-        opacity .5s ease;
+    text-transform:
+        uppercase;
 }
-
 
 .opening-note span {
-    color: #ce6089;
+    color:
+        #ce6089;
 }
 
 
-/* =========================================
+/* =========================================================
    PAGE LEAVING
-========================================= */
+========================================================= */
 
 body {
     transition:
@@ -1970,350 +2009,534 @@ body {
         transform .55s ease;
 }
 
-
 body.page-leaving {
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         scale(.985);
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 
-/* =========================================
+/* =========================================================
    TABLET
-========================================= */
+========================================================= */
 
 @media (max-width: 760px) {
 
-    .book {
-        width: 94vw;
-        height: 390px;
+    .home-container {
+        padding:
+            22px 8px 30px;
     }
 
+    .book {
+        width:
+            94vw;
+
+        height:
+            390px;
+    }
 
     .book-inside {
-        width: 270px;
-        height: 390px;
+        width:
+            91vw;
+
+        height:
+            390px;
     }
-
-
-    .book.opening .book-inside {
-        width: 91vw;
-    }
-
 
     .book-cover {
-        width: 290px;
-        height: 390px;
+        width:
+            290px;
 
-        margin-left: -145px;
+        height:
+            390px;
+
+        margin-left:
+            -145px;
     }
-
 
     .book-page {
         padding:
             28px 18px;
     }
 
-
     .scrapbook-card {
-        width: 185px;
+        width:
+            185px;
     }
-
 
     .photo-wrap {
-        height: 145px;
+        height:
+            145px;
     }
-
 
     .story-title {
-        font-size: 27px;
+        font-size:
+            27px;
     }
-
 
     .story-paragraph {
-        font-size: 10px;
+        font-size:
+            10px;
 
-        line-height: 1.55;
+        line-height:
+            1.55;
     }
-
 
     .cover-text h1 {
-        font-size: 25px;
+        font-size:
+            25px;
     }
 
-
     .cover-text h2 {
-        font-size: 25px;
+        font-size:
+            25px;
     }
 
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 520px) {
 
     .home-container {
-        padding:
-            20px 7px 25px;
-    }
+        min-height:
+            auto;
 
+        padding:
+            18px 4px 26px;
+    }
 
     .opening-header {
-        margin-bottom: 15px;
+        margin-bottom:
+            14px;
     }
-
 
     .opening-header p {
-        font-size: 6px;
+        font-size:
+            6px;
 
-        letter-spacing: 3px;
+        letter-spacing:
+            3px;
     }
-
 
     .opening-header span {
-        max-width: 300px;
+        max-width:
+            300px;
 
-        display: block;
+        display:
+            block;
 
-        font-size: 8px;
+        font-size:
+            8px;
 
-        line-height: 1.5;
+        line-height:
+            1.5;
     }
-
 
     .book {
-        width: 96vw;
-        height: 345px;
-    }
+        width:
+            96vw;
 
+        height:
+            345px;
+    }
 
     .book-inside {
-        width: 235px;
-        height: 345px;
+        width:
+            94vw;
+
+        height:
+            345px;
+
+        border-radius:
+            10px;
     }
-
-
-    .book.opening .book-inside {
-        width: 94vw;
-    }
-
 
     .book-cover {
-        width: 255px;
-        height: 345px;
+        width:
+            255px;
 
-        margin-left: -127.5px;
+        height:
+            345px;
+
+        margin-left:
+            -127.5px;
     }
-
 
     .book-page {
         padding:
-            22px 8px;
+            20px 7px;
     }
-
 
     .page-frame {
-        inset: 11px;
+        inset:
+            10px;
     }
-
 
     .page-small {
-        margin-bottom: 10px;
+        margin-bottom:
+            9px;
 
-        font-size: 6px;
+        font-size:
+            6px;
 
-        letter-spacing: 2px;
+        letter-spacing:
+            2px;
     }
-
 
     .scrapbook-card {
-        width: 142px;
+        width:
+            140px;
 
         padding:
-            9px 9px 11px;
+            9px;
     }
-
 
     .photo-wrap {
-        height: 105px;
+        height:
+            102px;
     }
-
 
     .photo-caption {
-        margin-top: 7px;
+        margin-top:
+            7px;
 
-        font-size: 9px;
+        font-size:
+            8.7px;
+
+        line-height:
+            1.35;
     }
-
 
     .left-note {
-        max-width: 140px;
+        max-width:
+            138px;
 
-        margin-top: 10px;
+        margin-top:
+            9px;
 
-        font-size: 7px;
+        font-size:
+            7px;
 
-        line-height: 1.5;
+        line-height:
+            1.45;
     }
-
 
     .right-heart {
-        margin-bottom: 4px;
+        margin-bottom:
+            4px;
 
-        font-size: 11px;
+        font-size:
+            11px;
     }
-
 
     .story-title {
-        margin-bottom: 7px;
+        margin-bottom:
+            7px;
 
-        font-size: 20px;
+        font-size:
+            20px;
     }
-
 
     .story-divider {
-        width: 50px;
+        width:
+            50px;
 
-        margin-bottom: 8px;
+        margin-bottom:
+            8px;
     }
-
 
     .story-paragraph {
-        max-width: 120px;
+        max-width:
+            120px;
 
-        margin-bottom: 6px;
+        margin-bottom:
+            6px;
 
-        font-size: 7.5px;
+        font-size:
+            7.3px;
 
-        line-height: 1.43;
+        line-height:
+            1.42;
     }
-
 
     .last-paragraph {
-        margin-bottom: 8px;
+        margin-bottom:
+            8px;
     }
-
 
     .continue-button {
         padding:
             7px 10px;
 
-        font-size: 7px;
+        font-size:
+            7px;
     }
-
 
     .cover-text {
         padding:
-            28px 18px;
+            26px 18px;
     }
-
 
     .cover-small {
-        margin-bottom: 8px;
+        margin-bottom:
+            8px;
 
-        font-size: 6px;
+        font-size:
+            6px;
 
-        letter-spacing: 3px;
+        letter-spacing:
+            3px;
     }
-
 
     .cover-heart-wrap {
-        width: 40px;
-        height: 35px;
+        width:
+            40px;
 
-        margin-bottom: 5px;
+        height:
+            35px;
     }
-
 
     .cover-heart {
-        font-size: 18px;
+        font-size:
+            18px;
     }
-
 
     .cover-text h1 {
-        font-size: 21px;
+        font-size:
+            22px;
     }
-
-
-    .cover-ornament {
-        width: 90px;
-
-        margin:
-            12px 0 10px;
-    }
-
-
-    .cover-ornament span {
-        width: 31px;
-    }
-
 
     .cover-text h2 {
-        font-size: 22px;
+        font-size:
+            23px;
     }
-
 
     .cover-description {
-        margin-top: 8px;
-
-        font-size: 8px;
+        font-size:
+            9px;
     }
-
-
-    .cover-year {
-        margin-top: 9px;
-    }
-
 
     .ribbon-bow {
         transform:
-            translate(-50%, -50%) scale(.72);
+            translate(-50%, -50%) scale(.80);
     }
-
 
     .open-button {
-        min-width: 190px;
-
-        margin-top: 20px;
+        margin-top:
+            20px;
 
         padding:
-            11px 19px;
+            10px 19px;
 
-        font-size: 10px;
-    }
-
-
-    .book-light {
-        width: 330px;
-        height: 220px;
+        font-size:
+            9px;
     }
 
 }
 
 
-/* =========================================
-   REDUCED MOTION
-========================================= */
+/* =========================================================
+   VERY SMALL PHONE
+========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 380px) {
 
-    *,
-    *::before,
-    *::after {
-        animation-duration:
-            .01ms !important;
+    .book {
+        width:
+            97vw;
 
-        animation-iteration-count:
-            1 !important;
+        height:
+            315px;
+    }
 
-        transition-duration:
-            .01ms !important;
+    .book-inside {
+        width:
+            95vw;
+
+        height:
+            315px;
+    }
+
+    .book-cover {
+        width:
+            230px;
+
+        height:
+            315px;
+
+        margin-left:
+            -115px;
+    }
+
+    .book-page {
+        padding:
+            17px 5px;
+    }
+
+    .scrapbook-card {
+        width:
+            123px;
+    }
+
+    .photo-wrap {
+        height:
+            88px;
+    }
+
+    .left-note {
+        max-width:
+            120px;
+
+        font-size:
+            6.3px;
+    }
+
+    .story-title {
+        font-size:
+            17px;
+    }
+
+    .story-paragraph {
+        max-width:
+            103px;
+
+        font-size:
+            6.4px;
+    }
+
+    .continue-button {
+        padding:
+            6px 7px;
+
+        font-size:
+            6px;
     }
 
 }
+
+/* FOTO KHUSUS BUKU HOME */
+
+.home-main-photo {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    animation:
+        softPhotoAppear 1.2s ease forwards;
+
+}
+
+
+@keyframes softPhotoAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(1.08);
+
+    }
+
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+/* gelombang halus foto */
+
+.photo-wrap {
+
+    overflow: hidden;
+
+}
+
+
+.photo-wrap:hover .home-main-photo {
+
+    transform:
+        scale(1.04);
+
+}
+
+/* PERBAIKAN FOTO DI BUKU HOME */
+.photo-wrap img,
+#memorySlideImage {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    display: block;
+}
+
+/* LATAR BELAKANG AREA FOTO */
+.photo-wrap {
+    overflow: hidden;
+    background: #f8eee9;
+}
+
+/* =========================
+   3 FOTO DI HALAMAN HOME
+========================= */
+
+.photo-wrap {
+    overflow: hidden;
+    background: #f8eee9;
+}
+
+.home-photo-grid {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.35fr 0.95fr;
+    gap: 8px;
+    padding: 10px;
+}
+
+.home-photo-item {
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f3e6df;
+    box-shadow: 0 6px 18px rgba(80, 30, 40, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-photo-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(80, 30, 40, 0.18);
+}
+
+.home-photo-item.large {
+    grid-column: 1 / 3;
+}
+
+.home-photo-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Kalau mau foto tidak terpotong,
+   ganti object-fit: cover; menjadi contain; */

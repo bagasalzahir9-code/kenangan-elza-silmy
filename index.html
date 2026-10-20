@@ -11,962 +11,2035 @@
 
 
     <style>
+        /* =========================================================
+   RESET
+========================================================= */
+
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-
         html,
         body {
-            margin: 0;
             width: 100%;
             height: 100%;
+        }
+
+        body {
             overflow: hidden;
 
-            background: #0e0308;
+            color: white;
 
             font-family:
                 Georgia,
                 "Times New Roman",
                 serif;
+
+            background:
+                #090305;
+        }
+
+        button,
+        input {
+            font-family: inherit;
         }
 
 
+        /* =========================================================
+   ACCESS
+========================================================= */
 
-        /* =====================================================
-           WEBSITE
-        ===================================================== */
-
-        #websiteFrame {
+        #accessScreen {
             position: fixed;
             inset: 0;
 
-            width: 100%;
-            height: 100%;
-
-            border: none;
-
-            opacity: 0;
-            visibility: hidden;
-
-            background: #0e0308;
-
-            transition:
-                opacity 1s ease,
-                visibility 1s ease;
-        }
-
-
-        body.unlocked #websiteFrame {
-            opacity: 1;
-            visibility: visible;
-        }
-
-
-
-        /* =====================================================
-           COMMON SCREEN
-        ===================================================== */
-
-        .gate-screen {
-            position: fixed;
-            inset: 0;
+            z-index: 10000;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            padding: 24px;
+            padding: 22px;
+
+            overflow-y: auto;
+
+            background:
+                radial-gradient(circle at 50% 10%,
+                    rgba(255, 72, 140, .18),
+                    transparent 30%),
+
+                radial-gradient(circle at 15% 85%,
+                    rgba(130, 24, 62, .18),
+                    transparent 33%),
+
+                linear-gradient(150deg,
+                    #18060c,
+                    #0c0307 55%,
+                    #050203);
+
+            transition:
+                opacity .8s ease,
+                visibility .8s ease,
+                transform .8s ease;
+        }
+
+
+        #accessScreen.hidden {
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transform:
+                scale(1.025);
+        }
+
+
+        /* background */
+
+        .access-bg {
+            position: absolute;
+
+            pointer-events: none;
+
+            color:
+                rgba(255, 115, 163, .10);
+
+            animation:
+                accessFloat 7s ease-in-out infinite;
+        }
+
+
+        .bg1 {
+            left: 8%;
+            top: 16%;
+        }
+
+        .bg2 {
+            right: 9%;
+            top: 22%;
+
+            animation-delay:
+                1s;
+        }
+
+        .bg3 {
+            left: 12%;
+            bottom: 15%;
+
+            animation-delay:
+                2s;
+        }
+
+        .bg4 {
+            right: 13%;
+            bottom: 18%;
+
+            animation-delay:
+                3s;
+        }
+
+
+        @keyframes accessFloat {
+
+            50% {
+                transform:
+                    translateY(-15px) rotate(12deg);
+
+                opacity: .8;
+            }
+
+        }
+
+
+        /* =========================================================
+   ACCESS CARD
+========================================================= */
+
+        .access-card {
+            position: relative;
+
+            width:
+                min(450px,
+                    100%);
+
+            padding:
+                40px 28px 32px;
+
+            text-align: center;
 
             overflow: hidden;
 
+            border:
+                1px solid rgba(255, 207, 220, .14);
+
+            border-radius:
+                30px;
+
             background:
-                radial-gradient(circle at 50% 30%,
-                    rgba(142, 29, 69, 0.35),
-                    transparent 36%),
-                radial-gradient(circle at 10% 90%,
-                    rgba(91, 12, 41, 0.23),
-                    transparent 32%),
                 linear-gradient(145deg,
-                    #070204,
-                    #190811 48%,
-                    #090205);
+                    rgba(62, 14, 31, .96),
+                    rgba(18, 5, 10, .98));
+
+            box-shadow:
+                0 35px 85px rgba(0, 0, 0, .62),
+
+                0 0 58px rgba(255, 64, 131, .06);
         }
 
 
-        .gate-screen::before {
-            content: "";
+        .private-label {
+            margin-bottom:
+                11px;
 
-            position: absolute;
-            inset: -30%;
+            color:
+                #cc9aa8;
 
-            background:
-                radial-gradient(circle,
-                    rgba(255, 184, 202, 0.08) 0 1px,
-                    transparent 1.5px);
+            font-size:
+                9px;
 
-            background-size: 44px 44px;
+            letter-spacing:
+                5px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .couple-name {
+            margin-bottom:
+                7px;
+
+            color:
+                #fff6f9;
+
+            font-size:
+                clamp(30px,
+                    7vw,
+                    43px);
+
+            font-weight:
+                normal;
+        }
+
+
+        .couple-name span {
+            display:
+                inline-block;
+
+            color:
+                #ff719f;
+
+            text-shadow:
+                0 0 17px rgba(255, 75, 136, .5);
 
             animation:
-                backgroundMove 18s linear infinite;
+                nameHeart 1.8s ease-in-out infinite;
         }
 
 
-        @keyframes backgroundMove {
+        @keyframes nameHeart {
+
+            50% {
+                transform:
+                    scale(1.13);
+            }
+
+        }
+
+
+        .little-story {
+            margin-bottom:
+                17px;
+
+            color:
+                #b98e9a;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                4px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        /* =========================================================
+   STEP
+========================================================= */
+
+        .step {
+            display:
+                none;
+        }
+
+
+        .step.active {
+            display:
+                block;
+
+            animation:
+                stepIn .7s ease both;
+        }
+
+
+        @keyframes stepIn {
 
             from {
-                transform: translateY(0);
+                opacity: 0;
+
+                transform:
+                    translateY(13px) scale(.98);
             }
 
             to {
-                transform: translateY(88px);
+                opacity: 1;
+
+                transform:
+                    translateY(0) scale(1);
             }
 
         }
 
 
+        /* =========================================================
+   QR
+========================================================= */
 
-        .gate-glow {
-            position: absolute;
+        .qr-stage {
+            position:
+                relative;
 
-            width: 520px;
-            height: 520px;
+            width:
+                340px;
 
-            border-radius: 50%;
+            max-width:
+                100%;
+
+            height:
+                315px;
+
+            margin:
+                0 auto;
+        }
+
+
+        .qr-aura {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                51%;
+
+            width:
+                280px;
+
+            height:
+                280px;
+
+            transform:
+                translate(-50%, -50%);
+
+            border-radius:
+                50%;
 
             background:
-                rgba(169, 32, 78, 0.13);
+                radial-gradient(circle,
+                    rgba(255, 70, 136, .27),
+                    rgba(255, 70, 136, .08) 40%,
+                    transparent 72%);
 
-            filter: blur(95px);
+            filter:
+                blur(24px);
 
             animation:
-                gateGlow 4s ease-in-out infinite;
+                auraPulse 3s ease-in-out infinite;
         }
 
 
-        @keyframes gateGlow {
-
-            0%,
-            100% {
-                opacity: 0.45;
-                transform: scale(0.9);
-            }
+        @keyframes auraPulse {
 
             50% {
+                transform:
+                    translate(-50%, -50%) scale(1.10);
+
                 opacity: 1;
-                transform: scale(1.12);
             }
 
         }
 
 
+        /* heart */
 
-        /* =====================================================
-           BARCODE SCREEN
-        ===================================================== */
+        .heart-svg {
+            position:
+                absolute;
 
-        #barcodeScreen {
-            z-index: 100000;
+            left:
+                50%;
 
-            opacity: 1;
-            visibility: visible;
+            top:
+                51%;
 
-            transition:
-                opacity 0.8s ease,
-                visibility 0.8s ease,
-                transform 0.8s ease;
+            z-index:
+                1;
+
+            width:
+                280px;
+
+            height:
+                255px;
+
+            overflow:
+                visible;
+
+            transform:
+                translate(-50%, -50%);
+
+            animation:
+                heartBreath 3.2s ease-in-out infinite;
         }
 
 
-        body.show-password #barcodeScreen {
-            opacity: 0;
-            visibility: hidden;
+        .heart-svg path {
+            fill:
+                rgba(255, 60, 123, .02);
 
-            transform: scale(1.05);
+            stroke:
+                rgba(255, 145, 182, .92);
 
-            pointer-events: none;
+            stroke-width:
+                2.4;
+
+            filter:
+                drop-shadow(0 0 5px rgba(255, 91, 149, .95)) drop-shadow(0 0 18px rgba(255, 67, 132, .48));
         }
 
 
+        @keyframes heartBreath {
 
-        .barcode-card {
-            position: relative;
-            z-index: 5;
+            50% {
+                transform:
+                    translate(-50%, -50%) scale(1.03);
+            }
 
-            width: min(430px, 100%);
+        }
 
-            padding:
-                44px 34px 36px;
 
-            text-align: center;
+        /* =========================================================
+   ORBIT
+========================================================= */
+
+        .orbit {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                51%;
+
+            z-index:
+                3;
+
+            border-radius:
+                50%;
+
+            pointer-events:
+                none;
+        }
+
+
+        .orbit1 {
+            width:
+                300px;
+
+            height:
+                154px;
+
+            margin-left:
+                -150px;
+
+            margin-top:
+                -77px;
 
             border:
-                1px solid rgba(255, 219, 199, 0.22);
-
-            border-radius: 28px;
-
-            background:
-                linear-gradient(145deg,
-                    rgba(61, 13, 31, 0.91),
-                    rgba(17, 4, 10, 0.97));
-
-            box-shadow:
-                0 34px 90px rgba(0, 0, 0, 0.62),
-
-                0 0 38px rgba(196, 48, 96, 0.09);
-
-            backdrop-filter: blur(18px);
-        }
-
-
-
-        .gate-small {
-            margin: 0 0 10px;
-
-            color: #d6aa9b;
-
-            font-size: 10px;
-
-            letter-spacing: 4px;
-
-            text-transform: uppercase;
-        }
-
-
-
-        .gate-title {
-            margin: 0;
-
-            color: #fff2ec;
-
-            font-size:
-                clamp(31px,
-                    7vw,
-                    46px);
-
-            font-weight: 500;
-        }
-
-
-        .gate-title span {
-            display: inline-block;
-
-            color: #ef668f;
+                1px solid rgba(255, 94, 151, .38);
 
             animation:
-                heartBeat 1.5s ease-in-out infinite;
+                orbitOne 7s linear infinite;
         }
 
 
-        @keyframes heartBeat {
+        .orbit2 {
+            width:
+                270px;
 
-            0%,
-            100% {
-                transform: scale(1);
+            height:
+                202px;
+
+            margin-left:
+                -135px;
+
+            margin-top:
+                -101px;
+
+            border:
+                1px solid rgba(255, 175, 204, .22);
+
+            animation:
+                orbitTwo 10s linear infinite reverse;
+        }
+
+
+        .orbit3 {
+            width:
+                318px;
+
+            height:
+                116px;
+
+            margin-left:
+                -159px;
+
+            margin-top:
+                -58px;
+
+            border:
+                1px solid rgba(255, 125, 170, .17);
+
+            animation:
+                orbitThree 13s linear infinite;
+        }
+
+
+        @keyframes orbitOne {
+
+            to {
+                transform:
+                    rotate(360deg);
             }
+
+        }
+
+
+        @keyframes orbitTwo {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        @keyframes orbitThree {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        .orbit-dot {
+            position:
+                absolute;
+
+            width:
+                7px;
+
+            height:
+                7px;
+
+            border-radius:
+                50%;
+
+            background:
+                #ff79a8;
+
+            box-shadow:
+                0 0 9px #ff79a8;
+        }
+
+
+        .orbit1 .orbit-dot {
+            left:
+                -3px;
+
+            top:
+                47%;
+        }
+
+
+        .orbit2 .orbit-dot {
+            right:
+                -3px;
+
+            top:
+                43%;
+        }
+
+
+        .orbit3 .orbit-dot {
+            left:
+                72%;
+
+            top:
+                -3px;
+        }
+
+
+        /* =========================================================
+   QR BOX
+========================================================= */
+
+        .qr-glass {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                51%;
+
+            z-index:
+                6;
+
+            width:
+                186px;
+
+            height:
+                186px;
+
+            padding:
+                10px;
+
+            overflow:
+                hidden;
+
+            transform:
+                translate(-50%, -50%);
+
+            border-radius:
+                25px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 16px 38px rgba(0, 0, 0, .30),
+
+                0 0 25px rgba(255, 105, 155, .28);
+        }
+
+
+        .qr-image {
+            display:
+                block;
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            border-radius:
+                14px;
+        }
+
+
+        .scan-beam {
+            position:
+                absolute;
+
+            left:
+                10px;
+
+            right:
+                10px;
+
+            top:
+                0;
+
+            z-index:
+                10;
+
+            height:
+                42px;
+
+            background:
+                linear-gradient(180deg,
+                    transparent,
+                    rgba(255, 87, 148, .25),
+                    transparent);
+
+            filter:
+                blur(3px);
+
+            animation:
+                scanBeam 2.6s ease-in-out infinite;
+        }
+
+
+        .scan-line {
+            position:
+                absolute;
+
+            left:
+                9px;
+
+            right:
+                9px;
+
+            top:
+                13px;
+
+            z-index:
+                11;
+
+            height:
+                3px;
+
+            border-radius:
+                100px;
+
+            background:
+                linear-gradient(90deg,
+                    transparent,
+                    #ff568f,
+                    white,
+                    #ff568f,
+                    transparent);
+
+            box-shadow:
+                0 0 8px #ff568f,
+
+                0 0 18px rgba(255, 64, 130, .95);
+
+            animation:
+                scanLine 2.6s ease-in-out infinite;
+        }
+
+
+        @keyframes scanBeam {
 
             50% {
-                transform: scale(1.13);
+                top:
+                    142px;
             }
 
         }
 
 
+        @keyframes scanLine {
 
-        .gate-description {
-            margin:
-                14px auto 28px;
+            50% {
+                top:
+                    169px;
+            }
 
-            max-width: 300px;
+        }
+
+
+        .qr-title {
+            margin-top:
+                -6px;
 
             color:
-                rgba(255, 239, 231, 0.65);
+                #f3cad6;
 
-            font-size: 13px;
+            font-size:
+                10px;
 
-            line-height: 1.7;
+            letter-spacing:
+                3px;
+
+            text-transform:
+                uppercase;
         }
 
 
-
-        /* =====================================================
-           REAL BARCODE LOOK
-        ===================================================== */
-
-        .barcode-wrap {
-            position: relative;
-
-            width: 280px;
-
-            max-width: 100%;
-
+        .qr-subtitle {
             margin:
-                0 auto 28px;
+                7px 0 21px;
+
+            color:
+                rgba(234, 198, 209, .54);
+
+            font-size:
+                9px;
         }
 
 
+        /* =========================================================
+   BUTTON
+========================================================= */
 
-        .barcode-box {
-            position: relative;
-
-            width: 100%;
-            height: 115px;
-
-            overflow: hidden;
-
-            border-radius: 13px;
-
-            border:
-                1px solid rgba(255, 223, 211, 0.18);
-
-            background:
-                rgba(255, 239, 233, 0.06);
-
-            box-shadow:
-                inset 0 0 25px rgba(255, 255, 255, 0.025),
-
-                0 12px 35px rgba(0, 0, 0, 0.22);
-        }
-
-
-
-        .barcode-lines {
-            position: absolute;
-
-            top: 16px;
-            left: 18px;
-            right: 18px;
-            bottom: 19px;
-
-            background:
-                repeating-linear-gradient(90deg,
-
-                    #ffe2db 0px,
-                    #ffe2db 2px,
-
-                    transparent 2px,
-                    transparent 5px,
-
-                    #ffe2db 5px,
-                    #ffe2db 9px,
-
-                    transparent 9px,
-                    transparent 12px,
-
-                    #ffe2db 12px,
-                    #ffe2db 13px,
-
-                    transparent 13px,
-                    transparent 18px,
-
-                    #ffe2db 18px,
-                    #ffe2db 24px,
-
-                    transparent 24px,
-                    transparent 27px,
-
-                    #ffe2db 27px,
-                    #ffe2db 29px,
-
-                    transparent 29px,
-                    transparent 34px);
-
-            opacity: 0.9;
-        }
-
-
-
-        .barcode-box::after {
-            content: "";
-
-            position: absolute;
-
-            left: 12px;
-            right: 12px;
-
-            height: 2px;
-
-            background: #ff7a9e;
-
-            box-shadow:
-                0 0 8px #ff789e,
-                0 0 18px rgba(255, 74, 126, 0.75);
-
-            animation:
-                barcodeScan 2.5s ease-in-out infinite;
-        }
-
-
-        @keyframes barcodeScan {
-
-            0% {
-                top: 12px;
-                opacity: 0;
-            }
-
-            15% {
-                opacity: 1;
-            }
-
-            85% {
-                opacity: 1;
-            }
-
-            100% {
-                top: 101px;
-                opacity: 0;
-            }
-
-        }
-
-
-
-        .barcode-number {
-            margin:
-                7px 0 0;
-
-            color: #c79c90;
-
-            font-family: monospace;
-
-            font-size: 10px;
-
-            letter-spacing: 5px;
-        }
-
-
-
-        .continue-button {
-            width: 100%;
+        .romantic-button {
+            width:
+                100%;
 
             padding:
-                14px 20px;
+                16px 20px;
 
             border:
-                1px solid rgba(255, 205, 180, 0.3);
+                1px solid rgba(255, 165, 190, .34);
 
-            border-radius: 14px;
+            border-radius:
+                50px;
+
+            cursor:
+                pointer;
+
+            color:
+                #fff5f8;
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                3px;
+
+            text-transform:
+                uppercase;
 
             background:
                 linear-gradient(135deg,
-                    #771c3d,
-                    #aa315b);
-
-            color: #fff7f2;
-
-            font-family: inherit;
-
-            font-size: 13px;
-
-            letter-spacing: 2px;
-
-            cursor: pointer;
+                    #93264a,
+                    #5c152d);
 
             box-shadow:
-                0 10px 27px rgba(90, 5, 36, 0.42);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
+                0 10px 28px rgba(106, 20, 49, .42);
         }
 
 
-        .continue-button:hover {
-            transform: translateY(-2px);
+        /* =========================================================
+   PASSWORD
+========================================================= */
 
-            box-shadow:
-                0 14px 32px rgba(115, 9, 47, 0.5);
-        }
-
-
-        .continue-button:active {
-            transform: scale(0.98);
-        }
-
-
-
-        /* =====================================================
-           PASSWORD SCREEN
-        ===================================================== */
-
-        #passwordScreen {
-            z-index: 99999;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transform: scale(0.96);
-
-            transition:
-                opacity 0.8s ease,
-                visibility 0.8s ease,
-                transform 0.8s ease;
-        }
-
-
-        body.show-password #passwordScreen {
-            opacity: 1;
-            visibility: visible;
-
-            transform: scale(1);
-        }
-
-
-        body.unlocked #passwordScreen {
-            opacity: 0;
-            visibility: hidden;
-
-            transform: scale(1.05);
-
-            pointer-events: none;
-        }
-
-
-
-        .password-card {
-            position: relative;
-            z-index: 5;
-
-            width: min(430px, 100%);
+        .password-stage {
+            position:
+                relative;
 
             padding:
-                43px 34px 34px;
-
-            text-align: center;
-
-            border:
-                1px solid rgba(255, 219, 199, 0.22);
-
-            border-radius: 28px;
-
-            background:
-                linear-gradient(145deg,
-                    rgba(61, 13, 31, 0.91),
-                    rgba(17, 4, 10, 0.97));
-
-            box-shadow:
-                0 34px 90px rgba(0, 0, 0, 0.62),
-
-                0 0 38px rgba(196, 48, 96, 0.09);
-
-            backdrop-filter: blur(18px);
+                5px 0;
         }
 
+
+        .password-aura {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                70px;
+
+            width:
+                190px;
+
+            height:
+                190px;
+
+            transform:
+                translateX(-50%);
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255, 75, 138, .12);
+
+            filter:
+                blur(40px);
+        }
 
 
         .password-heart {
-            margin:
-                5px auto 24px;
+            position:
+                relative;
 
-            color: #ff6f98;
+            width:
+                64px;
 
-            font-size: 70px;
-
-            line-height: 1;
-
-            text-shadow:
-                0 0 12px rgba(255, 95, 143, 0.6),
-
-                0 0 28px rgba(255, 68, 124, 0.42);
-
-            animation:
-                passwordHeart 1.5s ease-in-out infinite;
-        }
-
-
-        @keyframes passwordHeart {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-        }
-
-
-
-        .password-label {
-            display: block;
-
-            margin-bottom: 9px;
-
-            color: #ead3c8;
-
-            font-size: 12px;
-
-            letter-spacing: 1.2px;
-        }
-
-
-
-        .password-box {
-            position: relative;
-
-            width: 100%;
-        }
-
-
-
-        #passwordInput {
-            width: 100%;
-
-            padding:
-                15px 50px 15px 17px;
-
-            border-radius: 14px;
-
-            border:
-                1px solid rgba(255, 208, 190, 0.23);
-
-            outline: none;
-
-            background:
-                rgba(7, 1, 4, 0.54);
-
-            color: #fff5ef;
-
-            text-align: center;
-
-            font-family: inherit;
-
-            font-size: 16px;
-
-            letter-spacing: 3px;
-
-            transition:
-                border 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-
-        #passwordInput:focus {
-            border-color:
-                rgba(233, 106, 143, 0.65);
-
-            box-shadow:
-                0 0 0 3px rgba(233, 106, 143, 0.08);
-        }
-
-
-
-        .show-password {
-            position: absolute;
-
-            top: 50%;
-            right: 14px;
-
-            transform:
-                translateY(-50%);
-
-            border: none;
-
-            background: transparent;
-
-            color: #d0a092;
-
-            cursor: pointer;
-
-            font-size: 15px;
-        }
-
-
-
-        .unlock-button {
-            width: 100%;
-
-            margin-top: 14px;
-
-            padding:
-                14px 20px;
-
-            border:
-                1px solid rgba(255, 205, 180, 0.3);
-
-            border-radius: 14px;
-
-            background:
-                linear-gradient(135deg,
-                    #771c3d,
-                    #aa315b);
-
-            color: #fff7f2;
-
-            font-family: inherit;
-
-            font-size: 13px;
-
-            letter-spacing: 2px;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 10px 27px rgba(90, 5, 36, 0.42);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-
-        .unlock-button:hover {
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 14px 32px rgba(115, 9, 47, 0.5);
-        }
-
-
-        .unlock-button:active {
-            transform: scale(0.98);
-        }
-
-
-
-        .password-message {
-            min-height: 19px;
+            height:
+                64px;
 
             margin:
-                13px 0 0;
+                3px auto 19px;
 
-            color: #ff91aa;
+            display:
+                flex;
 
-            font-size: 12px;
+            align-items:
+                center;
 
-            opacity: 0;
+            justify-content:
+                center;
 
-            transition:
-                opacity 0.3s ease;
-        }
+            border:
+                1px solid rgba(255, 126, 167, .20);
 
-
-        .password-message.show {
-            opacity: 1;
-        }
-
-
-
-        .gate-footer {
-            margin-top: 19px;
+            border-radius:
+                50%;
 
             color:
-                rgba(232, 195, 181, 0.43);
+                #ff719f;
 
-            font-size: 10px;
+            background:
+                rgba(255, 111, 159, .10);
 
-            letter-spacing: 2px;
-        }
+            font-size:
+                29px;
 
-
-
-        /* =====================================================
-           WRONG PASSWORD
-        ===================================================== */
-
-        .password-card.shake {
             animation:
-                wrongPassword 0.42s ease;
+                passHeart 1.9s ease-in-out infinite;
         }
 
 
-        @keyframes wrongPassword {
+        @keyframes passHeart {
 
-            0%,
-            100% {
-                transform: translateX(0);
+            50% {
+                transform:
+                    scale(1.08);
+            }
+
+        }
+
+
+        .password-title {
+            margin-bottom:
+                7px;
+
+            color:
+                #fff4f7;
+
+            font-size:
+                27px;
+
+            font-weight:
+                normal;
+        }
+
+
+        .password-subtitle {
+            margin:
+                0 auto 24px;
+
+            color:
+                #b98d99;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.75;
+        }
+
+
+        .password-input {
+            width:
+                100%;
+
+            margin-bottom:
+                13px;
+
+            padding:
+                16px 20px;
+
+            border:
+                1px solid rgba(255, 179, 199, .20);
+
+            border-radius:
+                50px;
+
+            outline:
+                none;
+
+            color:
+                white;
+
+            text-align:
+                center;
+
+            font-size:
+                14px;
+
+            letter-spacing:
+                5px;
+
+            background:
+                rgba(255, 255, 255, .035);
+        }
+
+
+        .password-error {
+            min-height:
+                20px;
+
+            margin-top:
+                12px;
+
+            color:
+                #ff91ae;
+
+            font-size:
+                10px;
+
+            opacity:
+                0;
+        }
+
+
+        .password-error.show {
+            opacity:
+                1;
+        }
+
+
+        .back-button {
+            margin-top:
+                11px;
+
+            border:
+                none;
+
+            cursor:
+                pointer;
+
+            color:
+                #a77a87;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                2px;
+
+            background:
+                transparent;
+        }
+
+
+        /* =========================================================
+   TYPEWRITER
+========================================================= */
+
+        #typewriterScreen {
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                20000;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                28px;
+
+            opacity:
+                0;
+
+            background:
+                radial-gradient(circle,
+                    rgba(118, 21, 57, .30),
+                    transparent 42%),
+
+                #090305;
+
+            transition:
+                opacity .85s ease;
+        }
+
+
+        #typewriterScreen.show {
+            display:
+                flex;
+
+            opacity:
+                1;
+        }
+
+
+        #typewriterScreen.fade-out {
+            opacity:
+                0;
+        }
+
+
+        .typewriter-box {
+            position:
+                relative;
+
+            width:
+                min(760px,
+                    100%);
+
+            min-height:
+                260px;
+
+            padding:
+                60px 42px 45px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid rgba(255, 185, 207, .15);
+
+            border-radius:
+                30px;
+
+            text-align:
+                center;
+
+            background:
+                rgba(55, 11, 28, .50);
+        }
+
+
+        .typewriter-label {
+            position:
+                absolute;
+
+            top:
+                27px;
+
+            left:
+                50%;
+
+            transform:
+                translateX(-50%);
+
+            color:
+                rgba(255, 183, 205, .52);
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                5px;
+        }
+
+
+        #typewriterText {
+            max-width:
+                650px;
+
+            color:
+                #fff0f5;
+
+            font-size:
+                clamp(19px,
+                    3vw,
+                    29px);
+
+            line-height:
+                1.85;
+        }
+
+
+        .love-final {
+            color:
+                #ff82aa;
+
+            text-shadow:
+                0 0 20px rgba(255, 98, 151, .45);
+        }
+
+
+        .type-cursor {
+            color:
+                #ff7ba7;
+
+            animation:
+                cursorBlink .72s infinite;
+        }
+
+
+        @keyframes cursorBlink {
+
+            50% {
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =========================================================
+   GIFT SCREEN
+========================================================= */
+
+        #giftScreen {
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                21000;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            opacity:
+                0;
+
+            background:
+                radial-gradient(circle,
+                    rgba(123, 23, 59, .30),
+                    transparent 42%),
+
+                #080204;
+
+            transition:
+                opacity .8s ease;
+        }
+
+
+        #giftScreen.show {
+            display:
+                flex;
+
+            opacity:
+                1;
+        }
+
+
+        #giftScreen.fade-out {
+            opacity:
+                0;
+        }
+
+
+        .gift-stage {
+            position:
+                relative;
+
+            width:
+                min(760px,
+                    100%);
+
+            height:
+                520px;
+        }
+
+
+        /* =========================================================
+   DOVES
+========================================================= */
+
+        .dove {
+            position:
+                absolute;
+
+            top:
+                38%;
+
+            z-index:
+                5;
+
+            opacity:
+                0;
+
+            font-size:
+                60px;
+
+            filter:
+                drop-shadow(0 0 12px rgba(255, 255, 255, .20));
+        }
+
+
+        .dove-left {
+            left:
+                -120px;
+
+            transform:
+                scaleX(-1);
+
+            animation:
+                doveEnterLeft 2.35s ease forwards;
+        }
+
+
+        .dove-right {
+            right:
+                -120px;
+
+            animation:
+                doveEnterRight 2.35s ease forwards;
+        }
+
+
+        @keyframes doveEnterLeft {
+
+            to {
+                left:
+                    24%;
+
+                opacity:
+                    1;
+            }
+
+        }
+
+
+        @keyframes doveEnterRight {
+
+            to {
+                right:
+                    24%;
+
+                opacity:
+                    1;
+            }
+
+        }
+
+
+        .dove-left.roam {
+            animation:
+                doveRoamLeft 4.2s ease-in-out infinite !important;
+        }
+
+
+        .dove-right.roam {
+            animation:
+                doveRoamRight 4.2s ease-in-out infinite !important;
+        }
+
+
+        @keyframes doveRoamLeft {
+
+            0% {
+                left: 24%;
+                top: 38%;
             }
 
             20% {
-                transform: translateX(-8px);
+                left: 7%;
+                top: 16%;
             }
 
             40% {
-                transform: translateX(8px);
+                left: 19%;
+                top: 55%;
             }
 
             60% {
-                transform: translateX(-5px);
+                left: 3%;
+                top: 39%;
             }
 
             80% {
-                transform: translateX(5px);
+                left: 18%;
+                top: 12%;
+            }
+
+            100% {
+                left: 24%;
+                top: 38%;
             }
 
         }
 
 
+        @keyframes doveRoamRight {
 
-        /* =====================================================
-           SPEAKER
-        ===================================================== */
+            0% {
+                right: 24%;
+                top: 38%;
+            }
 
-        .speaker-control {
-            position: fixed;
+            20% {
+                right: 7%;
+                top: 17%;
+            }
 
-            right: 16px;
-            bottom: 16px;
+            40% {
+                right: 18%;
+                top: 56%;
+            }
 
-            z-index: 999999;
+            60% {
+                right: 3%;
+                top: 39%;
+            }
 
-            width: 46px;
-            height: 46px;
+            80% {
+                right: 17%;
+                top: 13%;
+            }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            100% {
+                right: 24%;
+                top: 38%;
+            }
 
-            gap: 3px;
-
-            padding: 0;
-
-            border:
-                1px solid rgba(255, 214, 193, 0.24);
-
-            border-radius: 50%;
-
-            background:
-                rgba(38, 7, 19, 0.87);
-
-            color: #fff1eb;
-
-            backdrop-filter: blur(12px);
-
-            box-shadow:
-                0 8px 26px rgba(0, 0, 0, 0.38),
-
-                0 0 22px rgba(179, 40, 86, 0.1);
-
-            cursor: pointer;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition:
-                opacity 0.5s ease,
-                transform 0.25s ease;
         }
 
 
-        body.unlocked .speaker-control {
-            opacity: 1;
-            visibility: visible;
+        /* =========================================================
+   GIFT
+========================================================= */
+
+        .gift-box {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                49%;
+
+            z-index:
+                6;
+
+            opacity:
+                0;
+
+            transform:
+                translate(-50%, -50%);
+
+            font-size:
+                92px;
         }
 
 
-        .speaker-control:hover {
-            transform: scale(1.08);
-        }
-
-
-
-        .speaker-icon {
-            font-size: 17px;
-        }
-
-
-
-        .sound-waves {
-            display: flex;
-            align-items: center;
-
-            gap: 2px;
-
-            height: 17px;
-        }
-
-
-        .sound-waves i {
-            display: block;
-
-            width: 2px;
-
-            border-radius: 5px;
-
-            background: #f0a8bb;
-
-            transform-origin: center;
+        .gift-box.visible {
+            opacity:
+                1;
 
             animation:
-                soundWave 0.78s ease-in-out infinite;
+                giftFloat 1.3s ease-in-out infinite;
         }
 
 
-        .sound-waves i:nth-child(1) {
-            height: 5px;
-            animation-delay: 0s;
+        @keyframes giftFloat {
+
+            50% {
+                transform:
+                    translate(-50%, -57%);
+            }
+
         }
 
 
-        .sound-waves i:nth-child(2) {
-            height: 13px;
-            animation-delay: 0.13s;
+        /* auto click */
+
+        .tap-ring {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                49%;
+
+            z-index:
+                8;
+
+            width:
+                105px;
+
+            height:
+                105px;
+
+            border:
+                2px solid rgba(255, 158, 191, .86);
+
+            border-radius:
+                50%;
+
+            opacity:
+                0;
+
+            transform:
+                translate(-50%, -50%);
         }
 
 
-        .sound-waves i:nth-child(3) {
-            height: 8px;
-            animation-delay: 0.26s;
+        .tap-ring.play {
+            animation:
+                tapPulse .55s ease;
+        }
+
+
+        @keyframes tapPulse {
+
+            0% {
+                opacity:
+                    .95;
+
+                transform:
+                    translate(-50%, -50%) scale(.25);
+            }
+
+            100% {
+                opacity:
+                    0;
+
+                transform:
+                    translate(-50%, -50%) scale(1.45);
+            }
+
+        }
+
+
+        /* flash */
+
+        .gift-flash {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                49%;
+
+            z-index:
+                12;
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            border-radius:
+                50%;
+
+            opacity:
+                0;
+
+            transform:
+                translate(-50%, -50%);
+
+            background:
+                white;
+
+            box-shadow:
+                0 0 30px white,
+                0 0 90px #ff8bb4,
+                0 0 150px #ff5f96;
+        }
+
+
+        .gift-flash.active {
+            animation:
+                flashOpen .8s ease;
+        }
+
+
+        @keyframes flashOpen {
+
+            40% {
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%) scale(4);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    translate(-50%, -50%) scale(9);
+            }
+
+        }
+
+
+        /* =========================================================
+   INTRO PHOTO
+========================================================= */
+
+        .intro-photo-wrap {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            top:
+                49%;
+
+            z-index:
+                11;
+
+            /* LEBIH KECIL */
+            width:
+                220px;
+
+            height:
+                285px;
+
+            padding:
+                8px;
+
+            overflow:
+                hidden;
+
+            opacity:
+                0;
+
+            border-radius:
+                25px;
+
+            transform:
+                translate(-50%, -50%) scale(.50);
+
+            background:
+                linear-gradient(145deg,
+                    #fff8fb,
+                    #ffe5ee);
+
+            box-shadow:
+                0 22px 50px rgba(0, 0, 0, .42),
+
+                0 0 40px rgba(255, 105, 155, .30);
+        }
+
+
+        .intro-photo-wrap.visible {
+            animation:
+                photoReveal 1.1s ease forwards,
+
+                photoWave 2.5s ease-in-out 1.1s infinite;
+        }
+
+
+        .intro-photo-wrap img {
+            width:
+                100%;
+
+            height:
+                100%;
+
+            display:
+                block;
+
+            object-fit:
+                cover;
+
+            border-radius:
+                18px;
+        }
+
+
+        @keyframes photoReveal {
+
+            to {
+                opacity:
+                    1;
+
+                transform:
+                    translate(-50%, -50%) scale(1);
+            }
+
+        }
+
+
+        @keyframes photoWave {
+
+            0%,
+            100% {
+                transform:
+                    translate(-50%, -50%) translateY(0) rotate(-1deg);
+            }
+
+            25% {
+                transform:
+                    translate(-50%, -50%) translateY(-7px) rotate(1deg);
+            }
+
+            50% {
+                transform:
+                    translate(-50%, -50%) translateY(4px) rotate(-1deg);
+            }
+
+            75% {
+                transform:
+                    translate(-50%, -50%) translateY(-9px) rotate(1.2deg);
+            }
+
+        }
+
+
+        /* =========================================================
+   LOVE PARTICLES
+========================================================= */
+
+        .flying-heart,
+        .flying-love-text {
+            position:
+                absolute;
+
+            bottom:
+                -45px;
+
+            z-index:
+                4;
+
+            pointer-events:
+                none;
+
+            animation:
+                loveFly linear forwards;
+        }
+
+
+        .flying-heart {
+            color:
+                #ff6f9f;
+
+            text-shadow:
+                0 0 10px #ff6f9f,
+                0 0 22px rgba(255, 91, 145, .78);
+        }
+
+
+        .flying-love-text {
+            color:
+                rgba(255, 190, 211, .94);
+
+            font-style:
+                italic;
+
+            white-space:
+                nowrap;
+
+            text-shadow:
+                0 0 10px rgba(255, 94, 148, .7);
+        }
+
+
+        @keyframes loveFly {
+
+            0% {
+                opacity:
+                    0;
+
+                transform:
+                    translateY(0) scale(.65);
+            }
+
+            15% {
+                opacity:
+                    1;
+            }
+
+            100% {
+                opacity:
+                    0;
+
+                transform:
+                    translateY(-110vh) rotate(20deg) scale(1.25);
+            }
+
+        }
+
+
+        /* =========================================================
+   WEBSITE
+========================================================= */
+
+        #websiteWrapper {
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                1;
+
+            display:
+                none;
+
+            opacity:
+                0;
+
+            background:
+                #080305;
+
+            transition:
+                opacity 1s ease;
+        }
+
+
+        #websiteWrapper.active {
+            display:
+                block;
+        }
+
+
+        #websiteWrapper.visible {
+            opacity:
+                1;
+        }
+
+
+        #siteFrame {
+            display:
+                block;
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            border:
+                none;
+        }
+
+
+        /* =========================================================
+   CONTROLS
+========================================================= */
+
+        .floating-controls {
+            position:
+                fixed;
+
+            right:
+                18px;
+
+            bottom:
+                18px;
+
+            z-index:
+                99999;
+
+            display:
+                none;
+
+            gap:
+                9px;
+        }
+
+
+        .floating-controls.visible {
+            display:
+                flex;
+        }
+
+
+        #musicButton,
+        #resetButton {
+            width:
+                48px;
+
+            height:
+                48px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid rgba(255, 213, 224, .20);
+
+            border-radius:
+                50%;
+
+            color:
+                #ffd7e2;
+
+            cursor:
+                pointer;
+
+            background:
+                rgba(31, 8, 15, .84);
+
+            backdrop-filter:
+                blur(12px);
+        }
+
+
+        .sound-bars {
+            height:
+                18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                2px;
+        }
+
+
+        .sound-bars span {
+            width:
+                2px;
+
+            display:
+                block;
+
+            background:
+                #ff719d;
+
+            animation:
+                soundWave .75s ease-in-out infinite;
+        }
+
+
+        .sound-bars span:nth-child(1) {
+            height:
+                7px;
+        }
+
+        .sound-bars span:nth-child(2) {
+            height:
+                14px;
+        }
+
+        .sound-bars span:nth-child(3) {
+            height:
+                10px;
+        }
+
+
+        #musicButton.muted .sound-bars span {
+            height:
+                3px;
+
+            animation:
+                none;
         }
 
 
         @keyframes soundWave {
 
-            0%,
-            100% {
-                transform: scaleY(0.42);
-                opacity: 0.42;
-            }
-
             50% {
-                transform: scaleY(1.14);
-                opacity: 1;
+                transform:
+                    scaleY(1.4);
             }
 
         }
 
 
+        /* =========================================================
+   MOBILE INDEX
+========================================================= */
 
-        .speaker-control.muted .sound-waves i {
-            animation: none;
+        @media (max-width: 480px) {
 
-            transform:
-                scaleY(0.28);
-
-            opacity: 0.25;
-        }
-
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .barcode-card,
-            .password-card {
+            #accessScreen {
                 padding:
-                    34px 22px 28px;
-
-                border-radius: 23px;
+                    14px;
             }
 
-
-            .barcode-wrap {
-                width: 245px;
+            .access-card {
+                padding:
+                    32px 19px 26px;
             }
 
+            .qr-stage {
+                width:
+                    290px;
 
-            .speaker-control {
-                width: 42px;
-                height: 42px;
+                height:
+                    278px;
+            }
 
-                right: 12px;
-                bottom: 12px;
+            .heart-svg {
+                width:
+                    248px;
+
+                height:
+                    225px;
+            }
+
+            .qr-glass {
+                width:
+                    164px;
+
+                height:
+                    164px;
+            }
+
+            .gift-stage {
+                height:
+                    470px;
+            }
+
+            .dove {
+                font-size:
+                    43px;
+            }
+
+            .intro-photo-wrap {
+                width:
+                    185px;
+
+                height:
+                    240px;
+            }
+
+            .typewriter-box {
+                min-height:
+                    260px;
+
+                padding:
+                    58px 22px 36px;
+            }
+
+            #typewriterText {
+                font-size:
+                    18px;
             }
 
         }
@@ -975,196 +2048,186 @@
 </head>
 
 
-
 <body>
 
 
-    <!-- =====================================================
-         STEP 1 : BARCODE
-    ===================================================== -->
+    <!-- =========================================================
+     ACCESS
+========================================================= -->
 
-    <section class="gate-screen" id="barcodeScreen">
+    <section id="accessScreen">
 
-        <div class="gate-glow"></div>
-
-
-        <div class="barcode-card">
-
-
-            <p class="gate-small">
-                PRIVATE ACCESS
-            </p>
+        <span class="access-bg bg1">♥</span>
+        <span class="access-bg bg2">✦</span>
+        <span class="access-bg bg3">♥</span>
+        <span class="access-bg bg4">✦</span>
 
 
-            <h1 class="gate-title">
+        <div class="access-card">
+
+
+            <div class="private-label">
+                Private Access
+            </div>
+
+
+            <h1 class="couple-name">
 
                 Elza
 
-                <span>
-                    ♥
-                </span>
+                <span>♥</span>
 
                 Silmy
 
             </h1>
 
 
-            <p class="gate-description">
-
-                Setiap cerita memiliki
-                pintu masuknya sendiri.
-
-                <br>
-
-                Ini adalah pintu menuju
-                cerita kecil kita.
-
-            </p>
+            <div class="little-story">
+                Our Little Story
+            </div>
 
 
 
-            <div class="barcode-wrap">
+            <!-- QR -->
+
+            <div class="step active" id="qrStep">
 
 
-                <div class="barcode-box">
+                <div class="qr-stage">
 
-                    <div class="barcode-lines"></div>
+
+                    <div class="qr-aura"></div>
+
+
+                    <svg class="heart-svg" viewBox="0 0 300 280">
+
+                        <path d="
+                        M150 250
+                        C135 235,55 180,32 125
+                        C10 73,42 27,91 27
+                        C119 27,140 42,150 61
+                        C160 42,181 27,209 27
+                        C258 27,290 73,268 125
+                        C245 180,165 235,150 250 Z
+                        " />
+
+                    </svg>
+
+
+                    <div class="orbit orbit1">
+                        <span class="orbit-dot"></span>
+                    </div>
+
+                    <div class="orbit orbit2">
+                        <span class="orbit-dot"></span>
+                    </div>
+
+                    <div class="orbit orbit3">
+                        <span class="orbit-dot"></span>
+                    </div>
+
+
+                    <div class="qr-glass">
+
+                        <img class="qr-image"
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=https%3A%2F%2Fbagasalzahir9-code.github.io%2Fkenangan-elza-silmy%2F%3Fscanned%3D1"
+                            alt="QR Code">
+
+                        <div class="scan-beam"></div>
+
+                        <div class="scan-line"></div>
+
+                    </div>
+
 
                 </div>
 
 
-                <p class="barcode-number">
+                <p class="qr-title">
+                    Scan Our Little Story
+                </p>
 
-                    03032026
+
+                <p class="qr-subtitle">
+
+                    arahkan kamera HP ke QR
+
+                    <br>
+
+                    lalu buka linknya ♥
 
                 </p>
 
 
-            </div>
+                <button id="continueToPassword" class="romantic-button" type="button">
 
+                    Continue ♥
 
+                </button>
 
-            <button class="continue-button" id="continueToPassword" type="button">
-
-                SCAN TO CONTINUE ♥
-
-            </button>
-
-
-            <p class="gate-footer">
-
-                OUR LITTLE STORY
-
-            </p>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         STEP 2 : PASSWORD
-    ===================================================== -->
-
-    <section class="gate-screen" id="passwordScreen">
-
-        <div class="gate-glow"></div>
-
-
-        <div class="password-card" id="passwordCard">
-
-
-            <p class="gate-small">
-
-                ONE MORE STEP
-
-            </p>
-
-
-            <h1 class="gate-title">
-
-                Elza
-
-                <span>
-                    ♥
-                </span>
-
-                Silmy
-
-            </h1>
-
-
-            <p class="gate-description">
-
-                Masukkan tanggal
-                yang menjadi kunci
-                cerita ini.
-
-            </p>
-
-
-
-            <div class="password-heart">
-
-                ♥
 
             </div>
 
 
 
-            <form id="passwordForm">
+            <!-- PASSWORD -->
+
+            <div class="step" id="passwordStep">
+
+                <div class="password-stage">
+
+                    <div class="password-aura"></div>
 
 
-                <label class="password-label" for="passwordInput">
-
-                    masukkan password
-
-                </label>
+                    <div class="password-heart">
+                        ♥
+                    </div>
 
 
-                <div class="password-box">
+                    <h2 class="password-title">
+                        One More Secret
+                    </h2>
 
 
-                    <input id="passwordInput" type="password" autocomplete="off" inputmode="numeric"
-                        placeholder="••••••••">
+                    <p class="password-subtitle">
+
+                        Masukkan tanggal kecil
+
+                        <br>
+
+                        yang menyimpan cerita besar kita.
+
+                    </p>
 
 
-                    <button class="show-password" id="showPassword" type="button" aria-label="Tampilkan password">
+                    <input id="passwordInput" class="password-input" type="password" inputmode="numeric"
+                        placeholder="PASSWORD" maxlength="8">
 
-                        ♡
+
+                    <button id="enterWebsite" class="romantic-button" type="button">
+
+                        Open Our Story ♥
+
+                    </button>
+
+
+                    <p id="passwordError" class="password-error">
+
+                        password-nya belum benar ♥
+
+                    </p>
+
+
+                    <button id="backToQR" class="back-button" type="button">
+
+                        ← kembali ke QR
 
                     </button>
 
 
                 </div>
 
-
-
-                <button class="unlock-button" type="submit">
-
-                    OPEN OUR STORY ♥
-
-                </button>
-
-
-
-                <p class="password-message" id="passwordMessage">
-
-                    password belum tepat ♥
-
-                </p>
-
-
-            </form>
-
-
-            <p class="gate-footer">
-
-                ONLY FOR US
-
-            </p>
+            </div>
 
 
         </div>
@@ -1173,133 +2236,317 @@
 
 
 
-    <!-- =====================================================
-         WEBSITE
-    ===================================================== -->
+    <!-- =========================================================
+     TYPEWRITER
+========================================================= -->
 
-    <iframe id="websiteFrame" src="home.html" title="Elza dan Silmy">
-    </iframe>
+    <section id="typewriterScreen">
 
+        <div class="typewriter-box">
 
+            <div class="typewriter-label">
+                FOR YOU ♥
+            </div>
 
-    <!-- =====================================================
-         MUSIC
-    ===================================================== -->
+            <div id="typewriterText"></div>
 
-    <audio id="backgroundMusic" src="musik/romantis.mp3" preload="auto" loop>
-    </audio>
+        </div>
 
-
-
-    <!-- =====================================================
-         SPEAKER
-    ===================================================== -->
-
-    <button class="speaker-control" id="speakerButton" type="button" aria-label="Mute atau unmute musik">
-
-
-        <span class="speaker-icon" id="speakerIcon">
-
-            🔊
-
-        </span>
-
-
-        <span class="sound-waves">
-
-            <i></i>
-            <i></i>
-            <i></i>
-
-        </span>
-
-
-    </button>
+    </section>
 
 
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ===================================================== -->
+    <!-- =========================================================
+     DOVE + GIFT
+========================================================= -->
+
+    <section id="giftScreen">
+
+        <div class="gift-stage">
+
+            <div class="dove dove-left">
+                🕊️
+            </div>
+
+            <div class="dove dove-right">
+                🕊️
+            </div>
+
+
+            <div class="gift-box" id="giftBox">
+                🎁
+            </div>
+
+
+            <div class="tap-ring" id="tapRing"></div>
+
+
+            <div class="gift-flash" id="giftFlash"></div>
+
+
+            <div class="intro-photo-wrap" id="introPhoto">
+
+                <img id="introPhotoImage" src="foto/intro.jpg" alt="Foto spesial">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     WEBSITE
+========================================================= -->
+
+    <main id="websiteWrapper">
+
+        <iframe id="siteFrame" src="home.html" title="Elza dan Silmy" allow="autoplay; fullscreen"></iframe>
+
+    </main>
+
+
+
+    <audio id="romanticMusic" src="musik/romantis.mp3" preload="auto" loop></audio>
+
+
+
+    <div class="floating-controls" id="floatingControls">
+
+        <button id="resetButton" type="button">
+            ↶
+        </button>
+
+
+        <button id="musicButton" type="button">
+
+            ♪
+
+            <span class="sound-bars">
+
+                <span></span>
+
+                <span></span>
+
+                <span></span>
+
+            </span>
+
+        </button>
+
+    </div>
+
+
 
     <script>
 
+        /* =========================================================
+           ELEMENT
+        ========================================================= */
+
+        const accessScreen =
+            document.getElementById(
+                "accessScreen"
+            );
+
+        const qrStep =
+            document.getElementById(
+                "qrStep"
+            );
+
+        const passwordStep =
+            document.getElementById(
+                "passwordStep"
+            );
 
         const continueToPassword =
             document.getElementById(
                 "continueToPassword"
             );
 
-
-        const passwordForm =
-            document.getElementById(
-                "passwordForm"
-            );
-
-
         const passwordInput =
             document.getElementById(
                 "passwordInput"
             );
 
-
-        const passwordMessage =
+        const passwordError =
             document.getElementById(
-                "passwordMessage"
+                "passwordError"
+            );
+
+        const enterWebsite =
+            document.getElementById(
+                "enterWebsite"
+            );
+
+        const backToQR =
+            document.getElementById(
+                "backToQR"
+            );
+
+        const typewriterScreen =
+            document.getElementById(
+                "typewriterScreen"
+            );
+
+        const typewriterText =
+            document.getElementById(
+                "typewriterText"
+            );
+
+        const giftScreen =
+            document.getElementById(
+                "giftScreen"
+            );
+
+        const giftBox =
+            document.getElementById(
+                "giftBox"
+            );
+
+        const tapRing =
+            document.getElementById(
+                "tapRing"
+            );
+
+        const giftFlash =
+            document.getElementById(
+                "giftFlash"
+            );
+
+        const introPhoto =
+            document.getElementById(
+                "introPhoto"
+            );
+
+        const introPhotoImage =
+            document.getElementById(
+                "introPhotoImage"
+            );
+
+        const websiteWrapper =
+            document.getElementById(
+                "websiteWrapper"
+            );
+
+        const siteFrame =
+            document.getElementById(
+                "siteFrame"
+            );
+
+        const romanticMusic =
+            document.getElementById(
+                "romanticMusic"
+            );
+
+        const floatingControls =
+            document.getElementById(
+                "floatingControls"
+            );
+
+        const musicButton =
+            document.getElementById(
+                "musicButton"
+            );
+
+        const resetButton =
+            document.getElementById(
+                "resetButton"
             );
 
 
-        const passwordCard =
-            document.getElementById(
-                "passwordCard"
+        const CORRECT_PASSWORD =
+            "03032026";
+
+
+        let loveInterval =
+            null;
+
+
+        /* =========================================================
+           PHOTO FALLBACK
+        ========================================================= */
+
+        const photoSources = [
+
+            "foto/intro.jpg",
+
+            "foto/intro.jpeg",
+
+            "foto/intro.png",
+
+            "foto/intro.webp"
+
+        ];
+
+
+        let photoSourceIndex =
+            0;
+
+
+        introPhotoImage.onerror =
+            function () {
+
+                photoSourceIndex++;
+
+
+                if (
+                    photoSourceIndex <
+                    photoSources.length
+                ) {
+
+                    introPhotoImage.src =
+                        photoSources[
+                        photoSourceIndex
+                        ];
+
+                }
+
+            };
+
+
+        /* =========================================================
+           QR PARAMETER
+        ========================================================= */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
             );
 
 
-        const showPassword =
-            document.getElementById(
-                "showPassword"
+        if (
+            params.get("scanned") ===
+            "1"
+        ) {
+
+            qrStep.classList.remove(
+                "active"
             );
 
-
-        const music =
-            document.getElementById(
-                "backgroundMusic"
+            passwordStep.classList.add(
+                "active"
             );
 
-
-        const speakerButton =
-            document.getElementById(
-                "speakerButton"
-            );
+        }
 
 
-        const speakerIcon =
-            document.getElementById(
-                "speakerIcon"
-            );
-
-
-        const websiteFrame =
-            document.getElementById(
-                "websiteFrame"
-            );
-
-
-
-        /* =====================================================
-           STEP 1 → PASSWORD
-        ===================================================== */
+        /* =========================================================
+           QR → PASSWORD
+        ========================================================= */
 
         continueToPassword.addEventListener(
             "click",
             function () {
 
+                qrStep.classList.remove(
+                    "active"
+                );
 
-                document
-                    .body
-                    .classList
-                    .add("show-password");
-
+                passwordStep.classList.add(
+                    "active"
+                );
 
                 setTimeout(
                     function () {
@@ -1307,419 +2554,2108 @@
                         passwordInput.focus();
 
                     },
-                    600
+                    300
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           MUSIC RESET
+        ========================================================= */
+
+        function stopAndResetMusic() {
+
+            romanticMusic.pause();
+
+            romanticMusic.currentTime =
+                0;
+
+            romanticMusic.muted =
+                false;
+
+            musicButton.classList.remove(
+                "muted"
+            );
+
+        }
+
+
+        /* =========================================================
+           BACK TO QR
+        ========================================================= */
+
+        backToQR.addEventListener(
+            "click",
+            function () {
+
+                stopAndResetMusic();
+
+                passwordStep.classList.remove(
+                    "active"
+                );
+
+                qrStep.classList.add(
+                    "active"
+                );
+
+                passwordInput.value =
+                    "";
+
+                passwordError.classList.remove(
+                    "show"
+                );
+
+                history.replaceState(
+                    {},
+                    "",
+                    window.location.pathname
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           TYPEWRITER
+        ========================================================= */
+
+        const message =
+            "semoga kamu seneng dan suka lihat website buatan aku yang sederhana ini yaaa... i love u ♥";
+
+
+        function typingDelay(
+            character
+        ) {
+
+            if (
+                character === "."
+            ) {
+
+                return 240;
+
+            }
+
+            if (
+                character === ","
+            ) {
+
+                return 170;
+
+            }
+
+            if (
+                character === "♥"
+            ) {
+
+                return 420;
+
+            }
+
+            if (
+                character === " "
+            ) {
+
+                return 35;
+
+            }
+
+            return 56;
+
+        }
+
+
+        function runTypewriter() {
+
+            typewriterText.innerHTML =
+                '<span id="typedContent"></span><span class="type-cursor">|</span>';
+
+
+            const typedContent =
+                document.getElementById(
+                    "typedContent"
                 );
 
 
-            }
-        );
+            let index =
+                0;
 
 
-
-        /* =====================================================
-           PASSWORD
-        ===================================================== */
-
-        const correctPassword =
-            "03032026";
-
-
-
-        passwordForm.addEventListener(
-            "submit",
-            async function (event) {
-
-
-                event.preventDefault();
-
-
-                const enteredPassword =
-                    passwordInput
-                        .value
-                        .trim();
-
-
+            function typeNext() {
 
                 if (
-                    enteredPassword ===
-                    correctPassword
+                    index <
+                    message.length
                 ) {
 
-
-                    passwordMessage
-                        .classList
-                        .remove("show");
-
-
-                    music.volume =
-                        0.38;
-
-
-                    music.muted =
-                        false;
-
-
-
-                    /*
-                    Password submit is a user interaction,
-                    so browsers normally allow audio here.
-                    */
-
-                    try {
-
-                        await music.play();
-
-                    }
-                    catch (error) {
-
-                        console.log(
-                            "Audio belum bisa dimainkan.",
-                            error
+                    const character =
+                        message.charAt(
+                            index
                         );
 
-                    }
+
+                    typedContent.textContent +=
+                        character;
 
 
-
-                    document
-                        .body
-                        .classList
-                        .add("unlocked");
+                    index++;
 
 
-                }
-                else {
+                    setTimeout(
+                        typeNext,
+                        typingDelay(
+                            character
+                        )
+                    );
 
 
-                    passwordMessage.textContent =
-                        "password belum tepat ♥";
-
-
-                    passwordMessage
-                        .classList
-                        .add("show");
-
-
-                    passwordCard
-                        .classList
-                        .remove("shake");
-
-
-                    void passwordCard.offsetWidth;
-
-
-                    passwordCard
-                        .classList
-                        .add("shake");
-
-
-                    passwordInput.select();
+                    return;
 
                 }
 
+
+                const loveText =
+                    "i love u ♥";
+
+
+                const full =
+                    typedContent.textContent;
+
+
+                const before =
+                    full.slice(
+                        0,
+                        -loveText.length
+                    );
+
+
+                typedContent.innerHTML =
+                    before +
+                    '<span class="love-final">' +
+                    loveText +
+                    '</span>';
+
+
+                setTimeout(
+                    startGiftScene,
+                    2100
+                );
 
             }
-        );
 
 
+            typeNext();
 
-        /* =====================================================
-           SHOW PASSWORD
-        ===================================================== */
-
-        showPassword.addEventListener(
-            "click",
-            function () {
+        }
 
 
-                if (
-                    passwordInput.type ===
-                    "password"
-                ) {
+        /* =========================================================
+           AUTO TAP
+        ========================================================= */
+
+        function playAutoTap() {
+
+            tapRing.classList.remove(
+                "play"
+            );
 
 
-                    passwordInput.type =
-                        "text";
+            void tapRing.offsetWidth;
 
 
-                    showPassword.textContent =
-                        "♥";
+            tapRing.classList.add(
+                "play"
+            );
+
+        }
 
 
-                }
-                else {
+        /* =========================================================
+           PARTICLE
+        ========================================================= */
+
+        function createLoveParticle() {
+
+            const textMode =
+                Math.random() >
+                .55;
 
 
-                    passwordInput.type =
-                        "password";
+            const item =
+                document.createElement(
+                    "span"
+                );
 
 
-                    showPassword.textContent =
-                        "♡";
+            if (
+                textMode
+            ) {
+
+                item.className =
+                    "flying-love-text";
 
 
-                }
+                const messages = [
+
+                    "i love u",
+
+                    "i love you ♥",
+
+                    "love u",
+
+                    "forever ♥"
+
+                ];
 
 
-            }
-        );
-
-
-
-        /* =====================================================
-           SPEAKER
-
-           IMPORTANT:
-           MUTE DOES NOT PAUSE AUDIO.
-        ===================================================== */
-
-        speakerButton.addEventListener(
-            "click",
-            function () {
-
-
-                music.muted =
-                    !music.muted;
-
-
-
-                if (music.muted) {
-
-
-                    speakerButton
-                        .classList
-                        .add("muted");
-
-
-                    speakerIcon.textContent =
-                        "🔇";
-
-
-                }
-                else {
-
-
-                    speakerButton
-                        .classList
-                        .remove("muted");
-
-
-                    speakerIcon.textContent =
-                        "🔊";
-
-
-                    if (music.paused) {
-
-
-                        music
-                            .play()
-                            .catch(
-                                () => { }
-                            );
-
-
-                    }
-
-
-                }
-
+                item.textContent =
+                    messages[
+                    Math.floor(
+                        Math.random() *
+                        messages.length
+                    )
+                    ];
 
             }
-        );
+
+            else {
+
+                item.className =
+                    "flying-heart";
 
 
+                item.textContent =
+                    Math.random() >
+                        .3
+                        ? "♥"
+                        : "♡";
 
-        /* =====================================================
-           INTERNAL PAGE NAVIGATION
-
-           index.html remains alive,
-           therefore audio remains alive.
-        ===================================================== */
-
-        websiteFrame.addEventListener(
-            "load",
-            function () {
+            }
 
 
-                try {
+            item.style.left =
+                (
+                    2 +
+                    Math.random() *
+                    94
+                ) +
+                "%";
 
 
-                    const frameDocument =
-                        websiteFrame.contentDocument;
+            item.style.fontSize =
+                (
+                    10 +
+                    Math.random() *
+                    18
+                ) +
+                "px";
 
 
-                    if (!frameDocument) {
-                        return;
-                    }
+            item.style.animationDuration =
+                (
+                    3.8 +
+                    Math.random() *
+                    3.4
+                ) +
+                "s";
 
 
+            giftScreen.appendChild(
+                item
+            );
 
-                    const links =
-                        frameDocument
-                            .querySelectorAll(
-                                "a[href]"
+
+            setTimeout(
+                function () {
+
+                    item.remove();
+
+                },
+                8000
+            );
+
+        }
+
+
+        /* =========================================================
+           GIFT SCENE
+        ========================================================= */
+
+        function startGiftScene() {
+
+            typewriterScreen.classList.add(
+                "fade-out"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    typewriterScreen.style.display =
+                        "none";
+
+
+                    giftScreen.style.display =
+                        "flex";
+
+
+                    requestAnimationFrame(
+                        function () {
+
+                            giftScreen.classList.add(
+                                "show"
                             );
-
-
-                    links.forEach(
-                        function (link) {
-
-
-                            const href =
-                                link.getAttribute(
-                                    "href"
-                                );
-
-
-                            if (!href) {
-                                return;
-                            }
-
-
-                            if (
-                                href.startsWith("#") ||
-                                href.startsWith("http") ||
-                                href.startsWith("mailto:") ||
-                                href.startsWith("tel:")
-                            ) {
-
-                                return;
-
-                            }
-
-
-
-                            link.addEventListener(
-                                "click",
-                                function (event) {
-
-
-                                    if (
-                                        href.endsWith(
-                                            ".html"
-                                        )
-                                    ) {
-
-
-                                        event.preventDefault();
-
-
-
-                                        /*
-                                        Navbar Home links from
-                                        existing pages may still use
-                                        index.html.
-
-                                        Inside our wrapper,
-                                        Home = home.html.
-                                        */
-
-                                        if (
-                                            href ===
-                                            "index.html"
-                                        ) {
-
-
-                                            websiteFrame.src =
-                                                "home.html";
-
-
-                                        }
-                                        else {
-
-
-                                            websiteFrame.src =
-                                                href;
-
-
-                                        }
-
-
-                                    }
-
-
-                                }
-                            );
-
 
                         }
                     );
 
 
+                    setTimeout(
+                        function () {
 
-                    /* HOME EXPLORE BUTTON */
+                            giftBox.classList.add(
+                                "visible"
+                            );
 
-                    const continueButton =
-                        frameDocument
-                            .getElementById(
-                                "continueBtn"
+                        },
+                        1600
+                    );
+
+
+                    setTimeout(
+                        playAutoTap,
+                        2700
+                    );
+
+
+                    setTimeout(
+                        playAutoTap,
+                        3330
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            giftFlash.classList.add(
+                                "active"
                             );
 
 
-                    if (continueButton) {
+                            giftBox.style.opacity =
+                                "0";
 
 
-                        continueButton
-                            .addEventListener(
-                                "click",
-                                function () {
-
-
-                                    setTimeout(
-                                        function () {
-
-
-                                            websiteFrame.src =
-                                                "gallery.html";
-
-
-                                        },
-                                        80
-                                    );
-
-
-                                }
+                            introPhoto.classList.add(
+                                "visible"
                             );
 
+
+                            document
+                                .querySelector(
+                                    ".dove-left"
+                                )
+                                .classList
+                                .add(
+                                    "roam"
+                                );
+
+
+                            document
+                                .querySelector(
+                                    ".dove-right"
+                                )
+                                .classList
+                                .add(
+                                    "roam"
+                                );
+
+
+                            for (
+                                let i = 0;
+                                i < 18;
+                                i++
+                            ) {
+
+                                setTimeout(
+                                    createLoveParticle,
+                                    i * 70
+                                );
+
+                            }
+
+
+                            loveInterval =
+                                setInterval(
+                                    createLoveParticle,
+                                    165
+                                );
+
+                        },
+                        3900
+                    );
+
+
+                    /*
+                      FOTO MUNCUL 5 DETIK
+                    */
+
+                    setTimeout(
+                        finishGiftScene,
+                        8900
+                    );
+
+
+                },
+                750
+            );
+
+        }
+
+
+        /* =========================================================
+           GIFT → WEBSITE
+        ========================================================= */
+
+        function finishGiftScene() {
+
+            clearInterval(
+                loveInterval
+            );
+
+
+            giftScreen.classList.add(
+                "fade-out"
+            );
+
+
+            websiteWrapper.classList.add(
+                "active"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    websiteWrapper.classList.add(
+                        "visible"
+                    );
+
+                },
+                100
+            );
+
+
+            setTimeout(
+                function () {
+
+                    giftScreen.style.display =
+                        "none";
+
+
+                    floatingControls.classList.add(
+                        "visible"
+                    );
+
+                },
+                900
+            );
+
+        }
+
+
+        /* =========================================================
+           PASSWORD
+        ========================================================= */
+
+        function openWebsite() {
+
+            const entered =
+                passwordInput.value.trim();
+
+
+            if (
+                entered !==
+                CORRECT_PASSWORD
+            ) {
+
+                passwordError.classList.add(
+                    "show"
+                );
+
+
+                passwordInput.value =
+                    "";
+
+
+                passwordInput.focus();
+
+
+                return;
+
+            }
+
+
+            passwordError.classList.remove(
+                "show"
+            );
+
+
+            /* musik selalu mulai dari awal */
+
+            stopAndResetMusic();
+
+
+            romanticMusic.volume =
+                .38;
+
+
+            romanticMusic
+                .play()
+                .catch(
+                    function () { }
+                );
+
+
+            accessScreen.classList.add(
+                "hidden"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    accessScreen.style.display =
+                        "none";
+
+
+                    typewriterScreen.style.display =
+                        "flex";
+
+
+                    requestAnimationFrame(
+                        function () {
+
+                            typewriterScreen.classList.add(
+                                "show"
+                            );
+
+                        }
+                    );
+
+
+                    runTypewriter();
+
+                },
+                700
+            );
+
+        }
+
+
+        enterWebsite.addEventListener(
+            "click",
+            openWebsite
+        );
+
+
+        passwordInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Enter"
+                ) {
+
+                    openWebsite();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           MUSIC MUTE
+        ========================================================= */
+
+        musicButton.addEventListener(
+            "click",
+            function () {
+
+                romanticMusic.muted =
+                    !romanticMusic.muted;
+
+
+                musicButton.classList.toggle(
+                    "muted",
+                    romanticMusic.muted
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        function resetToQR() {
+
+            stopAndResetMusic();
+
+
+            clearInterval(
+                loveInterval
+            );
+
+
+            floatingControls.classList.remove(
+                "visible"
+            );
+
+
+            websiteWrapper.classList.remove(
+                "visible"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    websiteWrapper.classList.remove(
+                        "active"
+                    );
+
+
+                    siteFrame.src =
+                        "home.html";
+
+
+                    giftScreen.className =
+                        "";
+
+
+                    giftScreen.style.display =
+                        "none";
+
+
+                    giftBox.className =
+                        "gift-box";
+
+
+                    giftBox.style.opacity =
+                        "";
+
+
+                    introPhoto.className =
+                        "intro-photo-wrap";
+
+
+                    tapRing.className =
+                        "tap-ring";
+
+
+                    giftFlash.className =
+                        "gift-flash";
+
+
+                    const leftDove =
+                        document.querySelector(
+                            ".dove-left"
+                        );
+
+
+                    const rightDove =
+                        document.querySelector(
+                            ".dove-right"
+                        );
+
+
+                    leftDove.className =
+                        "dove dove-left";
+
+
+                    rightDove.className =
+                        "dove dove-right";
+
+
+                    typewriterScreen.className =
+                        "";
+
+
+                    typewriterScreen.style.display =
+                        "none";
+
+
+                    accessScreen.style.display =
+                        "flex";
+
+
+                    accessScreen.classList.remove(
+                        "hidden"
+                    );
+
+
+                    passwordStep.classList.remove(
+                        "active"
+                    );
+
+
+                    qrStep.classList.add(
+                        "active"
+                    );
+
+
+                    passwordInput.value =
+                        "";
+
+
+                    history.replaceState(
+                        {},
+                        "",
+                        window.location.pathname
+                    );
+
+                },
+                550
+            );
+
+        }
+
+
+        resetButton.addEventListener(
+            "click",
+            resetToQR
+        );
+
+
+        /* =========================================================
+           PAGE LOADER
+        ========================================================= */
+
+        function loadPage(
+            page
+        ) {
+
+            if (
+                !page ||
+                page === "#" ||
+                page.startsWith(
+                    "javascript:"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                page.includes(
+                    "index.html"
+                )
+            ) {
+
+                page =
+                    "home.html";
+
+            }
+
+
+            siteFrame.src =
+                page;
+
+        }
+
+
+        /* =========================================================
+           STYLE PATCHES CHILD PAGE
+        ========================================================= */
+
+        function addStyle(
+            doc,
+            css
+        ) {
+
+            const style =
+                doc.createElement(
+                    "style"
+                );
+
+
+            style.textContent =
+                css;
+
+
+            doc.head.appendChild(
+                style
+            );
+
+        }
+
+
+        /* =========================================================
+           HOME CINEMATIC PATCH
+        ========================================================= */
+
+        function patchHome(
+            doc
+        ) {
+
+            addStyle(
+                doc,
+                `
+
+        /*
+          HOME OPEN BOOK CINEMATIC
+        */
+
+        .book {
+            perspective: 3000px !important;
+        }
+
+
+        .book-cover {
+            transition:
+                transform 1.95s
+                cubic-bezier(.62,.03,.20,1),
+
+                box-shadow 1.3s ease,
+
+                filter .9s ease
+                !important;
+        }
+
+
+        .book-inside {
+            transition:
+                width 1.65s
+                cubic-bezier(.22,1,.36,1),
+
+                opacity .42s ease,
+
+                transform 1.65s
+                cubic-bezier(.22,1,.36,1)
+                !important;
+        }
+
+
+        .book.opening {
+            animation:
+                parentBookDepth
+                1.9s
+                cubic-bezier(.22,1,.36,1)
+                both !important;
+        }
+
+
+        .book.opening .book-cover {
+            transform:
+                rotateY(-168deg)
+                !important;
+
+            box-shadow:
+                -24px 22px 38px
+                rgba(0,0,0,.20)
+                !important;
+        }
+
+
+        .book.opening .book-inside {
+            width:
+                670px !important;
+
+            opacity:
+                1 !important;
+
+            transform:
+                translateX(-50%)
+                scale(1)
+                !important;
+        }
+
+
+        .book.opening .book-page {
+            opacity:
+                1 !important;
+
+            transform:
+                scale(1)
+                !important;
+        }
+
+
+        @keyframes parentBookDepth {
+
+            0% {
+                transform:
+                    scale(.98)
+                    translateY(6px);
+            }
+
+            45% {
+                transform:
+                    scale(1.018)
+                    translateY(-5px);
+            }
+
+            100% {
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+
+        }
+
+
+        .book-light.show {
+            animation:
+                parentBookGlow
+                2.5s ease forwards
+                !important;
+        }
+
+
+        @keyframes parentBookGlow {
+
+            0% {
+                opacity:
+                    0;
+
+                transform:
+                    translate(-50%,-50%)
+                    scale(.35);
+            }
+
+            35% {
+                opacity:
+                    1;
+
+                transform:
+                    translate(-50%,-50%)
+                    scale(1.2);
+            }
+
+            100% {
+                opacity:
+                    .2;
+
+                transform:
+                    translate(-50%,-50%)
+                    scale(1);
+            }
+
+        }
+
+
+        /*
+          COUNTER LEBIH TERASA
+        */
+
+        .love-counter-box {
+            animation:
+                parentCounterGlow
+                3s ease-in-out infinite
+                !important;
+        }
+
+
+        @keyframes parentCounterGlow {
+
+            50% {
+                transform:
+                    translateY(-4px);
+
+                box-shadow:
+                    0 14px 28px
+                    rgba(193,110,140,.20),
+
+                    0 0 28px
+                    rgba(255,135,178,.28)
+                    !important;
+            }
+
+        }
+
+
+        /*
+          TABLET
+        */
+
+        @media (max-width:760px) {
+
+            .book {
+                width:
+                    92vw !important;
+
+                height:
+                    370px !important;
+            }
+
+            .book-inside {
+                height:
+                    370px !important;
+            }
+
+            .book.opening .book-inside {
+                width:
+                    89vw !important;
+            }
+
+            .book-cover {
+                width:
+                    276px !important;
+
+                height:
+                    370px !important;
+
+                margin-left:
+                    -138px !important;
+            }
+
+        }
+
+
+        /*
+          HP
+        */
+
+        @media (max-width:520px) {
+
+            .home-container {
+                min-height:
+                    auto !important;
+
+                padding:
+                    17px 6px 28px
+                    !important;
+            }
+
+            .book {
+                width:
+                    94vw !important;
+
+                height:
+                    320px !important;
+            }
+
+            .book-inside {
+                width:
+                    218px !important;
+
+                height:
+                    320px !important;
+            }
+
+            .book.opening
+            .book-inside {
+                width:
+                    92vw !important;
+            }
+
+            .book-cover {
+                width:
+                    236px !important;
+
+                height:
+                    320px !important;
+
+                margin-left:
+                    -118px !important;
+            }
+
+            .book-page {
+                padding:
+                    18px 7px !important;
+            }
+
+            .scrapbook-card {
+                width:
+                    132px !important;
+            }
+
+            .photo-wrap {
+                height:
+                    95px !important;
+            }
+
+            .story-title {
+                font-size:
+                    18px !important;
+            }
+
+            .story-paragraph {
+                max-width:
+                    115px !important;
+
+                font-size:
+                    7px !important;
+            }
+
+        }
+
+        `
+            );
+
+
+            /*
+              Ambil alih tombol supaya timing
+              sama seperti Surat Cinta.
+            */
+
+            const openButton =
+                doc.getElementById(
+                    "openBtn"
+                );
+
+
+            if (
+                !openButton
+            ) {
+
+                return;
+
+            }
+
+
+            openButton.addEventListener(
+                "click",
+                function (
+                    event
+                ) {
+
+                    /*
+                      hentikan home.js lama
+                      supaya tidak dobel animasi
+                    */
+
+                    event.preventDefault();
+
+                    event.stopImmediatePropagation();
+
+
+                    if (
+                        openButton.dataset.opened ===
+                        "1"
+                    ) {
+
+                        return;
 
                     }
 
 
-                }
-                catch (error) {
+                    openButton.dataset.opened =
+                        "1";
 
 
-                    console.log(
-                        "Navigation error:",
-                        error
+                    const ribbon =
+                        doc.getElementById(
+                            "ribbon"
+                        );
+
+
+                    const coverText =
+                        doc.getElementById(
+                            "coverText"
+                        );
+
+
+                    const book =
+                        doc.getElementById(
+                            "book"
+                        );
+
+
+                    const bookLight =
+                        doc.getElementById(
+                            "bookLight"
+                        );
+
+
+                    const particles =
+                        doc.getElementById(
+                            "openingParticles"
+                        );
+
+
+                    const status =
+                        doc.getElementById(
+                            "storyStatus"
+                        );
+
+
+                    openButton.classList.add(
+                        "hidden"
                     );
 
 
-                }
+                    if (
+                        status
+                    ) {
+
+                        status.textContent =
+                            "Membuka cerita kita...";
 
 
+                        status.classList.add(
+                            "visible"
+                        );
+
+                    }
+
+
+                    /*
+                      cover text
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                coverText
+                            ) {
+
+                                coverText.classList.add(
+                                    "show"
+                                );
+
+                            }
+
+                        },
+                        100
+                    );
+
+
+                    /*
+                      pita lepas
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                ribbon
+                            ) {
+
+                                ribbon.classList.add(
+                                    "releasing"
+                                );
+
+                            }
+
+                        },
+                        250
+                    );
+
+
+                    /*
+                      glow
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                bookLight
+                            ) {
+
+                                bookLight.classList.add(
+                                    "show"
+                                );
+
+                            }
+
+                        },
+                        600
+                    );
+
+
+                    /*
+                      BUKU TERBUKA
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                status
+                            ) {
+
+                                status.textContent =
+                                    "Elza ♥ Silmy";
+
+                            }
+
+
+                            if (
+                                book
+                            ) {
+
+                                book.classList.add(
+                                    "opening"
+                                );
+
+                            }
+
+
+                            if (
+                                particles
+                            ) {
+
+                                particles.classList.add(
+                                    "show"
+                                );
+
+                            }
+
+                        },
+                        850
+                    );
+
+
+                    /*
+                      selesai
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                book
+                            ) {
+
+                                book.classList.add(
+                                    "opened"
+                                );
+
+                            }
+
+
+                            if (
+                                status
+                            ) {
+
+                                status.classList.remove(
+                                    "visible"
+                                );
+
+                            }
+
+                        },
+                        2750
+                    );
+
+
+                },
+                true
+            );
+
+        }
+
+
+        /* =========================================================
+           MY PRINCES PATCH
+        ========================================================= */
+
+        function patchPrinces(
+            doc
+        ) {
+
+            /*
+              HILANGKAN:
+              Lihat Kenangan Lainnya →
+            */
+
+            addStyle(
+                doc,
+                `
+
+        .after-princes
+        .gallery-button {
+            display:
+                none !important;
+        }
+
+
+        /*
+          ending tetap rapi
+        */
+
+        .after-princes {
+            padding-bottom:
+                100px !important;
+        }
+
+
+        @media (max-width:650px) {
+
+            .after-princes {
+                padding-left:
+                    18px !important;
+
+                padding-right:
+                    18px !important;
+
+                padding-bottom:
+                    75px !important;
             }
-        );
+
+        }
+
+        `
+            );
+
+        }
 
 
+        /* =========================================================
+           SURAT CINTA PATCH
+        ========================================================= */
 
-        /* =====================================================
-           AUDIO ERROR
-        ===================================================== */
+        function patchSurat(
+            doc
+        ) {
 
-        music.addEventListener(
-            "error",
+            addStyle(
+                doc,
+                `
+
+        /*
+          DESKTOP
+          BUKU DIPERKECIL SEDIKIT
+        */
+
+        .storybook {
+            width:
+                min(
+                    770px,
+                    80vw
+                )
+                !important;
+
+            height:
+                min(
+                    448px,
+                    46vw
+                )
+                !important;
+
+            min-height:
+                350px
+                !important;
+        }
+
+
+        .book-page {
+            padding:
+                32px 34px 30px
+                !important;
+        }
+
+
+        .memory-photo {
+            width:
+                min(
+                    78%,
+                    265px
+                )
+                !important;
+
+            margin-top:
+                28px
+                !important;
+        }
+
+
+        .right-page h2 {
+            margin-top:
+                34px
+                !important;
+
+            font-size:
+                clamp(
+                    23px,
+                    2.6vw,
+                    30px
+                )
+                !important;
+        }
+
+
+        .letter-text {
+            font-size:
+                13.5px
+                !important;
+
+            line-height:
+                1.58
+                !important;
+        }
+
+
+        .cover-border {
+            padding:
+                24px 38px 54px
+                !important;
+        }
+
+
+        .cover-border h2 {
+            font-size:
+                clamp(
+                    37px,
+                    5vw,
+                    56px
+                )
+                !important;
+        }
+
+
+        /*
+          TABLET
+        */
+
+        @media (max-width:760px) {
+
+            .storybook {
+                width:
+                    88vw
+                    !important;
+
+                height:
+                    388px
+                    !important;
+
+                min-height:
+                    0
+                    !important;
+            }
+
+
+            .book-page {
+                padding:
+                    23px 14px
+                    !important;
+            }
+
+
+            .memory-photo {
+                width:
+                    min(
+                        78%,
+                        220px
+                    )
+                    !important;
+
+                margin-top:
+                    24px
+                    !important;
+
+                padding:
+                    7px
+                    !important;
+            }
+
+
+            .right-page h2 {
+                margin:
+                    28px 0 13px
+                    !important;
+
+                font-size:
+                    24px
+                    !important;
+            }
+
+
+            .letter-text {
+                margin-bottom:
+                    10px
+                    !important;
+
+                font-size:
+                    11px
+                    !important;
+
+                line-height:
+                    1.52
+                    !important;
+            }
+
+        }
+
+
+        /*
+          HP
+        */
+
+        @media (max-width:520px) {
+
+            .navbar {
+                padding:
+                    9px 8px
+                    !important;
+
+                gap:
+                    6px
+                    !important;
+            }
+
+
+            .logo {
+                font-size:
+                    12px
+                    !important;
+
+                white-space:
+                    nowrap;
+            }
+
+
+            .nav-menu {
+                gap:
+                    4px
+                    !important;
+            }
+
+
+            .nav-menu a {
+                font-size:
+                    6.8px
+                    !important;
+
+                white-space:
+                    nowrap;
+            }
+
+
+            .love-intro h1 {
+                font-size:
+                    31px
+                    !important;
+
+                line-height:
+                    1.05
+                    !important;
+            }
+
+
+            .storybook {
+                width:
+                    92vw
+                    !important;
+
+                height:
+                    306px
+                    !important;
+
+                min-height:
+                    0
+                    !important;
+
+                margin-top:
+                    18px
+                    !important;
+            }
+
+
+            .book-page {
+                padding:
+                    13px 7px 15px
+                    !important;
+
+                overflow-y:
+                    auto
+                    !important;
+
+                scrollbar-width:
+                    none;
+            }
+
+
+            .book-page::-webkit-scrollbar {
+                display:
+                    none;
+            }
+
+
+            .page-label {
+                font-size:
+                    6.2px
+                    !important;
+
+                letter-spacing:
+                    2px
+                    !important;
+            }
+
+
+            .memory-photo {
+                width:
+                    82%
+                    !important;
+
+                margin:
+                    20px auto 8px
+                    !important;
+
+                padding:
+                    5px
+                    !important;
+            }
+
+
+            .memory-photo span {
+                bottom:
+                    -18px
+                    !important;
+
+                font-size:
+                    8px
+                    !important;
+            }
+
+
+            .right-page h2 {
+                margin:
+                    18px 0 8px
+                    !important;
+
+                font-size:
+                    17px
+                    !important;
+            }
+
+
+            .letter-text {
+                margin-bottom:
+                    7px
+                    !important;
+
+                font-size:
+                    8.4px
+                    !important;
+
+                line-height:
+                    1.42
+                    !important;
+            }
+
+
+            .cover-border {
+                padding:
+                    12px 13px 38px
+                    !important;
+            }
+
+
+            .cover-border h2 {
+                font-size:
+                    27px
+                    !important;
+            }
+
+
+            .cover-description {
+                font-size:
+                    6.8px
+                    !important;
+
+                line-height:
+                    1.45
+                    !important;
+            }
+
+
+            .ribbon-bow {
+                transform:
+                    translate(-50%, -50%)
+                    scale(.50)
+                    !important;
+            }
+
+
+            .open-book-button {
+                max-width:
+                    82vw
+                    !important;
+
+                margin-top:
+                    15px
+                    !important;
+
+                padding:
+                    9px 13px
+                    !important;
+
+                font-size:
+                    8.5px
+                    !important;
+            }
+
+
+            .story-controls {
+                width:
+                    94vw
+                    !important;
+
+                margin:
+                    13px auto 0
+                    !important;
+
+                gap:
+                    5px
+                    !important;
+            }
+
+
+            .story-controls button {
+                min-width:
+                    74px
+                    !important;
+
+                padding:
+                    7px
+                    !important;
+
+                font-size:
+                    7px
+                    !important;
+            }
+
+
+            .story-controls span {
+                font-size:
+                    7px
+                    !important;
+            }
+
+
+            .story-ending {
+                padding-left:
+                    13px
+                    !important;
+
+                padding-right:
+                    13px
+                    !important;
+            }
+
+
+            .story-ending h2 {
+                font-size:
+                    30px
+                    !important;
+
+                line-height:
+                    1.08
+                    !important;
+            }
+
+        }
+
+        `
+            );
+
+        }
+
+
+        /* =========================================================
+           IFRAME
+        ========================================================= */
+
+        siteFrame.addEventListener(
+            "load",
             function () {
 
+                try {
 
-                console.log(
-                    "Pastikan file ada di musik/romantis.mp3"
-                );
+                    const doc =
+                        siteFrame.contentDocument ||
+                        siteFrame.contentWindow.document;
 
+
+                    const currentFile =
+                        siteFrame
+                            .contentWindow
+                            .location
+                            .pathname
+                            .split("/")
+                            .pop()
+                            .toLowerCase();
+
+
+                    /*
+                      HOME
+                    */
+
+                    if (
+                        currentFile ===
+                        "home.html"
+                    ) {
+
+                        patchHome(
+                            doc
+                        );
+
+                    }
+
+
+                    /*
+                      MY PRINCES
+                    */
+
+                    if (
+                        currentFile ===
+                        "cerita.html"
+                    ) {
+
+                        patchPrinces(
+                            doc
+                        );
+
+                    }
+
+
+                    /*
+                      SURAT CINTA
+                    */
+
+                    if (
+                        currentFile ===
+                        "surat.html"
+                    ) {
+
+                        patchSurat(
+                            doc
+                        );
+
+                    }
+
+
+                    /*
+                      SEMUA LINK INTERNAL
+                    */
+
+                    const links =
+                        doc.querySelectorAll(
+                            "a"
+                        );
+
+
+                    links.forEach(
+                        function (
+                            link
+                        ) {
+
+                            link.addEventListener(
+                                "click",
+                                function (
+                                    event
+                                ) {
+
+                                    const href =
+                                        link.getAttribute(
+                                            "href"
+                                        );
+
+
+                                    if (
+                                        !href
+                                    ) {
+
+                                        return;
+
+                                    }
+
+
+                                    if (
+                                        href.startsWith(
+                                            "http"
+                                        ) ||
+
+                                        href.startsWith(
+                                            "mailto:"
+                                        ) ||
+
+                                        href.startsWith(
+                                            "tel:"
+                                        ) ||
+
+                                        href.startsWith(
+                                            "#"
+                                        )
+                                    ) {
+
+                                        return;
+
+                                    }
+
+
+                                    event.preventDefault();
+
+
+                                    loadPage(
+                                        href
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                      EXPLORE HOME
+                    */
+
+                    const continueBtn =
+                        doc.getElementById(
+                            "continueBtn"
+                        );
+
+
+                    if (
+                        continueBtn
+                    ) {
+
+                        continueBtn.addEventListener(
+                            "click",
+                            function (
+                                event
+                            ) {
+
+                                event.preventDefault();
+
+
+                                loadPage(
+                                    "gallery.html"
+                                );
+
+                            },
+                            true
+                        );
+
+                    }
+
+                }
+
+                catch (
+                error
+                ) {
+
+                    console.log(
+                        error
+                    );
+
+                }
 
             }
         );
-
 
     </script>
 

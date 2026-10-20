@@ -2,1167 +2,1108 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>
-        Elza ♥ Silmy
-    </title>
-
+    <title>Elza ♥ Silmy | Our Memory</title>
 
     <style>
         * {
             box-sizing: border-box;
-        }
-
-
-        html,
-        body {
             margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #12050b;
-            font-family: Georgia, "Times New Roman", serif;
+            padding: 0;
         }
 
+        :root {
+            --spread: min(460px, calc(100vw - 28px));
+            --page: calc(var(--spread) / 2);
+            --cream: #fff8f1;
+            --pink: #c34f79;
+        }
 
+        body {
+            height: 100vh;
+            overflow: hidden;
+            color: #fff4f7;
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(ellipse at center, #681832, transparent 70%),
+                linear-gradient(145deg, #210711, #4b1028, #210610);
+        }
 
-        /* =====================================================
-           WEBSITE FRAME
-        ===================================================== */
-
-        #websiteFrame {
+        .navbar {
             position: fixed;
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            border: none;
-
+            top: 0; left: 0; right: 0;
+            z-index: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 13px 7%;
+            background: rgba(15, 5, 12, .88);
+            border-bottom: 1px solid rgba(255, 180, 210, .1);
+            backdrop-filter: blur(12px);
             opacity: 0;
             visibility: hidden;
-
-            transition:
-                opacity 1.1s ease,
-                visibility 1.1s ease;
+            transform: translateY(-10px);
+            transition: opacity .6s ease, visibility .6s ease, transform .6s ease;
         }
 
-
-        body.unlocked #websiteFrame {
+        .navbar.visible {
             opacity: 1;
             visibility: visible;
+            transform: translateY(0);
         }
 
+        .navbar .logo {
+            font-size: 15px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
 
+        .navbar .logo span { color: #f29abb; }
 
-        /* =====================================================
-           PASSWORD SCREEN
-        ===================================================== */
-
-        .lock-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-
+        .navbar .nav-menu {
             display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 25px;
-
-            overflow: hidden;
-
-            background:
-                radial-gradient(circle at 50% 35%,
-                    rgba(125, 27, 61, 0.35),
-                    transparent 38%),
-                radial-gradient(circle at 10% 90%,
-                    rgba(100, 15, 45, 0.24),
-                    transparent 35%),
-                linear-gradient(145deg,
-                    #090205,
-                    #180710 48%,
-                    #0b0206);
-
-            transition:
-                opacity 1s ease,
-                visibility 1s ease,
-                transform 1s ease;
+            gap: 20px;
         }
 
+        .navbar .nav-menu a {
+            color: #d1a8b8;
+            text-decoration: none;
+            font: 11px Arial, sans-serif;
+            transition: color .25s;
+        }
 
-        body.unlocked .lock-screen {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.05);
+        .navbar .nav-menu a:hover,
+        .navbar .nav-menu a.active { color: #ffacc9; }
+
+        button { font: inherit; }
+
+        .header {
+            padding: 25px 12px 22px;
+            text-align: center;
+        }
+
+        .header-label {
+            margin-bottom: 9px;
+            color: #e7c18c;
+            font: bold 8px Arial, sans-serif;
+            letter-spacing: 4px;
+        }
+
+        .header h1 {
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+        .header h1 span { color: #f2a4bf; }
+
+        .header p {
+            margin-top: 8px;
+            color: #d0a7b7;
+            font-size: 10px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .book-stage {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: auto;
+            align-items: center;
+            justify-items: center;
+            padding: 20px 14px;
+            perspective: 1400px;
+        }
+
+        .book-stage > .book {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .book-stage > .open-area,
+        .book-stage > .continue-area {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: end;
+            margin-bottom: 28px;
+        }
+
+        .book {
+            position: relative;
+            width: var(--page);
+            height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 12px 18px rgba(0,0,0,.25));
+            transition: width 1.6s cubic-bezier(.6,0,.2,1);
+        }
+
+        .book.opening {
+            width: var(--spread);
+            overflow: visible;
+        }
+
+        .book-spread {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: var(--spread);
+            min-height: 305px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: var(--cream);
+            box-shadow: 0 0 0 1px rgba(255,220,230,.2);
+        }
+
+        .book-spread::after {
+            content: "";
+            position: absolute;
+            z-index: 2;
+            top: 0; bottom: 0;
+            left: 50%;
+            width: 9px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg,
+                rgba(100,48,57,.15),
+                rgba(255,255,255,.85),
+                rgba(100,48,57,.1));
             pointer-events: none;
         }
 
-
-
-        /* =====================================================
-           BACKGROUND DECORATION
-        ===================================================== */
-
-        .lock-screen::before {
-            content: "";
-
-            position: absolute;
-            inset: -40%;
-
-            background:
-                radial-gradient(circle,
-                    rgba(255, 166, 187, 0.08) 0 1px,
-                    transparent 2px);
-
-            background-size: 45px 45px;
-
-            animation: starsMove 18s linear infinite;
-        }
-
-
-        @keyframes starsMove {
-
-            from {
-                transform: translateY(0);
-            }
-
-            to {
-                transform: translateY(90px);
-            }
-
-        }
-
-
-
-        .lock-glow {
-            position: absolute;
-
-            width: 500px;
-            height: 500px;
-
-            border-radius: 50%;
-
-            background: rgba(154, 29, 73, 0.15);
-
-            filter: blur(90px);
-
-            animation: glowPulse 4s ease-in-out infinite;
-        }
-
-
-        @keyframes glowPulse {
-
-            0%,
-            100% {
-                transform: scale(0.9);
-                opacity: 0.55;
-            }
-
-            50% {
-                transform: scale(1.15);
-                opacity: 1;
-            }
-
-        }
-
-
-
-        /* =====================================================
-           PASSWORD CARD
-        ===================================================== */
-
-        .lock-card {
+        .page {
             position: relative;
-            z-index: 5;
+            min-width: 0;
+            padding: 15px 10px;
+            color: #795561;
+            background: linear-gradient(140deg, #fffdf9, #fff2e9);
+        }
 
-            width: min(430px, 100%);
+        .page-frame {
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(177,100,125,.23);
+            pointer-events: none;
+        }
 
-            padding: 44px 34px 36px;
+        .section-label {
+            color: #b36c83;
+            font: bold 7px Arial, sans-serif;
+            letter-spacing: 2px;
+        }
 
+        .photo-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
             text-align: center;
-
-            border: 1px solid rgba(255, 217, 194, 0.25);
-
-            border-radius: 28px;
-
-            background:
-                linear-gradient(145deg,
-                    rgba(56, 12, 29, 0.92),
-                    rgba(20, 4, 11, 0.96));
-
-            box-shadow:
-                0 35px 90px rgba(0, 0, 0, 0.6),
-                0 0 40px rgba(200, 63, 105, 0.1);
-
-            backdrop-filter: blur(18px);
         }
 
-
-
-        .lock-small {
-            margin: 0 0 10px;
-
-            color: #d7aa99;
-
-            font-size: 11px;
-
-            letter-spacing: 4px;
-
-            text-transform: uppercase;
-        }
-
-
-
-        .lock-title {
-            margin: 0;
-
-            color: #fff1e9;
-
-            font-size: clamp(31px, 7vw, 46px);
-
-            font-weight: 500;
-
-            letter-spacing: 1px;
-        }
-
-
-        .lock-title span {
-            color: #d95a7f;
-
-            display: inline-block;
-
-            animation: heartBeat 1.6s ease-in-out infinite;
-        }
-
-
-        @keyframes heartBeat {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.14);
-            }
-
-        }
-
-
-
-        .lock-description {
-            margin: 13px auto 28px;
-
-            max-width: 300px;
-
-            color: rgba(255, 238, 229, 0.67);
-
-            font-size: 13px;
-
-            line-height: 1.75;
-        }
-
-
-
-        /* =====================================================
-           BARCODE
-        ===================================================== */
-
-        .barcode-wrap {
-            margin: 0 auto 29px;
-
-            width: 255px;
-
-            max-width: 100%;
-        }
-
-
-        .barcode {
-            position: relative;
-
+        .photo-frame {
             width: 100%;
-            height: 82px;
-
+            max-width: 165px;
+            height: 190px;
             overflow: hidden;
-
-            border-radius: 8px;
-
-            background:
-                repeating-linear-gradient(90deg,
-
-                    #f6ded1 0px,
-                    #f6ded1 2px,
-
-                    transparent 2px,
-                    transparent 5px,
-
-                    #f6ded1 5px,
-                    #f6ded1 9px,
-
-                    transparent 9px,
-                    transparent 12px,
-
-                    #f6ded1 12px,
-                    #f6ded1 13px,
-
-                    transparent 13px,
-                    transparent 18px,
-
-                    #f6ded1 18px,
-                    #f6ded1 23px,
-
-                    transparent 23px,
-                    transparent 26px,
-
-                    #f6ded1 26px,
-                    #f6ded1 28px,
-
-                    transparent 28px,
-                    transparent 33px);
-
-            opacity: 0.92;
-
-            mask-image:
-                linear-gradient(to bottom,
-                    transparent,
-                    black 7%,
-                    black 93%,
-                    transparent);
+            border-radius: 2px;
+            background: #f4e5e9;
         }
 
-
-        .barcode::after {
-            content: "";
-
-            position: absolute;
-            left: 0;
-            right: 0;
-
-            height: 2px;
-
-            background: #ff789b;
-
-            box-shadow:
-                0 0 9px #ff6b94,
-                0 0 20px rgba(255, 80, 130, 0.8);
-
-            animation: barcodeScan 2.6s ease-in-out infinite;
-        }
-
-
-        @keyframes barcodeScan {
-
-            0% {
-                top: 6px;
-                opacity: 0;
-            }
-
-            15% {
-                opacity: 1;
-            }
-
-            85% {
-                opacity: 1;
-            }
-
-            100% {
-                top: 74px;
-                opacity: 0;
-            }
-
-        }
-
-
-
-        .barcode-text {
-            margin-top: 7px;
-
-            color: #b98b7e;
-
-            font-family: monospace;
-
-            font-size: 10px;
-
-            letter-spacing: 4px;
-        }
-
-
-
-        /* =====================================================
-           PASSWORD FORM
-        ===================================================== */
-
-        .password-label {
+        #memoryPhoto {
             display: block;
-
-            margin-bottom: 10px;
-
-            color: #ead2c8;
-
-            font-size: 12px;
-
-            letter-spacing: 1.2px;
-        }
-
-
-
-        .password-box {
-            position: relative;
-
             width: 100%;
-        }
-
-
-
-        #passwordInput {
-            width: 100%;
-
-            padding: 15px 50px 15px 17px;
-
-            border-radius: 14px;
-
-            border: 1px solid rgba(255, 208, 190, 0.23);
-
-            outline: none;
-
-            background: rgba(7, 1, 4, 0.54);
-
-            color: #fff5ef;
-
-            text-align: center;
-
-            font-family: inherit;
-
-            font-size: 16px;
-
-            letter-spacing: 2px;
-
-            transition:
-                border 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-
-        #passwordInput:focus {
-            border-color: rgba(233, 106, 143, 0.65);
-
-            box-shadow:
-                0 0 0 3px rgba(233, 106, 143, 0.08);
-        }
-
-
-
-        .show-password {
-            position: absolute;
-
-            top: 50%;
-            right: 14px;
-
-            transform: translateY(-50%);
-
-            border: none;
-
-            background: transparent;
-
-            color: #cf9c8c;
-
-            cursor: pointer;
-
-            font-size: 15px;
-        }
-
-
-
-        .unlock-button {
-            width: 100%;
-
-            margin-top: 14px;
-
-            padding: 14px 20px;
-
-            border: 1px solid rgba(255, 205, 180, 0.3);
-
-            border-radius: 14px;
-
-            background:
-                linear-gradient(135deg,
-                    #7a1e3f,
-                    #a62e57);
-
-            color: #fff7f2;
-
-            font-family: inherit;
-
-            font-size: 13px;
-
-            letter-spacing: 2px;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 10px 27px rgba(90, 5, 36, 0.42);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-
-        .unlock-button:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 14px 32px rgba(115, 9, 47, 0.5);
-        }
-
-
-        .unlock-button:active {
-            transform: scale(0.98);
-        }
-
-
-
-        .password-message {
-            min-height: 19px;
-
-            margin: 13px 0 0;
-
-            color: #ff90a9;
-
-            font-size: 12px;
-
-            opacity: 0;
-
-            transition: opacity 0.3s ease;
-        }
-
-
-        .password-message.show {
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            cursor: zoom-in;
             opacity: 1;
+            transition: opacity .3s ease;
         }
 
+        .photo-frame.switching #memoryPhoto { opacity: 0; }
 
-
-        .lock-footer {
-            margin-top: 22px;
-
-            color: rgba(232, 195, 181, 0.46);
-
-            font-size: 10px;
-
-            letter-spacing: 2px;
+        .photo-caption {
+            min-height: 13px;
+            color: #a85a76;
+            font-size: 8px;
+            font-style: italic;
         }
 
-
-
-        /* =====================================================
-           SHAKE WHEN PASSWORD WRONG
-        ===================================================== */
-
-        .lock-card.shake {
-            animation: wrongPassword 0.42s ease;
-        }
-
-
-        @keyframes wrongPassword {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            20% {
-                transform: translateX(-8px);
-            }
-
-            40% {
-                transform: translateX(8px);
-            }
-
-            60% {
-                transform: translateX(-5px);
-            }
-
-            80% {
-                transform: translateX(5px);
-            }
-
-        }
-
-
-
-        /* =====================================================
-           SPEAKER BUTTON
-        ===================================================== */
-
-        .speaker-control {
-            position: fixed;
-
-            right: 18px;
-            bottom: 18px;
-
-            z-index: 9999;
-
-            width: 47px;
-            height: 47px;
-
+        .photo-controls {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+        }
 
-            gap: 3px;
-
-            padding: 0;
-
-            border: 1px solid rgba(255, 214, 193, 0.25);
-
+        .photo-arrow {
+            display: grid;
+            place-items: center;
+            width: 23px;
+            height: 23px;
+            border: 1px solid #e4c0cc;
             border-radius: 50%;
-
-            background: rgba(37, 7, 18, 0.86);
-
-            color: #fff1eb;
-
-            backdrop-filter: blur(12px);
-
-            box-shadow:
-                0 8px 26px rgba(0, 0, 0, 0.38),
-                0 0 25px rgba(179, 40, 86, 0.1);
-
+            color: #a64268;
+            background: #fffaf6;
+            font-size: 17px;
             cursor: pointer;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition:
-                opacity 0.5s ease,
-                transform 0.25s ease,
-                background 0.25s ease;
+            transition: background .2s, color .2s;
         }
 
-
-        body.unlocked .speaker-control {
-            opacity: 1;
-            visibility: visible;
+        .photo-arrow:hover {
+            color: white;
+            background: #b84b75;
         }
 
-
-        .speaker-control:hover {
-            transform: scale(1.07);
-
-            background: rgba(70, 13, 33, 0.94);
-        }
-
-
-
-        .speaker-icon {
-            font-size: 18px;
-
-            transform: translateX(1px);
-        }
-
-
-
-        /* =====================================================
-           SOUND WAVES
-        ===================================================== */
-
-        .sound-waves {
+        .photo-dots {
             display: flex;
             align-items: center;
+            gap: 5px;
+        }
 
-            gap: 2px;
+        .photo-dot {
+            width: 5px;
+            height: 5px;
+            border: none;
+            border-radius: 50%;
+            background: #dec3cd;
+            cursor: pointer;
+        }
 
+        .photo-dot.active {
+            width: 13px;
+            border-radius: 6px;
+            background: #c04d76;
+        }
+
+        .story-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .story-heart {
+            margin: 10px 0 6px;
+            color: var(--pink);
+            font-size: 15px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            50% {
+                transform: scale(1.15);
+                text-shadow: 0 0 9px rgba(220,90,140,.4);
+            }
+        }
+
+        .story-page h2 {
+            color: #a63e62;
+            font-size: 23px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .story-divider {
+            width: 42px;
+            height: 1px;
+            margin: 10px auto;
+            background: #d78da5;
+        }
+
+        .story-text {
+            max-width: 180px;
+            color: #795965;
+            font-size: 8.5px;
+            line-height: 1.65;
+        }
+
+        .story-text p+p { margin-top: 7px; }
+
+        .story-quote {
+            margin-top: 9px;
+            color: #ad5b79;
+            font-size: 8px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 5px;
+            left: 0; right: 0;
+            color: #c49aa8;
+            font-size: 6px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .book-cover {
+            position: absolute;
+            z-index: 10;
+            top: 0; left: 0;
+            width: var(--page);
+            height: 100%;
+            min-height: 305px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #d7a0b5;
+            border-radius: 8px;
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            backface-visibility: hidden;
+            background:
+                radial-gradient(ellipse at center,
+                    rgba(202,86,130,.25), transparent 65%),
+                linear-gradient(145deg, #641832, #300917 80%);
+            box-shadow:
+                inset 0 0 0 5px rgba(255,230,238,.04),
+                inset 0 0 0 7px rgba(225,160,185,.22);
+            transition: transform 2s cubic-bezier(.6,0,.2,1);
+        }
+
+        .book-cover::before {
+            content: "";
+            position: absolute;
+            inset: 9px;
+            border: 1px solid rgba(237,194,210,.45);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            transition: opacity .35s ease;
+        }
+
+        .cover-label {
+            color: #e7c18c;
+            font: bold 6px Arial, sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        .cover-heart {
+            margin: 12px 0 8px;
+            color: #f2a6c0;
+            font-size: 21px;
+        }
+
+        .cover-content h2 {
+            font-size: 26px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .cover-content h2 span {
+            display: block;
+            color: #f0a8c1;
+        }
+
+        .cover-description {
+            margin-top: 9px;
+            color: #e3b9c8;
+            font-size: 8px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .ribbon {
+            position: absolute;
+            z-index: 4;
+            background: linear-gradient(90deg, #d68aa8, #f4c9d8, #b65b7c);
+            box-shadow: 0 2px 7px rgba(0,0,0,.14);
+            transition: transform .8s ease, opacity .6s ease;
+        }
+
+        .ribbon.vertical {
+            top: 0; bottom: 0;
+            left: calc(50% - 9px);
+            width: 18px;
+        }
+
+        .ribbon.horizontal {
+            left: 0; right: 0;
+            top: calc(50% - 9px);
             height: 18px;
         }
 
+        .ribbon-bow {
+            position: absolute;
+            z-index: 5;
+            top: calc(50% - 17px);
+            left: 50%;
+            width: 57px;
+            height: 34px;
+            transform: translateX(-50%);
+            transition: transform .7s ease, opacity .5s ease;
+        }
 
-        .sound-waves i {
+        .ribbon-bow::before,
+        .ribbon-bow::after {
+            content: "";
+            position: absolute;
+            top: 4px;
+            width: 25px;
+            height: 23px;
+            border: 5px solid #e6a8bf;
+            background: rgba(255,220,233,.1);
+        }
+
+        .ribbon-bow::before {
+            left: 0;
+            border-radius: 70% 30% 70% 30%;
+            transform: rotate(18deg);
+        }
+
+        .ribbon-bow::after {
+            right: 0;
+            border-radius: 30% 70% 30% 70%;
+            transform: rotate(-18deg);
+        }
+
+        .ribbon-knot {
+            position: absolute;
+            z-index: 6;
+            top: calc(50% - 8px);
+            left: calc(50% - 8px);
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            background: #f1c1d1;
+            transition: opacity .4s ease;
+        }
+
+        .book-cover.untie .ribbon.vertical {
+            transform: translateY(-110%);
+            opacity: 0;
+        }
+
+        .book-cover.untie .ribbon.horizontal {
+            transform: translateX(110%);
+            opacity: 0;
+        }
+
+        .book-cover.untie .ribbon-bow {
+            transform: translateX(-50%) scale(1.6) rotate(20deg);
+            opacity: 0;
+        }
+
+        .book-cover.untie .ribbon-knot { opacity: 0; }
+
+        .name-reveal {
+            position: absolute;
+            z-index: 8;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 8px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .name-reveal.show {
+            visibility: visible;
+            animation: nameAppear .5s ease forwards;
+        }
+
+        .name-reveal p {
+            color: #e5bd8d;
+            font: bold 6px Arial, sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        .name-reveal h2 {
+            color: #f4c0d2;
+            font-size: 22px;
+            font-weight: normal;
+            font-style: italic;
+            text-shadow: 0 0 14px rgba(255,160,195,.3);
+        }
+
+        .name-reveal span { color: #f4a3bf; }
+
+        @keyframes nameAppear {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .book-cover.open {
+            transform: rotateY(-175deg);
+            pointer-events: none;
+            box-shadow: -18px 8px 30px rgba(0,0,0,.35);
+        }
+
+        .open-area {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            transition: opacity .4s ease, visibility .4s ease;
+        }
+
+        .open-book-button,
+        .continue-button {
+            padding: 11px 22px;
+            border: 1px solid rgba(255,220,233,.6);
+            border-radius: 25px;
+            color: #fff5f8;
+            background: linear-gradient(135deg, #c34f79, #913054);
+            box-shadow: 0 5px 16px rgba(0,0,0,.18);
+            font: bold 9px Arial, sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .open-book-button:hover,
+        .continue-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 19px rgba(0,0,0,.25);
+        }
+
+        .open-book-button:disabled {
+            opacity: .7;
+            cursor: default;
+        }
+
+        .open-area.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .continue-area {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition:
+                opacity .6s ease,
+                transform .6s ease,
+                visibility .6s ease;
+        }
+
+        .continue-area.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .continue-button { font-size: 10px; }
+
+        .love-counter {
+            grid-column: 1;
+            grid-row: 1;
+            justify-self: end;
+            margin-right: 28px;
+            display: none;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .love-counter.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @media (max-width: 640px) {
+            .love-counter {
+                position: fixed;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%) translateX(-10px);
+                grid-column: unset;
+                grid-row: unset;
+                margin: 0;
+                z-index: 999;
+            }
+            .love-counter.visible {
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+
+        .love-counter-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 180, 210, .35);
+            border-radius: 16px;
+            background: rgba(15, 4, 10, .88);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 0 18px rgba(200, 80, 130, .15);
+        }
+
+        .love-counter-label {
+            color: #e7c18c;
+            font: bold 7px Arial, sans-serif;
+            letter-spacing: 2.5px;
+        }
+
+        .love-counter-number {
+            color: #f2a4bf;
+            font-size: 22px;
+            font-style: italic;
+            line-height: 1;
+            text-shadow: 0 0 14px rgba(242, 164, 191, .4);
+        }
+
+        .love-counter-time {
+            color: #e8c8d5;
+            font: bold 13px Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .love-counter-sub {
+            color: #b08898;
+            font-size: 8px;
+            font-style: italic;
+        }
+
+        .closing {
+            padding: 22px 12px 24px;
+            text-align: center;
+            color: #d9b1c0;
+        }
+
+        .closing p {
+            font-size: 9px;
+            font-style: italic;
+        }
+
+        .closing span {
             display: block;
+            margin-top: 7px;
+            color: #edb5ca;
+            font-size: 13px;
+        }
 
-            width: 2px;
+        .lightbox {
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(15,3,9,.92);
+        }
 
+        .lightbox.show { display: flex; }
+
+        .lightbox img {
+            display: block;
+            max-width: 92vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 2px solid #e9b1c7;
             border-radius: 5px;
-
-            background: #efa6b9;
-
-            transform-origin: center;
-
-            animation: soundWave 0.8s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(220,120,160,.2);
         }
 
-
-        .sound-waves i:nth-child(1) {
-            height: 6px;
-            animation-delay: 0s;
+        .lightbox-close {
+            position: absolute;
+            top: 15px; right: 18px;
+            width: 38px; height: 38px;
+            border: 1px solid #e9b1c7;
+            border-radius: 50%;
+            color: white;
+            background: #792341;
+            font-size: 24px;
+            cursor: pointer;
         }
 
-
-        .sound-waves i:nth-child(2) {
-            height: 13px;
-            animation-delay: 0.16s;
+        @media (max-width: 380px) {
+            .book-spread { min-height: 275px; }
+            .book-cover  { min-height: 275px; }
+            .page        { padding: 12px 7px; }
+            .photo-frame { max-width: 125px; height: 140px; }
+            .story-page h2 { font-size: 19px; }
+            .story-text    { font-size: 7.5px; }
+            .story-quote   { font-size: 7px; }
         }
 
-
-        .sound-waves i:nth-child(3) {
-            height: 9px;
-            animation-delay: 0.32s;
-        }
-
-
-        @keyframes soundWave {
-
-            0%,
-            100% {
-                transform: scaleY(0.45);
-                opacity: 0.45;
-            }
-
-            50% {
-                transform: scaleY(1.15);
-                opacity: 1;
-            }
-
-        }
-
-
-
-        /* =====================================================
-           MUTED
-        ===================================================== */
-
-        .speaker-control.muted .sound-waves i {
-            animation: none;
-
-            transform: scaleY(0.3);
-
-            opacity: 0.3;
-        }
-
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .lock-card {
-                padding:
-                    38px 23px 30px;
-
-                border-radius: 23px;
-            }
-
-
-            .barcode-wrap {
-                width: 220px;
-            }
-
-
-            .speaker-control {
-                width: 43px;
-                height: 43px;
-
-                right: 13px;
-                bottom: 13px;
-            }
-
+        @media (prefers-reduced-motion: reduce) {
+            .story-heart { animation: none; }
         }
     </style>
-
 </head>
-
-
 
 <body>
 
+    <nav class="navbar" id="siteNavbar">
+        <div class="logo">Elza <span>♥</span> Silmy</div>
+        <div class="nav-menu">
+            <a href="home.html" class="active">Home</a>
+            <a href="gallery.html">Galeri</a>
+            <a href="cerita.html">My Princes</a>
+            <a href="surat.html">A Moment For You</a>
+        </div>
+    </nav>
 
-    <!-- =====================================================
-         PASSWORD PAGE
-    ===================================================== -->
+    <main class="book-stage">
 
-    <div class="lock-screen" id="lockScreen">
+        <div class="book" id="memoryBook">
 
-        <div class="lock-glow"></div>
+            <div class="book-spread">
 
+                <!-- HALAMAN KIRI: FOTO -->
+                <section class="page photo-page">
+                    <div class="page-frame"></div>
+                    <div class="section-label">OUR MEMORIES</div>
 
-        <div class="lock-card" id="lockCard">
+                    <div class="photo-frame" id="photoFrame">
+                        <img id="memoryPhoto" src="foto/kenangan1.jpg"
+                            alt="Kenangan Elza dan Silmy"
+                            title="Klik untuk memperbesar foto">
+                    </div>
 
+                    <p class="photo-caption" id="photoCaption">
+                        A little memory with you ♥
+                    </p>
 
-            <p class="lock-small">
-                PRIVATE MEMORY
-            </p>
+                    <div class="photo-controls">
+                        <button class="photo-arrow" id="previousPhoto" type="button" aria-label="Foto sebelumnya">
+                            ‹
+                        </button>
 
+                        <div class="photo-dots" id="photoDots">
+                            <button class="photo-dot active" type="button" aria-label="Foto 1"></button>
+                            <button class="photo-dot" type="button" aria-label="Foto 2"></button>
+                            <button class="photo-dot" type="button" aria-label="Foto 3"></button>
+                        </div>
 
-            <h1 class="lock-title">
+                        <button class="photo-arrow" id="nextPhoto" type="button" aria-label="Foto berikutnya">
+                            ›
+                        </button>
+                    </div>
 
-                Elza
+                    <div class="page-number">0 1</div>
+                </section>
 
-                <span>
-                    ♥
-                </span>
+                <!-- HALAMAN KANAN: CERITA -->
+                <section class="page story-page">
+                    <div class="page-frame"></div>
+                    <div class="section-label">ELZA ♥ SILMY</div>
+                    <div class="story-heart">♥</div>
 
-                Silmy
+                    <h2>Cerita Kita</h2>
+                    <div class="story-divider"></div>
 
-            </h1>
+                    <div class="story-text">
+                        <p>
+                            Ini bukan sekadar tentang foto atau kenangan.
+                            Ini tentang dua manusia yang dipertemukan,
+                            lalu perlahan menciptakan cerita mereka sendiri.
+                        </p>
+                        <p>
+                            Tentang tawa, percakapan sederhana,
+                            perjalanan kecil, dan semua hal yang
+                            akhirnya menjadi berarti.
+                        </p>
+                        <p>
+                            Dan mungkin, ini baru halaman pertama
+                            dari cerita yang masih panjang.
+                        </p>
+                    </div>
 
+                    <div class="story-quote">
+                        "You are my favorite kind of memory."
+                    </div>
 
-            <p class="lock-description">
+                    <div class="page-number">0 2</div>
+                </section>
 
-                Ada satu tanggal kecil
-                yang menjadi kunci
-                untuk membuka cerita ini.
+            </div>
 
-            </p>
+            <!-- SAMPUL DEPAN -->
+            <div class="book-cover" id="bookCover">
 
+                <div class="cover-content" id="coverContent">
+                    <div class="cover-label">A LITTLE STORY ABOUT US</div>
+                    <div class="cover-heart">♥</div>
+                    <h2>Our <span>Memory</span></h2>
+                    <p class="cover-description">A little book, a lot of memories.</p>
+                </div>
 
+                <div class="ribbon vertical"></div>
+                <div class="ribbon horizontal"></div>
+                <div class="ribbon-bow"></div>
+                <div class="ribbon-knot"></div>
 
-            <!-- BARCODE -->
-
-            <div class="barcode-wrap">
-
-                <div class="barcode"></div>
-
-                <div class="barcode-text">
-                    OUR • LITTLE • STORY
+                <div class="name-reveal" id="nameReveal">
+                    <p>A SPECIAL MOMENT FOR</p>
+                    <h2>Elza <span>♥</span> Silmy</h2>
+                    <p>MADE WITH LOVE</p>
                 </div>
 
             </div>
 
-
-
-            <!-- PASSWORD -->
-
-            <form id="passwordForm">
-
-
-                <label class="password-label" for="passwordInput">
-
-                    masukkan password
-
-                </label>
-
-
-                <div class="password-box">
-
-                    <input id="passwordInput" type="password" autocomplete="off" placeholder="••••••••••">
-
-
-                    <button class="show-password" id="showPassword" type="button" aria-label="Lihat password">
-
-                        ♡
-
-                    </button>
-
-                </div>
-
-
-                <button class="unlock-button" type="submit">
-
-                    OPEN OUR STORY ♥
-
-                </button>
-
-
-                <p class="password-message" id="passwordMessage">
-
-                    password belum tepat ♥
-
-                </p>
-
-
-            </form>
-
-
-            <p class="lock-footer">
-                ONLY FOR US
-            </p>
-
-
         </div>
 
+        <!-- TOMBOL BUKA BUKU -->
+        <div class="open-area" id="openArea">
+            <button class="open-book-button" type="button" id="openBook">
+                Klik untuk Membuka Buku ♥
+            </button>
+        </div>
+
+        <!-- TOMBOL SETELAH BUKU TERBUKA -->
+        <div class="continue-area" id="continueArea">
+            <button class="continue-button" type="button" id="continueBtn">
+                EXPLORE OUR STORY ♥
+            </button>
+        </div>
+
+        <!-- LOVE COUNTER -->
+        <div class="love-counter" id="loveCounter">
+            <div class="love-counter-box">
+                <span class="love-counter-label">BERSAMA SELAMA</span>
+                <span class="love-counter-number" id="counterDays">0 hari</span>
+                <span class="love-counter-time" id="counterTime">00:00:00</span>
+                <span class="love-counter-sub">elza ♥ silmy</span>
+            </div>
+        </div>
+
+    </main>
+
+
+
+    <!-- LIGHTBOX FOTO BESAR -->
+    <div class="lightbox" id="photoLightbox" role="dialog"
+        aria-label="Foto kenangan ukuran besar" aria-hidden="true">
+        <button class="lightbox-close" id="closeLightbox" type="button" aria-label="Tutup foto">
+            ×
+        </button>
+        <img id="largePhoto" src="" alt="Foto kenangan Elza dan Silmy">
     </div>
 
-
-
-    <!-- =====================================================
-         WEBSITE
-    ===================================================== -->
-
-    <iframe id="websiteFrame" src="home.html" title="Elza dan Silmy">
-    </iframe>
-
-
-
-    <!-- =====================================================
-         BACKGROUND MUSIC
-    ===================================================== -->
-
-    <audio id="backgroundMusic" src="musik/musikromantis.mp3" preload="auto" loop>
-    </audio>
-
-
-
-    <!-- =====================================================
-         SPEAKER
-    ===================================================== -->
-
-    <button class="speaker-control" id="speakerButton" type="button" aria-label="Mute atau unmute musik">
-
-        <span class="speaker-icon" id="speakerIcon">
-
-            🔊
-
-        </span>
-
-
-        <span class="sound-waves">
-
-            <i></i>
-            <i></i>
-            <i></i>
-
-        </span>
-
-    </button>
-
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ===================================================== -->
-
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-        /* =====================================================
-           ELEMENTS
-        ===================================================== */
+            var book         = document.getElementById("memoryBook");
+            var cover        = document.getElementById("bookCover");
+            var coverContent = document.getElementById("coverContent");
+            var nameReveal   = document.getElementById("nameReveal");
+            var openButton   = document.getElementById("openBook");
+            var openArea     = document.getElementById("openArea");
+            var continueArea = document.getElementById("continueArea");
+            var continueBtn  = document.getElementById("continueBtn");
+            var navbar       = document.getElementById("siteNavbar");
+            var photo        = document.getElementById("memoryPhoto");
+            var photoFrame   = document.getElementById("photoFrame");
+            var caption      = document.getElementById("photoCaption");
+            var prevBtn      = document.getElementById("previousPhoto");
+            var nextBtn      = document.getElementById("nextPhoto");
+            var lightbox     = document.getElementById("photoLightbox");
+            var largePhoto   = document.getElementById("largePhoto");
+            var closeBtn     = document.getElementById("closeLightbox");
 
-        const passwordForm =
-            document.getElementById("passwordForm");
+            var dots = Array.from(document.querySelectorAll("#photoDots .photo-dot"));
 
-        const passwordInput =
-            document.getElementById("passwordInput");
+            /*
+                Foto 1 dan 2 sudah ada.
+                Foto 3 (kenangan3.jpg) belum ada, akan ditambahkan nanti.
+                Kalau foto belum ada, tampil placeholder tanpa error.
+            */
+            var photos = [
+                { src: "foto/kenangan1.jpg", caption: "A little memory with you ♥" },
+                { src: "foto/kenangan2.jpg", caption: "One of my favorite moments ♥" },
+                { src: "foto/kenangan3.jpg", caption: "A memory worth keeping ♥" }
+            ];
 
-        const passwordMessage =
-            document.getElementById("passwordMessage");
+            var currentPhoto   = 0;
+            var openingStarted = false;
+            var photoRequest   = 0;
 
-        const lockCard =
-            document.getElementById("lockCard");
+            /* ---- ANIMASI BUKA BUKU ---- */
 
-        const showPassword =
-            document.getElementById("showPassword");
+            openButton.addEventListener("click", function () {
+                if (openingStarted) return;
+                openingStarted = true;
+                openButton.disabled = true;
 
-        const music =
-            document.getElementById("backgroundMusic");
+                /* Tahap 1: pita terlepas */
+                cover.classList.add("untie");
 
-        const speakerButton =
-            document.getElementById("speakerButton");
+                /* Tahap 2: 3 detik kemudian tulisan sampul hilang */
+                setTimeout(function () {
+                    coverContent.style.opacity = "0";
 
-        const speakerIcon =
-            document.getElementById("speakerIcon");
+                    setTimeout(function () {
+                        coverContent.style.visibility = "hidden";
 
+                        /* Tahap 3: nama Elza ♥ Silmy muncul */
+                        nameReveal.classList.add("show");
+                    }, 350);
 
-        /* =====================================================
-           PASSWORD
-        ===================================================== */
+                    /* Tahap 4: nama tampil 3 detik lalu buku terbuka */
+                    setTimeout(function () {
+                        nameReveal.classList.remove("show");
 
-        const correctPassword =
-            "03-03-2026";
+                        setTimeout(function () {
+                            book.classList.add("opening");
 
+                            requestAnimationFrame(function () {
+                                requestAnimationFrame(function () {
+                                    cover.classList.add("open");
+                                });
+                            });
 
-        passwordForm.addEventListener(
-            "submit",
-            async function (event) {
+                            openArea.classList.add("hidden");
 
-                event.preventDefault();
+                            /* Tombol Explore muncul setelah buku terbuka */
+                            setTimeout(function () {
+                                continueArea.classList.add("visible");
+                                navbar.classList.add("visible");
+                                updateCounter();
+                                setInterval(updateCounter, 1000);
+                                loveCounter.style.display = "block";
+                                requestAnimationFrame(function () {
+                                    loveCounter.classList.add("visible");
+                                });
+                            }, 1800);
 
+                        }, 300);
 
-                const enteredPassword =
-                    passwordInput.value.trim();
+                    }, 3350);
 
+                }, 3000);
+            });
 
-                if (
-                    enteredPassword ===
-                    correctPassword
-                ) {
+            /* ---- GANTI FOTO MANUAL ---- */
 
-                    passwordMessage.classList.remove(
-                        "show"
-                    );
+            function showPhoto(index) {
+                currentPhoto = (index + photos.length) % photos.length;
 
+                var selected = photos[currentPhoto];
+                var request  = ++photoRequest;
+                var preloader = new Image();
 
-                    /*
-                    Karena tombol password ditekan
-                    langsung oleh pengguna,
-                    browser mengizinkan musik dimulai.
-                    */
+                photoFrame.classList.add("switching");
 
-                    music.volume = 0.38;
+                preloader.onload = function () {
+                    if (request !== photoRequest) return;
 
-                    music.muted = false;
+                    photo.src = selected.src;
+                    photo.style.background = "";
+                    photo.alt = "Kenangan Elza dan Silmy, foto " + (currentPhoto + 1);
+                    caption.textContent = selected.caption;
 
+                    dots.forEach(function (dot, i) {
+                        dot.classList.toggle("active", i === currentPhoto);
+                    });
 
-                    try {
+                    requestAnimationFrame(function () {
+                        photoFrame.classList.remove("switching");
+                    });
+                };
 
-                        await music.play();
+                preloader.onerror = function () {
+                    if (request !== photoRequest) return;
 
-                    } catch (error) {
+                    /* Foto belum ada — tampilkan warna placeholder */
+                    photo.removeAttribute("src");
+                    photo.style.background = "#f4e5e9";
+                    caption.textContent = "Foto segera hadir ♥";
 
-                        console.log(
-                            "Browser belum mengizinkan audio."
-                        );
+                    dots.forEach(function (dot, i) {
+                        dot.classList.toggle("active", i === currentPhoto);
+                    });
 
-                    }
+                    photoFrame.classList.remove("switching");
+                };
 
-
-                    document.body.classList.add(
-                        "unlocked"
-                    );
-
-
-                } else {
-
-
-                    passwordMessage.textContent =
-                        "password belum tepat ♥";
-
-
-                    passwordMessage.classList.add(
-                        "show"
-                    );
-
-
-                    lockCard.classList.remove(
-                        "shake"
-                    );
-
-
-                    void lockCard.offsetWidth;
-
-
-                    lockCard.classList.add(
-                        "shake"
-                    );
-
-
-                    passwordInput.select();
-
-                }
-
+                preloader.src = selected.src;
             }
-        );
 
+            prevBtn.addEventListener("click", function () { showPhoto(currentPhoto - 1); });
+            nextBtn.addEventListener("click", function () { showPhoto(currentPhoto + 1); });
 
+            dots.forEach(function (dot, index) {
+                dot.addEventListener("click", function () { showPhoto(index); });
+            });
 
-        /* =====================================================
-           SHOW / HIDE PASSWORD
-        ===================================================== */
+            /* ---- LIGHTBOX ---- */
 
-        showPassword.addEventListener(
-            "click",
-            function () {
+            photo.addEventListener("click", function () {
+                if (!photo.complete || photo.naturalWidth === 0) return;
+                largePhoto.src = photo.src;
+                largePhoto.alt = photo.alt;
+                lightbox.classList.add("show");
+                lightbox.setAttribute("aria-hidden", "false");
+            });
 
-                if (
-                    passwordInput.type ===
-                    "password"
-                ) {
-
-                    passwordInput.type =
-                        "text";
-
-                    showPassword.textContent =
-                        "♥";
-
-                } else {
-
-                    passwordInput.type =
-                        "password";
-
-                    showPassword.textContent =
-                        "♡";
-
-                }
-
+            function closePhoto() {
+                lightbox.classList.remove("show");
+                lightbox.setAttribute("aria-hidden", "true");
             }
-        );
 
+            closeBtn.addEventListener("click", closePhoto);
 
+            lightbox.addEventListener("click", function (e) {
+                if (e.target === lightbox) closePhoto();
+            });
 
-        /* =====================================================
-           SPEAKER
-           TIDAK MEM-PAUSE LAGU
-           HANYA MUTE
-        ===================================================== */
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") closePhoto();
+            });
 
-        speakerButton.addEventListener(
-            "click",
-            function () {
+            /* ---- LOVE COUNTER ---- */
 
-                music.muted =
-                    !music.muted;
+            var loveCounter = document.getElementById("loveCounter");
+            var counterDays = document.getElementById("counterDays");
+            var counterTime = document.getElementById("counterTime");
 
+            function updateCounter() {
+                var start = new Date("2026-03-03T00:00:00");
+                var now = new Date();
+                var diff = now - start;
+                if (diff < 0) diff = 0;
 
-                if (music.muted) {
+                var days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-                    speakerButton.classList.add(
-                        "muted"
-                    );
-
-                    speakerIcon.textContent =
-                        "🔇";
-
-                } else {
-
-                    speakerButton.classList.remove(
-                        "muted"
-                    );
-
-                    speakerIcon.textContent =
-                        "🔊";
-
-
-                    /*
-                    Kalau browser sempat menghentikan
-                    musik karena alasan tertentu,
-                    coba jalankan lagi tanpa reset waktu.
-                    */
-
-                    if (music.paused) {
-
-                        music.play()
-                            .catch(() => { });
-
-                    }
-
-                }
-
+                counterDays.textContent = days + " hari";
+                counterTime.textContent =
+                    String(hours).padStart(2, "0") + ":" +
+                    String(minutes).padStart(2, "0") + ":" +
+                    String(seconds).padStart(2, "0");
             }
-        );
 
+            /* ---- TOMBOL EXPLORE → GALERI ---- */
 
+            continueBtn.addEventListener("click", function () {
+                window.location.href = "gallery.html";
+            });
 
-        /* =====================================================
-           AUDIO ERROR CHECK
-        ===================================================== */
-
-        music.addEventListener(
-            "error",
-            function () {
-
-                console.log(
-                    "File musik tidak ditemukan. Cek musik/musikromantis.mp3"
-                );
-
-            }
-        );
-
-
+            /* Tampilkan foto pertama saat halaman dibuka */
+            showPhoto(0);
+        });
     </script>
 
 </body>

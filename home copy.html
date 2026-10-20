@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elza ♥ Silmy | Our Memory</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --spread: min(460px, calc(100vw - 28px));
+            --page: calc(var(--spread) / 2);
+            --cream: #fff8f1;
+            --pink: #c34f79;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff4f7;
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(ellipse at center, #681832, transparent 70%),
+                linear-gradient(145deg, #210711, #4b1028, #210610);
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .header {
+            padding: 25px 12px 22px;
+            text-align: center;
+        }
+
+        .header-label {
+            margin-bottom: 9px;
+            color: #e7c18c;
+            font: bold 8px Arial, sans-serif;
+            letter-spacing: 4px;
+        }
+
+        .header h1 {
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+        .header h1 span {
+            color: #f2a4bf;
+        }
+
+        .header p {
+            margin-top: 8px;
+            color: #d0a7b7;
+            font-size: 10px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* AREA BUKU */
+
+        .book-stage {
+            width: 100%;
+            padding: 4px 14px 0;
+            perspective: 1400px;
+        }
+
+        .book {
+            position: relative;
+            width: var(--page);
+            height: auto;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .25));
+            transition: width 1.2s cubic-bezier(.65, 0, .25, 1);
+        }
+
+        /* Setelah dibuka, buku melebar menjadi dua halaman */
+
+        .book.opening {
+            width: var(--spread);
+            overflow: visible;
+        }
+
+        /* DUA HALAMAN BUKU */
+
+        .book-spread {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: var(--spread);
+            min-height: 305px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: var(--cream);
+            box-shadow: 0 0 0 1px rgba(255, 220, 230, .2);
+        }
+
+        .book-spread::after {
+            content: "";
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 9px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg,
+                    rgba(100, 48, 57, .15),
+                    rgba(255, 255, 255, .85),
+                    rgba(100, 48, 57, .1));
+            pointer-events: none;
+        }
+
+        .page {
+            position: relative;
+            min-width: 0;
+            padding: 15px 10px;
+            color: #795561;
+            background: linear-gradient(140deg, #fffdf9, #fff2e9);
+        }
+
+        .page-frame {
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(177, 100, 125, .23);
+            pointer-events: none;
+        }
+
+        /* HALAMAN KIRI */
+
+        .photo-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            text-align: center;
+        }
+
+        .section-label {
+            color: #b36c83;
+            font: bold 7px Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+
+        /* FOTO PENUH TANPA LAPISAN TAMBAHAN */
+
+        .photo-frame {
+            width: 100%;
+            max-width: 165px;
+            height: 190px;
+            padding: 0;
+            overflow: hidden;
+            border: none;
+            border-radius: 2px;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        #memoryPhoto {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            border: 0;
+            object-fit: cover;
+            object-position: center;
+            background: transparent;
+            opacity: 1;
+            transition: opacity .3s ease;
+        }
+
+        .photo-frame.switching #memoryPhoto {
+            opacity: 0;
+        }
+
+        .photo-caption {
+            min-height: 13px;
+            color: #a85a76;
+            font-size: 8px;
+            font-style: italic;
+        }
+
+        .photo-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .photo-arrow {
+            display: grid;
+            place-items: center;
+            width: 23px;
+            height: 23px;
+            border: 1px solid #e4c0cc;
+            border-radius: 50%;
+            color: #a64268;
+            background: #fffaf6;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .photo-arrow:hover {
+            color: white;
+            background: #b84b75;
+        }
+
+        .photo-dots {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .photo-dot {
+            width: 5px;
+            height: 5px;
+            border: none;
+            border-radius: 50%;
+            background: #dec3cd;
+            cursor: pointer;
+        }
+
+        .photo-dot.active {
+            width: 13px;
+            border-radius: 6px;
+            background: #c04d76;
+        }
+
+        /* HALAMAN KANAN */
+
+        .story-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .story-heart {
+            margin: 10px 0 6px;
+            color: var(--pink);
+            font-size: 15px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            50% {
+                transform: scale(1.15);
+                text-shadow: 0 0 9px rgba(220, 90, 140, .4);
+            }
+        }
+
+        .story-page h2 {
+            color: #a63e62;
+            font-size: 23px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .story-divider {
+            width: 42px;
+            height: 1px;
+            margin: 10px auto;
+            background: #d78da5;
+        }
+
+        .story-text {
+            max-width: 180px;
+            color: #795965;
+            font-size: 8.5px;
+            line-height: 1.65;
+        }
+
+        .story-text p+p {
+            margin-top: 7px;
+        }
+
+        .story-quote {
+            margin-top: 9px;
+            color: #ad5b79;
+            font-size: 8px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            color: #c49aa8;
+            font-size: 6px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        /* SAMPUL HANYA SATU HALAMAN SAAT TERTUTUP */
+
+        .book-cover {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: var(--page);
+            height: 100%;
+            min-height: 305px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #d7a0b5;
+            border-radius: 8px;
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            backface-visibility: hidden;
+            background:
+                radial-gradient(ellipse at center,
+                    rgba(202, 86, 130, .25), transparent 65%),
+                linear-gradient(145deg, #641832, #300917 80%);
+            box-shadow:
+                inset 0 0 0 5px rgba(255, 230, 238, .04),
+                inset 0 0 0 7px rgba(225, 160, 185, .22);
+            transition: transform 1.5s cubic-bezier(.65, 0, .25, 1);
+        }
+
+        .book-cover::before {
+            content: "";
+            position: absolute;
+            inset: 9px;
+            border: 1px solid rgba(237, 194, 210, .45);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            transition: opacity .35s ease;
+        }
+
+        .cover-label {
+            color: #e7c18c;
+            font: bold 6px Arial, sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        .cover-heart {
+            margin: 12px 0 8px;
+            color: #f2a6c0;
+            font-size: 21px;
+        }
+
+        .cover-content h2 {
+            font-size: 26px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .cover-content h2 span {
+            display: block;
+            color: #f0a8c1;
+        }
+
+        .cover-description {
+            margin-top: 9px;
+            color: #e3b9c8;
+            font-size: 8px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* PITA DI SAMPUL */
+
+        .ribbon {
+            position: absolute;
+            z-index: 4;
+            background: linear-gradient(90deg, #d68aa8, #f4c9d8, #b65b7c);
+            box-shadow: 0 2px 7px rgba(0, 0, 0, .14);
+            transition: transform .8s ease, opacity .6s ease;
+        }
+
+        .ribbon.vertical {
+            top: 0;
+            bottom: 0;
+            left: calc(50% - 9px);
+            width: 18px;
+        }
+
+        .ribbon.horizontal {
+            left: 0;
+            right: 0;
+            top: calc(50% - 9px);
+            height: 18px;
+        }
+
+        .ribbon-bow {
+            position: absolute;
+            z-index: 5;
+            top: calc(50% - 17px);
+            left: 50%;
+            width: 57px;
+            height: 34px;
+            transform: translateX(-50%);
+            transition: transform .7s ease, opacity .5s ease;
+        }
+
+        .ribbon-bow::before,
+        .ribbon-bow::after {
+            content: "";
+            position: absolute;
+            top: 4px;
+            width: 25px;
+            height: 23px;
+            border: 5px solid #e6a8bf;
+            background: rgba(255, 220, 233, .1);
+        }
+
+        .ribbon-bow::before {
+            left: 0;
+            border-radius: 70% 30% 70% 30%;
+            transform: rotate(18deg);
+        }
+
+        .ribbon-bow::after {
+            right: 0;
+            border-radius: 30% 70% 30% 70%;
+            transform: rotate(-18deg);
+        }
+
+        .ribbon-knot {
+            position: absolute;
+            z-index: 6;
+            top: calc(50% - 8px);
+            left: calc(50% - 8px);
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            background: #f1c1d1;
+            transition: opacity .4s ease;
+        }
+
+        /* PITA TERLEPAS */
+
+        .book-cover.untie .ribbon.vertical {
+            transform: translateY(-110%);
+            opacity: 0;
+        }
+
+        .book-cover.untie .ribbon.horizontal {
+            transform: translateX(110%);
+            opacity: 0;
+        }
+
+        .book-cover.untie .ribbon-bow {
+            transform: translateX(-50%) scale(1.6) rotate(20deg);
+            opacity: 0;
+        }
+
+        .book-cover.untie .ribbon-knot {
+            opacity: 0;
+        }
+
+        /* NAMA ELZA ♥ SILMY */
+
+        .name-reveal {
+            position: absolute;
+            z-index: 8;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 8px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .name-reveal.show {
+            visibility: visible;
+            animation: nameAppear .5s ease forwards;
+        }
+
+        .name-reveal p {
+            color: #e5bd8d;
+            font: bold 6px Arial, sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        .name-reveal h2 {
+            color: #f4c0d2;
+            font-size: 22px;
+            font-weight: normal;
+            font-style: italic;
+            text-shadow: 0 0 14px rgba(255, 160, 195, .3);
+        }
+
+        .name-reveal span {
+            color: #f4a3bf;
+        }
+
+        @keyframes nameAppear {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SAMPUL MEMBUKA KE KIRI */
+
+        .book-cover.open {
+            transform: rotateY(-165deg);
+            pointer-events: none;
+        }
+
+        /* TOMBOL DI LUAR BUKU */
+
+        .open-area {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            padding: 16px 12px 0;
+        }
+
+        .open-book-button {
+            padding: 11px 23px;
+            border: 1px solid rgba(255, 220, 233, .6);
+            border-radius: 25px;
+            color: #fff5f8;
+            background: linear-gradient(135deg, #c34f79, #913054);
+            box-shadow: 0 5px 16px rgba(0, 0, 0, .18);
+            font: bold 9px Arial, sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .open-book-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 19px rgba(0, 0, 0, .25);
+        }
+
+        .open-book-button:disabled {
+            opacity: .7;
+            cursor: default;
+        }
+
+        .open-area.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s ease, visibility .4s ease;
+        }
+
+        /* PENUTUP */
+
+        .closing {
+            padding: 22px 12px 24px;
+            text-align: center;
+            color: #d9b1c0;
+        }
+
+        .closing p {
+            font-size: 9px;
+            font-style: italic;
+        }
+
+        .closing span {
+            display: block;
+            margin-top: 7px;
+            color: #edb5ca;
+            font-size: 13px;
+        }
+
+        /* HP */
+
+        @media (max-width: 380px) {
+            .book-spread {
+                min-height: 275px;
+            }
+
+            .page {
+                padding: 12px 7px;
+            }
+
+            .photo-frame {
+                max-width: 125px;
+                height: 140px;
+            }
+
+            .story-page h2 {
+                font-size: 19px;
+            }
+
+            .story-text {
+                font-size: 7.5px;
+            }
+
+            .story-quote {
+                font-size: 7px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .story-heart {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-label">A LITTLE STORY ABOUT US</div>
+        <h1>Elza <span>♥</span> Silmy</h1>
+        <p>Somewhere between all the ordinary days,<br>
+            you became my favorite part.</p>
+    </header>
+
+    <main class="book-stage">
+
+        <div class="book" id="memoryBook">
+
+            <div class="book-spread">
+
+                <!-- HALAMAN FOTO KIRI -->
+                <section class="page photo-page">
+                    <div class="page-frame"></div>
+                    <div class="section-label">OUR MEMORIES</div>
+
+                    <div class="photo-frame" id="photoFrame">
+                        <img id="memoryPhoto" src="foto/kenangan1.jpg" alt="Kenangan Elza dan Silmy">
+                    </div>
+
+                    <p class="photo-caption" id="photoCaption">
+                        A little memory with you ♥
+                    </p>
+
+                    <div class="photo-controls">
+                        <button class="photo-arrow" id="previousPhoto" type="button"
+                            aria-label="Foto sebelumnya">‹</button>
+
+                        <div class="photo-dots" id="photoDots">
+                            <button class="photo-dot active" type="button" aria-label="Foto 1"></button>
+                            <button class="photo-dot" type="button" aria-label="Foto 2"></button>
+                            <button class="photo-dot" type="button" aria-label="Foto 3"></button>
+                        </div>
+
+                        <button class="photo-arrow" id="nextPhoto" type="button" aria-label="Foto berikutnya">›</button>
+                    </div>
+
+                    <div class="page-number">0 1</div>
+                </section>
+
+                <!-- HALAMAN TULISAN KANAN -->
+                <section class="page story-page">
+                    <div class="page-frame"></div>
+                    <div class="section-label">ELZA ♥ SILMY</div>
+                    <div class="story-heart">♥</div>
+
+                    <h2>Cerita Kita</h2>
+                    <div class="story-divider"></div>
+
+                    <div class="story-text">
+                        <p>
+                            Ini bukan sekadar tentang foto atau kenangan.
+                            Ini tentang dua manusia yang dipertemukan,
+                            lalu perlahan menciptakan cerita mereka sendiri.
+                        </p>
+
+                        <p>
+                            Tentang tawa, percakapan sederhana,
+                            perjalanan kecil, dan semua hal yang
+                            akhirnya menjadi berarti.
+                        </p>
+
+                        <p>
+                            Dan mungkin, ini baru halaman pertama
+                            dari cerita yang masih panjang.
+                        </p>
+                    </div>
+
+                    <div class="story-quote">
+                        "You are my favorite kind of memory."
+                    </div>
+
+                    <div class="page-number">0 2</div>
+                </section>
+
+            </div>
+
+            <!-- SAMPUL DEPAN SATU HALAMAN -->
+            <div class="book-cover" id="bookCover">
+
+                <div class="cover-content" id="coverContent">
+                    <div class="cover-label">A LITTLE STORY ABOUT US</div>
+                    <div class="cover-heart">♥</div>
+
+                    <h2>Our <span>Memory</span></h2>
+
+                    <p class="cover-description">
+                        A little book, a lot of memories.
+                    </p>
+                </div>
+
+                <div class="ribbon vertical"></div>
+                <div class="ribbon horizontal"></div>
+                <div class="ribbon-bow"></div>
+                <div class="ribbon-knot"></div>
+
+                <div class="name-reveal" id="nameReveal">
+                    <p>A SPECIAL MOMENT FOR</p>
+                    <h2>Elza <span>♥</span> Silmy</h2>
+                    <p>MADE WITH LOVE</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TOMBOL BUKA BERADA DI BAWAH BUKU -->
+        <div class="open-area" id="openArea">
+            <button class="open-book-button" type="button" id="openBook">
+                BUKA BUKU KENANGAN ♥
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="closing">
+        <p>Some moments pass, but the memories stay.</p>
+        <span>Elza ♥ Silmy</span>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const book = document.getElementById("memoryBook");
+            const cover = document.getElementById("bookCover");
+            const coverContent = document.getElementById("coverContent");
+            const nameReveal = document.getElementById("nameReveal");
+
+            const openButton = document.getElementById("openBook");
+            const openArea = document.getElementById("openArea");
+
+            const photo = document.getElementById("memoryPhoto");
+            const photoFrame = document.getElementById("photoFrame");
+            const caption = document.getElementById("photoCaption");
+
+            const previousButton = document.getElementById("previousPhoto");
+            const nextButton = document.getElementById("nextPhoto");
+
+            const dots = Array.from(
+                document.querySelectorAll("#photoDots .photo-dot")
+            );
+
+            /* GANTI NAMA FILE JIKA FOTO KAMU BERBEDA */
+            const photos = [
+                {
+                    src: "foto/kenangan1.jpg",
+                    caption: "A little memory with you ♥"
+                },
+                {
+                    src: "foto/kenangan2.jpg",
+                    caption: "One of my favorite moments ♥"
+                },
+                {
+                    src: "foto/kenangan3.jpg",
+                    caption: "A memory worth keeping ♥"
+                }
+            ];
+
+            let currentPhoto = 0;
+            let openingStarted = false;
+            let photoRequest = 0;
+
+
+            /* ANIMASI PEMBUKAAN YANG LEBIH SMOOTH */
+
+            openButton.addEventListener("click", function () {
+                if (openingStarted) return;
+
+                openingStarted = true;
+                openButton.disabled = true;
+
+                /* 1. Pita terlepas dengan halus */
+                cover.classList.add("untie");
+
+                /* 2. Tulisan sampul bertahan selama 3 detik */
+                setTimeout(function () {
+                    coverContent.style.opacity = "0";
+
+                    setTimeout(function () {
+                        coverContent.style.visibility = "hidden";
+                        nameReveal.classList.add("show");
+                    }, 350);
+
+                    /* 3. Nama Elza ♥ Silmy tampil selama 3 detik */
+                    setTimeout(function () {
+                        nameReveal.classList.remove("show");
+
+                        /* 4. Beri jeda singkat sebelum buku terbuka */
+                        setTimeout(function () {
+                            /* Lebarkan buku dan buka sampul hampir bersamaan */
+                            book.classList.add("opening");
+
+                            requestAnimationFrame(function () {
+                                requestAnimationFrame(function () {
+                                    cover.classList.add("open");
+                                });
+                            });
+
+                            /* Hilangkan tombol dengan halus */
+                            openArea.classList.add("hidden");
+
+                        }, 250);
+
+                    }, 3350);
+
+                }, 3000);
+            });
+
+
+            /* SLIDESHOW MANUAL, HANYA 3 FOTO */
+
+            function showPhoto(index) {
+
+                currentPhoto = (index + photos.length) % photos.length;
+
+                const selected = photos[currentPhoto];
+                const request = ++photoRequest;
+                const preloader = new Image();
+
+                photoFrame.classList.add("switching");
+
+                preloader.onload = function () {
+
+                    if (request !== photoRequest) return;
+
+                    photo.src = selected.src;
+                    photo.alt = "Kenangan Elza dan Silmy, foto " +
+                        (currentPhoto + 1);
+
+                    caption.textContent = selected.caption;
+
+                    dots.forEach(function (dot, i) {
+                        dot.classList.toggle("active", i === currentPhoto);
+                    });
+
+                    requestAnimationFrame(function () {
+                        photoFrame.classList.remove("switching");
+                    });
+                };
+
+                preloader.onerror = function () {
+
+                    if (request !== photoRequest) return;
+
+                    photoFrame.classList.remove("switching");
+                    caption.textContent = "Periksa nama foto di folder foto.";
+
+                    console.error("Foto tidak ditemukan:", selected.src);
+                };
+
+                preloader.src = selected.src;
+            }
+
+            previousButton.addEventListener("click", function () {
+                showPhoto(currentPhoto - 1);
+            });
+
+            nextButton.addEventListener("click", function () {
+                showPhoto(currentPhoto + 1);
+            });
+
+            dots.forEach(function (dot, index) {
+                dot.addEventListener("click", function () {
+                    showPhoto(index);
+                });
+            });
+
+            showPhoto(0);
+        });
+    </script>
+
+</body>
+
+</html>
